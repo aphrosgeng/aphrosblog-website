@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="键盘事件 键盘事件的种类 键盘事件由用户击打键盘触发，主要有keydown、keypress、keyup三个事件，它们都继承了KeyboardE" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="键盘事件 键盘事件的种类 键盘事件由用户击打键盘触发，主要有keydown、keypress、keyup三个事件，它们都继承了KeyboardE"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/events/model/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/events\/keyboard\/"
+        },"genre": "posts","wordcount":  1994 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/events\/keyboard\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1994 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#键盘事件的种类">键盘事件的种类</a></li>
+    <li><a href="#keyboardevent-接口概述">KeyboardEvent 接口概述</a></li>
+    <li><a href="#keyboardevent-的实例属性">KeyboardEvent 的实例属性</a>
+      <ul>
+        <li><a href="#keyboardeventaltkeykeyboardeventctrlkeykeyboardeventmetakeykeyboardeventshiftkey">KeyboardEvent.altKey，KeyboardEvent.ctrlKey，KeyboardEvent.metaKey，KeyboardEvent.shiftKey</a></li>
+        <li><a href="#keyboardeventcode">KeyboardEvent.code</a></li>
+        <li><a href="#keyboardeventkey">KeyboardEvent.key</a></li>
+        <li><a href="#keyboardeventlocation">KeyboardEvent.location</a></li>
+        <li><a href="#keyboardeventrepeat">KeyboardEvent.repeat</a></li>
+      </ul>
+    </li>
+    <li><a href="#keyboardevent-的实例方法">KeyboardEvent 的实例方法</a>
+      <ul>
+        <li><a href="#keyboardeventgetmodifierstate">KeyboardEvent.getModifierState()</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="键盘事件">键盘事件</h1>
+<h2 id="键盘事件的种类">键盘事件的种类</h2>
+<p>键盘事件由用户击打键盘触发，主要有<code>keydown</code>、<code>keypress</code>、<code>keyup</code>三个事件，它们都继承了<code>KeyboardEvent</code>接口。</p>
+<ul>
+<li><code>keydown</code>：按下键盘时触发。</li>
+<li><code>keypress</code>：按下有值的键时触发，即按下 Ctrl、Alt、Shift、Meta 这样无值的键，这个事件不会触发。对于有值的键，按下时先触发<code>keydown</code>事件，再触发这个事件。</li>
+<li><code>keyup</code>：松开键盘时触发该事件。</li>
+</ul>
+<p>如果用户一直按键不松开，就会连续触发键盘事件，触发的顺序如下。</p>
+<ol>
+<li>keydown</li>
+<li>keypress</li>
+<li>keydown</li>
+<li>keypress</li>
+<li>&hellip;（重复以上过程）</li>
+<li>keyup</li>
+</ol>
+<h2 id="keyboardevent-接口概述">KeyboardEvent 接口概述</h2>
+<p><code>KeyboardEvent</code>接口用来描述用户与键盘的互动。这个接口继承了<code>Event</code>接口，并且定义了自己的实例属性和实例方法。</p>
+<p>浏览器原生提供<code>KeyboardEvent</code>构造函数，用来新建键盘事件的实例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">new</span> <span class="nx">KeyboardEvent</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>KeyboardEvent</code>构造函数接受两个参数。第一个参数是字符串，表示事件类型；第二个参数是一个事件配置对象，该参数可选。除了<code>Event</code>接口提供的属性，还可以配置以下字段，它们都是可选。</p>
+<ul>
+<li><code>key</code>：字符串，当前按下的键，默认为空字符串。</li>
+<li><code>code</code>：字符串，表示当前按下的键的字符串形式，默认为空字符串。</li>
+<li><code>location</code>：整数，当前按下的键的位置，默认为<code>0</code>。</li>
+<li><code>ctrlKey</code>：布尔值，是否按下 Ctrl 键，默认为<code>false</code>。</li>
+<li><code>shiftKey</code>：布尔值，是否按下 Shift 键，默认为<code>false</code>。</li>
+<li><code>altKey</code>：布尔值，是否按下 Alt 键，默认为<code>false</code>。</li>
+<li><code>metaKey</code>：布尔值，是否按下 Meta 键，默认为<code>false</code>。</li>
+<li><code>repeat</code>：布尔值，是否重复按键，默认为<code>false</code>。</li>
+</ul>
+<h2 id="keyboardevent-的实例属性">KeyboardEvent 的实例属性</h2>
+<h3 id="keyboardeventaltkeykeyboardeventctrlkeykeyboardeventmetakeykeyboardeventshiftkey">KeyboardEvent.altKey，KeyboardEvent.ctrlKey，KeyboardEvent.metaKey，KeyboardEvent.shiftKey</h3>
+<p>以下属性都是只读属性，返回一个布尔值，表示是否按下对应的键。</p>
+<ul>
+<li><code>KeyboardEvent.altKey</code>：是否按下 Alt 键</li>
+<li><code>KeyboardEvent.ctrlKey</code>：是否按下 Ctrl 键</li>
+<li><code>KeyboardEvent.metaKey</code>：是否按下 meta 键（Mac 系统是一个四瓣的小花，Windows 系统是 windows 键）</li>
+<li><code>KeyboardEvent.shiftKey</code>：是否按下 Shift 键</li>
+</ul>
+<p>下面是一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">showChar</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ALT: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">altKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;CTRL: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Meta: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">metaKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Shift: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">shiftKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="nx">showChar</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="keyboardeventcode">KeyboardEvent.code</h3>
+<p><code>KeyboardEvent.code</code>属性返回一个字符串，表示当前按下的键的字符串形式。该属性只读。</p>
+<p>下面是一些常用键的字符串形式，其他键请查<a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values" target="_blank" rel="noopener noreffer ">文档</a>。</p>
+<ul>
+<li>数字键0 - 9：返回<code>digit0</code> - <code>digit9</code></li>
+<li>字母键A - z：返回<code>KeyA</code> - <code>KeyZ</code></li>
+<li>功能键F1 - F12：返回 <code>F1</code> - <code>F12</code></li>
+<li>方向键：返回<code>ArrowDown</code>、<code>ArrowUp</code>、<code>ArrowLeft</code>、<code>ArrowRight</code></li>
+<li>Alt 键：返回<code>AltLeft</code>或<code>AltRight</code></li>
+<li>Shift 键：返回<code>ShiftLeft</code>或<code>ShiftRight</code></li>
+<li>Ctrl 键：返回<code>ControlLeft</code>或<code>ControlRight</code></li>
+</ul>
+<h3 id="keyboardeventkey">KeyboardEvent.key</h3>
+<p><code>KeyboardEvent.key</code>属性返回一个字符串，表示按下的键名。该属性只读。</p>
+<p>如果按下的键代表可打印字符，则返回这个字符，比如数字、字母。</p>
+<p>如果按下的键代表不可打印的特殊字符，则返回预定义的键值，比如 Backspace，Tab，Enter，Shift，Control，Alt，CapsLock，Esc，Spacebar，PageUp，PageDown，End，Home，Left，Right，Up，Down，PrintScreen，Insert，Del，Win，F1～F12，NumLock，Scroll 等。</p>
+<p>如果同时按下一个控制键和一个符号键，则返回符号键的键名。比如，按下 Ctrl + a，则返回<code>a</code>；按下 Shift + a，则返回大写的<code>A</code>。</p>
+<p>如果无法识别键名，返回字符串<code>Unidentified</code>。</p>
+<h3 id="keyboardeventlocation">KeyboardEvent.location</h3>
+<p><code>KeyboardEvent.location</code>属性返回一个整数，表示按下的键处在键盘的哪一个区域。它可能取以下值。</p>
+<ul>
+<li>0：处在键盘的主区域，或者无法判断处于哪一个区域。</li>
+<li>1：处在键盘的左侧，只适用那些有两个位置的键（比如 Ctrl 和 Shift 键）。</li>
+<li>2：处在键盘的右侧，只适用那些有两个位置的键（比如 Ctrl 和 Shift 键）。</li>
+<li>3：处在数字小键盘。</li>
+</ul>
+<h3 id="keyboardeventrepeat">KeyboardEvent.repeat</h3>
+<p><code>KeyboardEvent.repeat</code>返回一个布尔值，代表该键是否被按着不放，以便判断是否重复这个键，即浏览器会持续触发<code>keydown</code>和<code>keypress</code>事件，直到用户松开手为止。</p>
+<h2 id="keyboardevent-的实例方法">KeyboardEvent 的实例方法</h2>
+<h3 id="keyboardeventgetmodifierstate">KeyboardEvent.getModifierState()</h3>
+<p><code>KeyboardEvent.getModifierState()</code>方法返回一个布尔值，表示是否按下或激活指定的功能键。它的常用参数如下。</p>
+<ul>
+<li><code>Alt</code>：Alt 键</li>
+<li><code>CapsLock</code>：大写锁定键</li>
+<li><code>Control</code>：Ctrl 键</li>
+<li><code>Meta</code>：Meta 键</li>
+<li><code>NumLock</code>：数字键盘开关键</li>
+<li><code>Shift</code>：Shift 键</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">event</span><span class="p">.</span><span class="nx">getModifierState</span><span class="p">(</span><span class="s1">&#39;Control&#39;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">event</span><span class="p">.</span><span class="nx">getModifierState</span><span class="p">(</span><span class="s1">&#39;Alt&#39;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">event</span><span class="p">.</span><span class="nx">getModifierState</span><span class="p">(</span><span class="s1">&#39;Meta&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面代码表示，只要<code>Control</code>、<code>Alt</code>、<code>Meta</code>里面，同时按下任意两个或两个以上的键就返回。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/events/keyboard/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/events/model/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/events/globaleventhandlers/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

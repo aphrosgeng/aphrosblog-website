@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="表单事件 表单事件的种类 input 事件 input事件当&lt;input&gt;、&lt;select&gt;、&lt;textarea&gt;的值发" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/events/form/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="表单事件 表单事件的种类 input 事件 input事件当&lt;input&gt;、&lt;select&gt;、&lt;textarea&gt;的值发"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/events/form/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/events/eventtarget/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/events\/form\/"
+        },"genre": "posts","wordcount":  2179 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/events\/form\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2179 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#表单事件的种类">表单事件的种类</a>
+      <ul>
+        <li><a href="#input-事件">input 事件</a></li>
+        <li><a href="#select-事件">select 事件</a></li>
+        <li><a href="#change-事件">change 事件</a></li>
+        <li><a href="#invalid-事件">invalid 事件</a></li>
+        <li><a href="#reset-事件submit-事件">reset 事件，submit 事件</a></li>
+      </ul>
+    </li>
+    <li><a href="#inputevent-接口">InputEvent 接口</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="表单事件">表单事件</h1>
+<h2 id="表单事件的种类">表单事件的种类</h2>
+<h3 id="input-事件">input 事件</h3>
+<p><code>input</code>事件当<code>&lt;input&gt;</code>、<code>&lt;select&gt;</code>、<code>&lt;textarea&gt;</code>的值发生变化时触发。对于复选框（<code>&lt;input type=checkbox&gt;</code>）或单选框（<code>&lt;input type=radio&gt;</code>），用户改变选项时，也会触发这个事件。另外，对于打开<code>contenteditable</code>属性的元素，只要值发生变化，也会触发<code>input</code>事件。</p>
+<p><code>input</code>事件的一个特点，就是会连续触发，比如用户每按下一次按键，就会触发一次<code>input</code>事件。</p>
+<p><code>input</code>事件对象继承了<code>InputEvent</code>接口。</p>
+<p>该事件跟<code>change</code>事件很像，不同之处在于<code>input</code>事件在元素的值发生变化后立即发生，而<code>change</code>在元素失去焦点时发生，而内容此时可能已经变化多次。也就是说，如果有连续变化，<code>input</code>事件会触发多次，而<code>change</code>事件只在失去焦点时触发一次。</p>
+<p>下面是<code>&lt;select&gt;</code>元素的例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/* HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="cm">&lt;select id=&#34;mySelect&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">  &lt;option value=&#34;1&#34;&gt;1&lt;/option&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">  &lt;option value=&#34;2&#34;&gt;2&lt;/option&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">  &lt;option value=&#34;3&#34;&gt;3&lt;/option&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">&lt;/select&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">inputHandler</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">mySelect</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#mySelect&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">mySelect</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nx">inputHandler</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码中，改变下拉框选项时，会触发<code>input</code>事件，从而执行回调函数<code>inputHandler</code>。</p>
+<h3 id="select-事件">select 事件</h3>
+<p><code>select</code>事件当在<code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code>里面选中文本时触发。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;input id=&#34;test&#34; type=&#34;text&#34; value=&#34;Select me!&#34; /&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span> <span class="c1">// &#34;select&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+</span></span></code></pre></div><p>选中的文本可以通过<code>event.target</code>元素的<code>selectionDirection</code>、<code>selectionEnd</code>、<code>selectionStart</code>和<code>value</code>属性拿到。</p>
+<h3 id="change-事件">change 事件</h3>
+<p><code>change</code>事件当<code>&lt;input&gt;</code>、<code>&lt;select&gt;</code>、<code>&lt;textarea&gt;</code>的值发生变化时触发。它与<code>input</code>事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，另一方面<code>input</code>事件必然伴随<code>change</code>事件。具体来说，分成以下几种情况。</p>
+<ul>
+<li>激活单选框（radio）或复选框（checkbox）时触发。</li>
+<li>用户提交时触发。比如，从下列列表（select）完成选择，在日期或文件输入框完成选择。</li>
+<li>当文本框或<code>&lt;textarea&gt;</code>元素的值发生改变，并且丧失焦点时触发。</li>
+</ul>
+<p>下面是一个例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;select size=&#34;1&#34; onchange=&#34;changeEventHandler(event);&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   &lt;option&gt;chocolate&lt;/option&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   &lt;option&gt;strawberry&lt;/option&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   &lt;option&gt;vanilla&lt;/option&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;/select&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">changeEventHandler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>如果比较一下上面<code>input</code>事件的例子，你会发现对于<code>&lt;select&gt;</code>元素来说，<code>input</code>和<code>change</code>事件基本是等价的。</p>
+<h3 id="invalid-事件">invalid 事件</h3>
+<p>用户提交表单时，如果表单元素的值不满足校验条件，就会触发<code>invalid</code>事件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">required</span> <span class="na">oninvalid</span><span class="o">=</span><span class="s">&#34;console.log(&#39;invalid input&#39;)&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>提交<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>上面代码中，输入框是必填的。如果不填，用户点击按钮提交时，就会触发输入框的<code>invalid</code>事件，导致提交被取消。</p>
+<h3 id="reset-事件submit-事件">reset 事件，submit 事件</h3>
+<p>这两个事件发生在表单对象<code>&lt;form&gt;</code>上，而不是发生在表单的成员上。</p>
+<p><code>reset</code>事件当表单重置（所有表单成员变回默认值）时触发。</p>
+<p><code>submit</code>事件当表单数据向服务器提交时触发。注意，<code>submit</code>事件的发生对象是<code>&lt;form&gt;</code>元素，而不是<code>&lt;button&gt;</code>元素，因为提交的是表单，而不是按钮。</p>
+<h2 id="inputevent-接口">InputEvent 接口</h2>
+<p><code>InputEvent</code>接口主要用来描述<code>input</code>事件的实例。该接口继承了<code>Event</code>接口，还定义了一些自己的实例属性和实例方法。</p>
+<p>浏览器原生提供<code>InputEvent()</code>构造函数，用来生成实例对象。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">new</span> <span class="nx">InputEvent</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>InputEvent</code>构造函数可以接受两个参数。第一个参数是字符串，表示事件名称，该参数是必需的。第二个参数是一个配置对象，用来设置事件实例的属性，该参数是可选的。配置对象的字段除了<code>Event</code>构造函数的配置属性，还可以设置下面的字段，这些字段都是可选的。</p>
+<ul>
+<li><code>inputType</code>：字符串，表示发生变更的类型（详见下文）。</li>
+<li><code>data</code>：字符串，表示插入的字符串。如果没有插入的字符串（比如删除操作），则返回<code>null</code>或空字符串。</li>
+<li><code>dataTransfer</code>：返回一个 DataTransfer 对象实例，该属性通常只在输入框接受富文本输入时有效。</li>
+</ul>
+<p><code>InputEvent</code>的实例属性主要就是上面三个属性，这三个实例属性都是只读的。</p>
+<p><strong>（1）InputEvent.data</strong></p>
+<p><code>InputEvent.data</code>属性返回一个字符串，表示变动的内容。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;input type=&#34;text&#34; id=&#34;myInput&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myInput&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">input</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nx">myFunction</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面代码中，如果手动在输入框里面输入<code>abc</code>，控制台会先输出<code>a</code>，再在下一行输出<code>b</code>，再在下一行输出<code>c</code>。然后选中<code>abc</code>，一次性将它们删除，控制台会输出<code>null</code>或一个空字符串。</p>
+<p><strong>（2）InputEvent.inputType</strong></p>
+<p><code>InputEvent.inputType</code>属性返回一个字符串，表示字符串发生变更的类型。</p>
+<p>对于常见情况，Chrome 浏览器的返回值如下。完整列表可以参考<a href="https://w3c.github.io/input-events/index.html#dom-inputevent-inputtype" target="_blank" rel="noopener noreffer ">文档</a>。</p>
+<ul>
+<li>手动插入文本：<code>insertText</code></li>
+<li>粘贴插入文本：<code>insertFromPaste</code></li>
+<li>向后删除：<code>deleteContentBackward</code></li>
+<li>向前删除：<code>deleteContentForward</code></li>
+</ul>
+<p><strong>（3）InputEvent.dataTransfer</strong></p>
+<p><code>InputEvent.dataTransfer</code>属性返回一个 DataTransfer 实例。该属性只在文本框接受粘贴内容（insertFromPaste）或拖拽内容（<code>insertFromDrop</code>）时才有效。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/events/form/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/events/form/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/events/form/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/events/form/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/events/form/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/events/globaleventhandlers/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/events/eventtarget/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

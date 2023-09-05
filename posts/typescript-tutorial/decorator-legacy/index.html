@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="装饰器（旧语法） 上一章介绍了装饰器的标准语法，那是在2022年通过成为标准的。但是在此之前，TypeScript 早在2014年就支持装饰器，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="装饰器（旧语法） 上一章介绍了装饰器的标准语法，那是在2022年通过成为标准的。但是在此之前，TypeScript 早在2014年就支持装饰器，"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" /><link rel="prev" href="http://localhost:1313/posts/typescript-tutorial/decorator/" /><link rel="next" href="http://localhost:1313/posts/typescript-tutorial/declare/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/decorator-legacy\/"
+        },"genre": "posts","wordcount":  5873 ,
+        "url": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/decorator-legacy\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5873 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#experimentaldecorators-编译选项">experimentalDecorators 编译选项</a></li>
+    <li><a href="#装饰器的种类">装饰器的种类</a></li>
+    <li><a href="#类装饰器">类装饰器</a></li>
+    <li><a href="#方法装饰器">方法装饰器</a></li>
+    <li><a href="#属性装饰器">属性装饰器</a></li>
+    <li><a href="#存取器装饰器">存取器装饰器</a></li>
+    <li><a href="#参数装饰器">参数装饰器</a></li>
+    <li><a href="#装饰器的执行顺序">装饰器的执行顺序</a></li>
+    <li><a href="#为什么装饰器不能用于函数">为什么装饰器不能用于函数？</a></li>
+    <li><a href="#多个装饰器的合成">多个装饰器的合成</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="装饰器旧语法">装饰器（旧语法）</h1>
+<p>上一章介绍了装饰器的标准语法，那是在2022年通过成为标准的。但是在此之前，TypeScript 早在2014年就支持装饰器，不过使用的是旧语法。</p>
+<p>装饰器的旧语法与标准语法，有相当大的差异。旧语法以后会被淘汰，但是目前大量现有项目依然在使用它，本章就介绍旧语法下的装饰器。</p>
+<h2 id="experimentaldecorators-编译选项">experimentalDecorators 编译选项</h2>
+<p>使用装饰器的旧语法，需要打开<code>--experimentalDecorators</code>编译选项。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tsc --target ES5 --experimentalDecorators
+</span></span></code></pre></div><p>此外，还有另外一个编译选项<code>--emitDecoratorMetadata</code>，用来产生一些装饰器的元数据，供其他工具或某些模块（比如 reflect-metadata ）使用。</p>
+<p>这两个编译选项可以在命令行设置，也可以在<code>tsconfig.json</code>文件里面进行设置。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;compilerOptions&#34;</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;target&#34;</span><span class="o">:</span> <span class="s2">&#34;ES6&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;experimentalDecorators&#34;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;emitDecoratorMetadata&#34;</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="装饰器的种类">装饰器的种类</h2>
+<p>按照所装饰的不同对象，装饰器可以分成五类。</p>
+<blockquote>
+<ul>
+<li>类装饰器（Class Decorators）：用于类。</li>
+<li>属性装饰器（Property Decorators）：用于属性。</li>
+<li>方法装饰器（Method Decorators）：用于方法。</li>
+<li>存取器装饰器（Accessor Decorators）：用于类的 set 或 get 方法。</li>
+<li>参数装饰器（Parameter Decorators）：用于方法的参数。</li>
+</ul>
+</blockquote>
+<p>下面是这五种装饰器一起使用的一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@ClassDecorator</span><span class="p">()</span> <span class="c1">// （A）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@PropertyDecorator</span><span class="p">()</span> <span class="c1">// （B）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">name</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@MethodDecorator</span><span class="p">()</span> <span class="c1">//（C）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">fly</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">@ParameterDecorator</span><span class="p">()</span> <span class="c1">// （D）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">meters</span>: <span class="kt">number</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@AccessorDecorator</span><span class="p">()</span> <span class="c1">// （E）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">get</span> <span class="nx">egg() {</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="nx">egg</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，A 是类装饰器，B 是属性装饰器，C 是方法装饰器，D 是参数装饰器，E 是存取器装饰器。</p>
+<p>注意，构造方法没有方法装饰器，只有参数装饰器。类装饰器其实就是在装饰构造方法。</p>
+<p>另外，装饰器只能用于类，要么应用于类的整体，要么应用于类的内部成员，不能用于独立的函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">Decorator() {</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;In Decorator&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@Decorator</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">decorated() {</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;in decorated&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，装饰器用于一个普通函数，这是无效的，结果报错。</p>
+<h2 id="类装饰器">类装饰器</h2>
+<p>类装饰器应用于类（class），但实际上是应用于类的构造方法。</p>
+<p>类装饰器有唯一参数，就是构造方法，可以在装饰器内部，对构造方法进行各种改造。如果类装饰器有返回值，就会替换掉原来的构造方法。</p>
+<p>类装饰器的类型定义如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">ClassDecorator</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">TFunction</span> <span class="na">extends</span> <span class="na">Function</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nx">target</span>: <span class="kt">TFunction</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">TFunction</span> <span class="o">|</span> <span class="k">void</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面定义中，类型参数<code>TFunction</code>必须是函数，实际上就是构造方法。类装饰器的返回值，要么是返回处理后的原始构造方法，要么返回一个新的构造方法。</p>
+<p>下面就是一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">target</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;apply decorator&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">target</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@f</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">A</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出：apply decorator
+</span></span></span></code></pre></div><p>上面示例中，使用了装饰器<code>@f</code>，因此类<code>A</code>的构造方法会自动传入<code>f</code>。</p>
+<p>类<code>A</code>不需要新建实例，装饰器也会执行。装饰器会在代码加载阶段执行，而不是在运行时执行，而且只会执行一次。</p>
+<p>由于 TypeScript 存在编译阶段，所以装饰器对类的行为的改变，实际上发生在编译阶段。这意味着，TypeScript 装饰器能在编译阶段运行代码，也就是说，它本质就是编译时执行的函数。</p>
+<p>下面再看一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@sealed</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BugReport</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">type</span> <span class="o">=</span> <span class="s2">&#34;report&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">t</span>:<span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">sealed</span><span class="p">(</span><span class="kr">constructor</span><span class="o">:</span> <span class="nb">Function</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Object</span><span class="p">.</span><span class="nx">seal</span><span class="p">(</span><span class="kr">constructor</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Object</span><span class="p">.</span><span class="nx">seal</span><span class="p">(</span><span class="kr">constructor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，装饰器<code>@sealed()</code>会锁定<code>BugReport</code>这个类，使得它无法新增或删除静态成员和实例成员。</p>
+<p>如果除了构造方法，类装饰器还需要其他参数，可以采取“工厂模式”，即把装饰器写在一个函数里面，该函数可以接受其他参数，执行后返回装饰器。但是，这样就需要调用装饰器的时候，先执行一次工厂函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">info</span>:<span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;received: &#39;</span><span class="p">,</span> <span class="nx">info</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;apply decorator&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">target</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@factory</span><span class="p">(</span><span class="s1">&#39;log something&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">A</span> <span class="p">{}</span>
+</span></span></code></pre></div><p>上面示例中，函数<code>factory()</code>的返回值才是装饰器，所以加载装饰器的时候，要先执行一次<code>@factory('log something')</code>，才能得到装饰器。这样做的好处是，可以加入额外的参数，本例是参数<code>info</code>。</p>
+<p>总之，<code>@</code>后面要么是一个函数名，要么是函数表达式，甚至可以写出下面这样的代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="err">@</span><span class="p">((</span><span class="kr">constructor</span><span class="o">:</span> <span class="nb">Function</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;log something&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">InlineDecoratorExample</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>@</code>后面是一个箭头函数，这也是合法的。</p>
+<p>类装饰器可以没有返回值，如果有返回值，就会替代所装饰的类的构造函数。由于 JavaScript 的类等同于构造函数的语法糖，所以装饰器通常返回一个新的类，对原有的类进行修改或扩展。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">decorator</span><span class="p">(</span><span class="nx">target</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kr">class</span> <span class="kr">extends</span> <span class="nx">target</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">value</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@decorator</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">value</span> <span class="o">=</span> <span class="mi">456</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// 123
+</span></span></span></code></pre></div><p>上面示例中，装饰器<code>decorator</code>返回一个新的类，替代了原来的类。</p>
+<p>上例的装饰器参数<code>target</code>类型是<code>any</code>，可以改成构造方法，这样就更准确了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Constructor</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">new</span><span class="p">(...</span><span class="nx">args</span>: <span class="kt">any</span><span class="p">[])</span><span class="o">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">decorator</span><span class="p">&lt;</span><span class="nt">T</span> <span class="na">extends</span> <span class="na">Constructor</span><span class="p">&gt;</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">T</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kr">class</span> <span class="kr">extends</span> <span class="nx">target</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">value</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这时，装饰器的行为就是下面这样。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">@</span><span class="nx">decorator</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">A</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">A</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">A</span> <span class="o">=</span> <span class="nx">decorator</span><span class="p">(</span><span class="nx">A</span><span class="p">)</span> <span class="o">||</span> <span class="nx">A</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面代码中，装饰器要么返回一个新的类<code>A</code>，要么不返回任何值，<code>A</code>保持装饰器处理后的状态。</p>
+<h2 id="方法装饰器">方法装饰器</h2>
+<p>方法装饰器用来装饰类的方法，它的类型定义如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">MethodDecorator</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="o">|</span><span class="kt">symbol</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">descriptor</span>: <span class="kt">TypedPropertyDescriptor</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">TypedPropertyDescriptor</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">|</span> <span class="k">void</span><span class="p">;</span>
+</span></span></code></pre></div><p>方法装饰器一共可以接受三个参数。</p>
+<ul>
+<li>target：（对于类的静态方法）类的构造函数，或者（对于类的实例方法）类的原型。</li>
+<li>propertyKey：所装饰方法的方法名，类型为<code>string|symbol</code>。</li>
+<li>descriptor：所装饰方法的描述对象。</li>
+</ul>
+<p>方法装饰器的返回值（如果有的话），就是修改后的该方法的描述对象，可以覆盖原始方法的描述对象。</p>
+<p>下面是一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">enumerable</span><span class="p">(</span><span class="nx">value</span>: <span class="kt">boolean</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">target</span>: <span class="kt">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">descriptor</span>: <span class="kt">PropertyDescriptor</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">descriptor</span><span class="p">.</span><span class="nx">enumerable</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Greeter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">greeting</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">message</span>:<span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">greeting</span> <span class="o">=</span> <span class="nx">message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">  <span class="kd">@enumerable</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">greet() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;Hello, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">greeting</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，方法装饰器<code>@enumerable()</code>装饰 Greeter 类的<code>greet()</code>方法，作用是修改该方法的描述对象的可遍历性属性<code>enumerable</code>。<code>@enumerable(false)</code>表示将该方法修改成不可遍历。</p>
+<p>下面再看一个例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">logger</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">descriptor</span>: <span class="kt">PropertyDescriptor</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;params: &#39;</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">original</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;result: &#39;</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@logger</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">add</span><span class="p">(</span><span class="nx">x</span>: <span class="kt">number</span><span class="p">,</span> <span class="nx">y</span>:<span class="kt">number</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="k">new</span> <span class="nx">C</span><span class="p">()).</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// params:  1 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// result:  3
+</span></span></span></code></pre></div><p>上面示例中，方法装饰器<code>@logger</code>用来装饰<code>add()</code>方法，它的作用是让该方法输出日志。每当<code>add()</code>调用一次，控制台就会打印出参数和运行结果。</p>
+<h2 id="属性装饰器">属性装饰器</h2>
+<p>属性装饰器用来装饰属性，类型定义如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">PropertyDecorator</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="o">|</span><span class="kt">symbol</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span></code></pre></div><p>属性装饰器函数接受两个参数。</p>
+<ul>
+<li>target：（对于实例属性）类的原型对象（prototype），或者（对于静态属性）类的构造函数。</li>
+<li>propertyKey：所装饰属性的属性名，注意类型有可能是字符串，也有可能是 Symbol 值。</li>
+</ul>
+<p>属性装饰器不需要返回值，如果有的话，也会被忽略。</p>
+<p>下面是一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">ValidRange</span><span class="p">(</span><span class="nx">min</span>:<span class="kt">number</span><span class="p">,</span> <span class="nx">max</span>:<span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span><span class="nx">target</span>:<span class="kt">Object</span><span class="p">,</span> <span class="nx">key</span>:<span class="kt">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">set</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">v</span>:<span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">v</span> <span class="o">&lt;</span> <span class="nx">min</span> <span class="o">||</span> <span class="nx">v</span> <span class="o">&gt;</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`Not allowed value </span><span class="si">${</span><span class="nx">v</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出 Installing ValidRange on year
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">Student</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@ValidRange</span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">year</span><span class="o">!:</span> <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Student</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 报错 Not allowed value 2022 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">stud</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="mi">2022</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，装饰器<code>ValidRange</code>对属性<code>year</code>设立了一个上下限检查器，只要该属性赋值时，超过了上下限，就会报错。</p>
+<p>注意，属性装饰器的第一个参数，对于实例属性是类的原型对象，而不是实例对象（即不是<code>this</code>对象）。这是因为装饰器执行时，类还没有新建实例，所以实例对象不存在。</p>
+<p>由于拿不到<code>this</code>，所以属性装饰器无法获得实例属性的值。这也是它没有在参数里面提供属性描述对象的原因。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">logProperty</span><span class="p">(</span><span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span> <span class="nx">member</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">prop</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">member</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Property </span><span class="si">${</span><span class="nx">member</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">prop</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">PropertyExample</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@logProperty</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span>:<span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;Foo&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出 Property name undefined
+</span></span></span></code></pre></div><p>上面示例中，属性装饰器<code>@logProperty</code>内部想要获取实例属性<code>name</code>的属性描述对象，结果拿到的是<code>undefined</code>。因为上例的<code>target</code>是类的原型对象，不是实例对象，所以拿不到<code>name</code>属性，也就是说<code>target.name</code>是不存在的，所以拿到的是<code>undefined</code>。只有通过<code>this.name</code>才能拿到<code>name</code>属性，但是这时<code>this</code>还不存在。</p>
+<p>属性装饰器不仅无法获得实例属性的值，也不能初始化或修改实例属性，而且它的返回值也会被忽略。因此，它的作用很有限。</p>
+<p>不过，如果属性装饰器设置了当前属性的存取器（getter/setter），然后在构造函数里面就可以对实例属性进行读写。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">Min</span><span class="p">(</span><span class="nx">limit</span>:<span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">propertyKey</span>: <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">value</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">getter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">setter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newVal</span>:<span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="nx">newVal</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">limit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`Your password should be bigger than </span><span class="si">${</span><span class="nx">limit</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">value</span> <span class="o">=</span> <span class="nx">newVal</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>      
+</span></span><span class="line"><span class="cl">    <span class="p">};</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">propertyKey</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">get</span><span class="o">:</span> <span class="nx">getter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">set</span><span class="o">:</span> <span class="nx">setter</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">User</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">username</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kd">@Min</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">password</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">username</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">username</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">password</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">u</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 报错 Your password should be bigger than 8 
+</span></span></span></code></pre></div><p>上面示例中，属性装饰器<code>@Min</code>通过设置存取器，拿到了实例属性的值。</p>
+<h2 id="存取器装饰器">存取器装饰器</h2>
+<p>存取器装饰器用来装饰类的存取器（accessor）。所谓“存取器”指的是某个属性的取值器（getter）和存值器（setter）。</p>
+<p>存取器装饰器的类型定义，与方法装饰器一致。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">AccessorDecorator</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="o">|</span><span class="kt">symbol</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">descriptor</span>: <span class="kt">TypedPropertyDescriptor</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">TypedPropertyDescriptor</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">|</span> <span class="k">void</span><span class="p">;</span>
+</span></span></code></pre></div><p>存取器装饰器有三个参数。</p>
+<ul>
+<li>target：（对于静态属性的存取器）类的构造函数，或者（对于实例属性的存取器）类的原型。</li>
+<li>propertyKey：存取器的属性名。</li>
+<li>descriptor：存取器的属性描述对象。</li>
+</ul>
+<p>存取器装饰器的返回值（如果有的话），会作为该属性新的描述对象。</p>
+<p>下面是一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">configurable</span><span class="p">(</span><span class="nx">value</span>: <span class="kt">boolean</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">target</span>: <span class="kt">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">descriptor</span>: <span class="kt">PropertyDescriptor</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">descriptor</span><span class="p">.</span><span class="nx">configurable</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Point</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">_x</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">_y</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">x</span>:<span class="kt">number</span><span class="p">,</span> <span class="nx">y</span>:<span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">_x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">_y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">  <span class="kd">@configurable</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">get</span> <span class="nx">x() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">  <span class="kd">@configurable</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">get</span> <span class="nx">y() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，装饰器<code>@configurable(false)</code>关闭了所装饰属性（<code>x</code>和<code>y</code>）的属性描述对象的<code>configurable</code>键（即关闭了属性的可配置性）。</p>
+<p>下面的示例是将装饰器用来验证属性值，如果赋值不满足条件就报错。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">validator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">descriptor</span>: <span class="kt">PropertyDescriptor</span>
+</span></span><span class="line"><span class="cl"><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">originalGet</span> <span class="o">=</span> <span class="nx">descriptor</span><span class="p">.</span><span class="kr">get</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">originalSet</span> <span class="o">=</span> <span class="nx">descriptor</span><span class="p">.</span><span class="kr">set</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">originalSet</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">descriptor</span><span class="p">.</span><span class="kr">set</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`Invalid value for </span><span class="si">${</span><span class="nx">propertyKey</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">originalSet</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="nx">foo</span><span class="o">!:</span> <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@validator</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">get</span> <span class="nx">foo() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">foo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">c</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 报错
+</span></span></span></code></pre></div><p>上面示例中，装饰器用自己定义的存值器，取代了原来的存值器，加入了验证条件。</p>
+<p>TypeScript 不允许对同一个属性的存取器（getter 和 setter）使用同一个装饰器，也就是说只能装饰两个存取器里面的一个，且必须是排在前面的那一个，否则报错。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="nx">name</span>:<span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@Decorator</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="nx">name</span><span class="p">(</span><span class="nx">n</span>:<span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@Decorator</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">get</span> <span class="nx">name() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>@Decorator</code>同时装饰<code>name</code>属性的存值器和取值器，所以报错。</p>
+<p>但是，下面的写法不会报错。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="nx">name</span>:<span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@Decorator</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="nx">name</span><span class="p">(</span><span class="nx">n</span>:<span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">get</span> <span class="nx">name() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>@Decorator</code>只装饰它后面第一个出现的存值器（<code>set name()</code>），并不装饰取值器（<code>get name()</code>），所以不报错。</p>
+<p>装饰器之所以不能同时用于同一个属性的存值器和取值器，原因是装饰器可以从属性描述对象上面，同时拿到取值器和存值器，因此只调用一次就够了。</p>
+<h2 id="参数装饰器">参数装饰器</h2>
+<p>参数装饰器用来装饰构造方法或者其他方法的参数。它的类型定义如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">ParameterDecorator</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="o">|</span><span class="kt">symbol</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parameterIndex</span>: <span class="kt">number</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span></code></pre></div><p>参数装饰器接受三个参数。</p>
+<ul>
+<li>target：（对于静态方法）类的构造函数，或者（对于类的实例方法）类的原型对象。</li>
+<li>propertyKey：所装饰的方法的名字，类型为<code>string|symbol</code>。</li>
+<li>parameterIndex：当前参数在方法的参数序列的位置（从0开始）。</li>
+</ul>
+<p>该装饰器不需要返回值，如果有的话会被忽略。</p>
+<p>下面是一个示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">log</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">target</span>: <span class="kt">Object</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">propertyKey</span>: <span class="kt">string</span><span class="o">|</span><span class="kt">symbol</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parameterIndex</span>: <span class="kt">number</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nb">String</span><span class="p">(</span><span class="nx">propertyKey</span><span class="p">)</span><span class="si">}</span><span class="sb"> NO.</span><span class="si">${</span><span class="nx">parameterIndex</span><span class="si">}</span><span class="sb"> Parameter`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">member</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">@log</span> <span class="nx">x</span>:<span class="kt">number</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">@log</span> <span class="nx">y</span>:<span class="kt">number</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`member Parameters: </span><span class="si">${</span><span class="nx">x</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">y</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">c</span><span class="p">.</span><span class="nx">member</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// member NO.1 Parameter
+</span></span></span><span class="line"><span class="cl"><span class="c1">// member NO.0 Parameter 
+</span></span></span><span class="line"><span class="cl"><span class="c1">// member Parameters: 5 5 
+</span></span></span></code></pre></div><p>上面示例中，参数装饰器会输出参数的位置序号。注意，后面的参数会先输出。</p>
+<p>跟其他装饰器不同，参数装饰器主要用于输出信息，没有办法修改类的行为。</p>
+<h2 id="装饰器的执行顺序">装饰器的执行顺序</h2>
+<p>前面说过，装饰器只会执行一次，就是在代码解析时执行，哪怕根本没有调用类新建实例，也会执行，而且从此就不再执行了。</p>
+<p>执行装饰器时，按照如下顺序执行。</p>
+<ol>
+<li>实例相关的装饰器。</li>
+<li>静态相关的装饰器。</li>
+<li>构造方法的参数装饰器。</li>
+<li>类装饰器。</li>
+</ol>
+<p>请看下面的示例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">key</span>:<span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="kt">any</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;执行：&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;类装饰器&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;静态方法&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">static</span> <span class="nx">method() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;实例方法&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">method() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;构造方法参数&#39;</span><span class="p">)</span> <span class="nx">foo</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>加载上面的示例，输出如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">实例方法</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">静态方法</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">构造方法参数</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">类装饰器</span>
+</span></span></code></pre></div><p>同一级装饰器的执行顺序，是按照它们的代码顺序。但是，参数装饰器的执行总是早于方法装饰器。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">key</span>:<span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="kt">any</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;执行：&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;方法1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">m1</span><span class="p">(</span><span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;参数1&#39;</span><span class="p">)</span> <span class="nx">foo</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;属性1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">p1</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;方法2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">m2</span><span class="p">(</span><span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;参数2&#39;</span><span class="p">)</span> <span class="nx">foo</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;属性2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">p2</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>加载上面的示例，输出如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">参数</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">方法</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">属性</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">参数</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">方法</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="err">执行：</span> <span class="err">属性</span><span class="mi">2</span>
+</span></span></code></pre></div><p>上面示例中，实例装饰器的执行顺序，完全是按照代码顺序的。但是，同一个方法的参数装饰器，总是早于该方法的方法装饰器执行。</p>
+<p>如果同一个方法或属性有多个装饰器，那么装饰器将顺序加载、逆序执行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">key</span>:<span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="kt">any</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;加载：&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;执行：&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">m1() {</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 加载： A
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 加载： B
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 加载： C
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 执行： C
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 执行： B
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 执行： A
+</span></span></span></code></pre></div><p>如果同一个方法有多个参数，那么参数也是顺序加载、逆序执行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">key</span>:<span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="kt">any</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;加载：&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;执行：&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">method</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span> <span class="nx">a</span>:<span class="kt">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span> <span class="nx">b</span>:<span class="kt">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">@f</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="nx">c</span>:<span class="kt">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 加载： A
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 加载： B
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 加载： C
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 执行： C
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 执行： B
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 执行： A
+</span></span></span></code></pre></div><h2 id="为什么装饰器不能用于函数">为什么装饰器不能用于函数？</h2>
+<p>装饰器只能用于类和类的方法，不能用于函数，主要原因是存在函数提升。</p>
+<p>JavaScript 的函数不管在代码的什么位置，都会提升到代码顶部。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">addOne</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">addOne</span><span class="p">(</span><span class="nx">n</span>:<span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，函数<code>addOne()</code>不会因为在定义之前执行而报错，原因就是函数存在提升，会自动提升到代码顶部。</p>
+<p>如果允许装饰器可以用于普通函数，那么就有可能导致意想不到的情况。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span>:<span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@add</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo() {</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，本来的意图是装饰器<code>@add</code>每使用一次，变量<code>counter</code>就加<code>1</code>，但是实际上会报错，因为函数提升的存在，使得实际执行的代码是下面这样。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">@</span><span class="nx">add</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="o">:</span><span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>上面示例中，<code>@add</code>还没有定义就调用了，从而报错。</p>
+<p>总之，由于存在函数提升，使得装饰器不能用于函数。类是不会提升的，所以就没有这方面的问题。</p>
+<p>另一方面，如果一定要装饰函数，可以采用高阶函数的形式直接执行，没必要写成装饰器。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello, &#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">loggingDecorator</span><span class="p">(</span><span class="nx">wrapped</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Starting&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">wrapped</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Finished&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">wrapped</span> <span class="o">=</span> <span class="nx">loggingDecorator</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面示例中，<code>loggingDecorator()</code>是一个装饰器，只要把原始函数传入它执行，就能起到装饰器的效果。</p>
+<h2 id="多个装饰器的合成">多个装饰器的合成</h2>
+<p>多个装饰器可以应用于同一个目标对象，可以写在一行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@f</span> <span class="kd">@g</span> <span class="nx">x</span>
+</span></span></code></pre></div><p>上面示例中，装饰器<code>@f</code>和<code>@g</code>同时装饰目标对象<code>x</code>。</p>
+<p>多个装饰器也可以写成多行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">@f</span>
+</span></span><span class="line"><span class="cl"><span class="kd">@g</span>
+</span></span><span class="line"><span class="cl"><span class="nx">x</span>
+</span></span></code></pre></div><p>多个装饰器的效果，类似于函数的合成，按照从里到外的顺序执行。对于上例来说，就是执行<code>f(g(x))</code>。</p>
+<p>前面也说过，如果<code>f</code>和<code>g</code>是表达式，那么需要先从外到里求值。</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://saul-mirone.github.io/a-complete-guide-to-typescript-decorator/" target="_blank" rel="noopener noreffer ">A Complete Guide to TypeScript Decorators</a>, by Saul Mirone</li>
+<li><a href="https://techsparx.com/nodejs/typescript/decorators/introduction.html" target="_blank" rel="noopener noreffer ">Deep introduction to using and implementing TypeScript decorators</a>, by David Herron</li>
+<li><a href="https://techsparx.com/nodejs/typescript/decorators/properties.html" target="_blank" rel="noopener noreffer ">Deep introduction to property decorators in TypeScript</a>, by David Herron</li>
+<li><a href="https://techsparx.com/nodejs/typescript/decorators/accessors.html" target="_blank" rel="noopener noreffer ">Deep introduction to accessor decorators in TypeScript</a>, by David Herron</li>
+<li><a href="https://dev.to/danywalls/using-property-decorators-in-typescript-with-a-real-example-44e" target="_blank" rel="noopener noreffer ">Using Property Decorators in Typescript with a real example</a>, by Dany Paredes</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/typescript-tutorial/decorator/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/typescript-tutorial/declare/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

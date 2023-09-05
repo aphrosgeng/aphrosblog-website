@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="元素 概述 &lt;img&gt;元素用于插入图片，主要继承了 HTMLImageElement 接口。 浏览器提供一个原生构造函数Image，用于生成HTMLImageEleme" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/elements/image/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="元素 概述 &lt;img&gt;元素用于插入图片，主要继承了 HTMLImageElement 接口。 浏览器提供一个原生构造函数Image，用于生成HTMLImageEleme"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/elements/image/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/elements/input/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/elements/form/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/elements\/image\/"
+        },"genre": "posts","wordcount":  2635 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/elements\/image\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2635 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#特性相关的属性">特性相关的属性</a></li>
+    <li><a href="#htmlimageelementwidthhtmlimageelementheight">HTMLImageElement.width，HTMLImageElement.height</a></li>
+    <li><a href="#htmlimageelementnaturalwidthhtmlimageelementnaturalheight">HTMLImageElement.naturalWidth，HTMLImageElement.naturalHeight</a></li>
+    <li><a href="#htmlimageelementcomplete">HTMLImageElement.complete</a></li>
+    <li><a href="#htmlimageelementcrossorigin">HTMLImageElement.crossOrigin</a></li>
+    <li><a href="#htmlimageelementreferrerpolicy">HTMLImageElement.referrerPolicy</a></li>
+    <li><a href="#htmlimageelementxhtmlimageelementy">HTMLImageElement.x，HTMLImageElement.y</a></li>
+    <li><a href="#事件属性">事件属性</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="img-元素"><!-- raw HTML omitted --> 元素</h1>
+<h2 id="概述">概述</h2>
+<p><code>&lt;img&gt;</code>元素用于插入图片，主要继承了 HTMLImageElement 接口。</p>
+<p>浏览器提供一个原生构造函数<code>Image</code>，用于生成<code>HTMLImageElement</code>实例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span> <span class="k">instanceof</span> <span class="nx">Image</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">img</span> <span class="k">instanceof</span> <span class="nx">HTMLImageElement</span> <span class="c1">// true
+</span></span></span></code></pre></div><p><code>Image</code>构造函数可以接受两个整数作为参数，分别表示<code>&lt;img&gt;</code>元素的宽度和高度。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 语法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Image</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 用法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">myImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+</span></span></code></pre></div><p><code>&lt;img&gt;</code>实例的<code>src</code>属性可以定义图像的网址。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;picture.jpg&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>新生成的<code>&lt;img&gt;</code>实例并不属于文档的一部分。如果想让它显示在文档中，必须手动插入文档。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;image1.png&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+</span></span></code></pre></div><p>除了使用<code>Image</code>构造，下面的方法也可以得到<code>HTMLImageElement</code>实例。</p>
+<ul>
+<li><code>document.images</code>的成员</li>
+<li>节点选取方法（比如<code>document.getElementById</code>）得到的<code>&lt;img&gt;</code>节点</li>
+<li><code>document.createElement('img')</code>生成的<code>&lt;img&gt;</code>节点</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">HTMLImageElement</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myImg&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span> <span class="k">instanceof</span> <span class="nx">HTMLImageElement</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span> <span class="k">instanceof</span> <span class="nx">HTMLImageElement</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span></code></pre></div><p><code>HTMLImageElement</code>实例除了具有 Node、Element、HTMLElement 接口以外，还拥有一些独有的属性。这个接口没有定义自己的方法。</p>
+<h2 id="特性相关的属性">特性相关的属性</h2>
+<p><strong>（1）HTMLImageElement.src</strong></p>
+<p><code>HTMLImageElement.src</code>属性返回图像的完整网址。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;img width=&#34;300&#34; height=&#34;400&#34; id=&#34;myImg&#34; src=&#34;http://example.com/pic.jpg&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="c1">// http://example.com/pic.jpg
+</span></span></span></code></pre></div><p><strong>（2）HTMLImageElement.currentSrc</strong></p>
+<p><code>HTMLImageElement.currentSrc</code>属性返回当前正在展示的图像的网址。JavaScript 和 CSS 的 mediaQuery 都可能改变正在展示的图像。</p>
+<p><strong>（3）HTMLImageElement.alt</strong></p>
+<p><code>HTMLImageElement.alt</code>属性可以读写<code>&lt;img&gt;</code>的 HTML 属性<code>alt</code>，表示对图片的文字说明。</p>
+<p><strong>（4）HTMLImageElement.isMap，HTMLImageElement.useMap</strong></p>
+<p><code>HTMLImageElement.isMap</code>属性对应<code>&lt;img&gt;</code>元素的 HTML 属性<code>ismap</code>，返回一个布尔值，表示图像是否为服务器端的图像映射的一部分。</p>
+<p><code>HTMLImageElement.useMap</code>属性对应<code>&lt;img&gt;</code>元素的 HTML 属性<code>usemap</code>，表示当前图像对应的<code>&lt;map&gt;</code>元素。</p>
+<p><strong>（5）HTMLImageElement.srcset，HTMLImageElement.sizes</strong></p>
+<p><code>HTMLImageElement.srcset</code>属性和<code>HTMLImageElement.sizes</code>属性，分别用于读写<code>&lt;img&gt;</code>元素的<code>srcset</code>属性和<code>sizes</code>属性。它们用于<code>&lt;img&gt;</code>元素的响应式加载。<code>srcset</code>属性可以单独使用，但是<code>sizes</code>属性必须与<code>srcset</code>属性同时使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;img srcset=&#34;example-320w.jpg 320w,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//              example-480w.jpg 480w,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//              example-800w.jpg 800w&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//      sizes=&#34;(max-width: 320px) 280px,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//             (max-width: 480px) 440px,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//             800px&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//      id=&#34;myImg&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//      src=&#34;example-800w.jpg&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myImg&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">srcset</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;example-320w.jpg 320w,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  example-480w.jpg 480w,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  example-800w.jpg 800w&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">sizes</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;(max-width: 320px) 280px,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  (max-width: 480px) 440px,
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  800px&#34;
+</span></span></span></code></pre></div><p>上面代码中，<code>sizes</code>属性指定，对于小于<code>320px</code>的屏幕，图像的宽度为<code>280px</code>；对于小于<code>480px</code>的屏幕，图像宽度为<code>440px</code>；其他情况下，图像宽度为<code>800px</code>。然后，浏览器会根据当前屏幕下的图像宽度，到<code>srcset</code>属性加载宽度最接近的图像。</p>
+<h2 id="htmlimageelementwidthhtmlimageelementheight">HTMLImageElement.width，HTMLImageElement.height</h2>
+<p><code>width</code>属性表示<code>&lt;img&gt;</code>的 HTML 宽度，<code>height</code>属性表示高度。这两个属性返回的都是整数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;img width=&#34;300&#34; height=&#34;400&#34; id=&#34;myImg&#34; src=&#34;pic.jpg&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">width</span> <span class="c1">// 300
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">img</span><span class="p">.</span><span class="nx">height</span> <span class="c1">// 400
+</span></span></span></code></pre></div><p>如果图像还没有加载，这两个属性返回的都是<code>0</code>。</p>
+<p>如果 HTML 代码没有设置<code>width</code>和<code>height</code>属性，则它们返回的是图像的实际宽度和高度，即<code>HTMLImageElement.naturalWidth</code>属性和<code>HTMLImageElement.naturalHeight</code>属性。</p>
+<h2 id="htmlimageelementnaturalwidthhtmlimageelementnaturalheight">HTMLImageElement.naturalWidth，HTMLImageElement.naturalHeight</h2>
+<p><code>HTMLImageElement.naturalWidth</code>属性表示图像的实际宽度（单位像素），<code>HTMLImageElement.naturalHeight</code>属性表示实际高度。这两个属性返回的都是整数。</p>
+<p>如果图像还没有指定或不可得，这两个属性都等于<code>0</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">naturalHeight</span> <span class="o">&gt;</span> <span class="nx">img</span><span class="p">.</span><span class="nx">naturalWidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">img</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;portrait&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面代码中，如果图片的高度大于宽度，则设为<code>portrait</code>模式。</p>
+<h2 id="htmlimageelementcomplete">HTMLImageElement.complete</h2>
+<p><code>HTMLImageElement.complete</code>属性返回一个布尔值，表示图表是否已经加载完成。如果<code>&lt;img&gt;</code>元素没有<code>src</code>属性，也会返回<code>true</code>。</p>
+<h2 id="htmlimageelementcrossorigin">HTMLImageElement.crossOrigin</h2>
+<p><code>HTMLImageElement.crossOrigin</code>属性用于读写<code>&lt;img&gt;</code>元素的<code>crossorigin</code>属性，表示跨域设置。</p>
+<p>这个属性有两个可能的值。</p>
+<ul>
+<li><code>anonymous</code>：跨域请求不要求用户身份（credentials），这是默认值。</li>
+<li><code>use-credentials</code>：跨域请求要求用户身份。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;img crossorigin=&#34;anonymous&#34; id=&#34;myImg&#34; src=&#34;pic.jpg&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">crossOrigin</span> <span class="c1">// &#34;anonymous&#34;
+</span></span></span></code></pre></div><h2 id="htmlimageelementreferrerpolicy">HTMLImageElement.referrerPolicy</h2>
+<p><code>HTMLImageElement.referrerPolicy</code>用来读写<code>&lt;img&gt;</code>元素的 HTML 属性<code>referrerpolicy</code>，表示请求图像资源时，如何处理 HTTP 请求的<code>referrer</code>字段。</p>
+<p>它有五个可能的值。</p>
+<ul>
+<li><code>no-referrer</code>：不带有<code>referrer</code>字段。</li>
+<li><code>no-referrer-when-downgrade</code>：如果请求的地址不是 HTTPS 协议，就不带有<code>referrer</code>字段，这是默认值。</li>
+<li><code>origin</code>：<code>referrer</code>字段是当前网页的地址，包含协议、域名和端口。</li>
+<li><code>origin-when-cross-origin</code>：如果请求的地址与当前网页是同源关系，那么<code>referrer</code>字段将带有完整路径，否则将只包含协议、域名和端口。</li>
+<li><code>unsafe-url</code>：<code>referrer</code>字段包含当前网页的地址，除了协议、域名和端口以外，还包括路径。这个设置是不安全的，因为会泄漏路径信息。</li>
+</ul>
+<h2 id="htmlimageelementxhtmlimageelementy">HTMLImageElement.x，HTMLImageElement.y</h2>
+<p><code>HTMLImageElement.x</code>属性返回图像左上角相对于页面左上角的横坐标，<code>HTMLImageElement.y</code>属性返回纵坐标。</p>
+<h2 id="事件属性">事件属性</h2>
+<p>图像加载完成，会触发<code>onload</code>属性指定的回调函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码为 &lt;img src=&#34;example.jpg&#34; onload=&#34;loadImage()&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">loadImage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Image is loaded&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>图像加载过程中发生错误，会触发<code>onerror</code>属性指定的回调函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码为 &lt;img src=&#34;image.gif&#34; onerror=&#34;myFunction()&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;There is something wrong&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/elements/image/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/elements/image/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/elements/image/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/elements/image/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/elements/image/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/elements/input/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/elements/form/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

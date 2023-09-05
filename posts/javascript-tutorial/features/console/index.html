@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="console 对象与控制台 console 对象 console对象是 JavaScript 的原生对象，它有点像 Unix 系统的标准输出stdout和标准错误stderr，可以输出各种信息到控制台，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/features/console/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="console 对象与控制台 console 对象 console对象是 JavaScript 的原生对象，它有点像 Unix 系统的标准输出stdout和标准错误stderr，可以输出各种信息到控制台，"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/features/console/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/features/conversion/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/events/touch/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/features\/console\/"
+        },"genre": "posts","wordcount":  5168 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/features\/console\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5168 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#console-对象">console 对象</a></li>
+    <li><a href="#console-对象的静态方法">console 对象的静态方法</a>
+      <ul>
+        <li><a href="#consolelogconsoleinfoconsoledebug">console.log()，console.info()，console.debug()</a></li>
+        <li><a href="#consolewarnconsoleerror">console.warn()，console.error()</a></li>
+        <li><a href="#consoletable">console.table()</a></li>
+        <li><a href="#consolecount">console.count()</a></li>
+        <li><a href="#consoledirconsoledirxml">console.dir()，console.dirxml()</a></li>
+        <li><a href="#consoleassert">console.assert()</a></li>
+        <li><a href="#consoletimeconsoletimeend">console.time()，console.timeEnd()</a></li>
+        <li><a href="#consolegroupconsolegroupendconsolegroupcollapsed">console.group()，console.groupEnd()，console.groupCollapsed()</a></li>
+        <li><a href="#consoletraceconsoleclear">console.trace()，console.clear()</a></li>
+      </ul>
+    </li>
+    <li><a href="#控制台命令行-api">控制台命令行 API</a></li>
+    <li><a href="#debugger-语句">debugger 语句</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="console-对象与控制台">console 对象与控制台</h1>
+<h2 id="console-对象">console 对象</h2>
+<p><code>console</code>对象是 JavaScript 的原生对象，它有点像 Unix 系统的标准输出<code>stdout</code>和标准错误<code>stderr</code>，可以输出各种信息到控制台，并且还提供了很多有用的辅助方法。</p>
+<p><code>console</code>的常见用途有两个。</p>
+<ul>
+<li>调试程序，显示网页代码运行时的错误信息。</li>
+<li>提供了一个命令行接口，用来与网页代码互动。</li>
+</ul>
+<p><code>console</code>对象的浏览器实现，包含在浏览器自带的开发工具之中。以 Chrome 浏览器的“开发者工具”（Developer Tools）为例，可以使用下面三种方法的打开它。</p>
+<ol>
+<li>按 F12 或者<code>Control + Shift + i</code>（PC）/ <code>Command + Option + i</code>（Mac）。</li>
+<li>浏览器菜单选择“工具/开发者工具”。</li>
+<li>在一个页面元素上，打开右键菜单，选择其中的“Inspect Element”。</li>
+</ol>
+<p>打开开发者工具以后，顶端有多个面板。</p>
+<ul>
+<li><strong>Elements</strong>：查看网页的 HTML 源码和 CSS 代码。</li>
+<li><strong>Resources</strong>：查看网页加载的各种资源文件（比如代码文件、字体文件 CSS 文件等），以及在硬盘上创建的各种内容（比如本地缓存、Cookie、Local Storage等）。</li>
+<li><strong>Network</strong>：查看网页的 HTTP 通信情况。</li>
+<li><strong>Sources</strong>：查看网页加载的脚本源码。</li>
+<li><strong>Timeline</strong>：查看各种网页行为随时间变化的情况。</li>
+<li><strong>Performance</strong>：查看网页的性能情况，比如 CPU 和内存消耗。</li>
+<li><strong>Console</strong>：用来运行 JavaScript 命令。</li>
+</ul>
+<p>这些面板都有各自的用途，以下只介绍<code>Console</code>面板（又称为控制台）。</p>
+<p><code>Console</code>面板基本上就是一个命令行窗口，你可以在提示符下，键入各种命令。</p>
+<h2 id="console-对象的静态方法">console 对象的静态方法</h2>
+<p><code>console</code>对象提供的各种静态方法，用来与控制台窗口互动。</p>
+<h3 id="consolelogconsoleinfoconsoledebug">console.log()，console.info()，console.debug()</h3>
+<p><code>console.log</code>方法用于在控制台输出信息。它可以接受一个或多个参数，将它们连接起来输出。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Hello World
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// a b c
+</span></span></span></code></pre></div><p><code>console.log</code>方法会自动在每次输出的结尾，添加换行符。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 3
+</span></span></span></code></pre></div><p>如果第一个参数是格式字符串（使用了格式占位符），<code>console.log</code>方法将依次用后面的参数替换占位符，然后再进行输出。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; %s + %s = %s&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  1 + 1 = 2
+</span></span></span></code></pre></div><p>上面代码中，<code>console.log</code>方法的第一个参数有三个占位符（<code>%s</code>），第二、三、四个参数会在显示时，依次替换掉这个三个占位符。</p>
+<p><code>console.log</code>方法支持以下占位符，不同类型的数据必须使用对应的占位符。</p>
+<ul>
+<li><code>%s</code> 字符串</li>
+<li><code>%d</code> 整数</li>
+<li><code>%i</code> 整数</li>
+<li><code>%f</code> 浮点数</li>
+<li><code>%o</code> 对象的链接</li>
+<li><code>%c</code> CSS 格式字符串</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">11</span> <span class="o">*</span> <span class="mi">9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;%d %s balloons&#39;</span><span class="p">,</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 99 red balloons
+</span></span></span></code></pre></div><p>上面代码中，第二个参数是数值，对应的占位符是<code>%d</code>，第三个参数是字符串，对应的占位符是<code>%s</code>。</p>
+<p>使用<code>%c</code>占位符时，对应的参数必须是 CSS 代码，用来对输出内容进行 CSS 渲染。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;%cThis text is styled!&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;color: red; background: yellow; font-size: 24px;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>上面代码运行后，输出的内容将显示为黄底红字。</p>
+<p><code>console.log</code>方法的两种参数格式，可以结合在一起使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; %s + %s &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;= 2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1 + 1  = 2
+</span></span></span></code></pre></div><p>如果参数是一个对象，<code>console.log</code>会显示该对象的值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Object {foo: &#34;bar&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Date</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// function Date() { [native code] }
+</span></span></span></code></pre></div><p>上面代码输出<code>Date</code>对象的值，结果为一个构造函数。</p>
+<p><code>console.info</code>是<code>console.log</code>方法的别名，用法完全一样。只不过<code>console.info</code>方法会在输出信息的前面，加上一个蓝色图标。</p>
+<p><code>console.debug</code>方法与<code>console.log</code>方法类似，会在控制台输出调试信息。但是，默认情况下，<code>console.debug</code>输出的信息不会显示，只有在打开显示级别在<code>verbose</code>的情况下，才会显示。</p>
+<p><code>console</code>对象的所有方法，都可以被覆盖。因此，可以按照自己的需要，定义<code>console.log</code>方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span> <span class="o">=</span> <span class="nx">console</span><span class="p">[</span><span class="nx">method</span><span class="p">].</span><span class="nx">bind</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;出错了！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2014-05-18T09:00.000Z 出错了！
+</span></span></span></code></pre></div><p>上面代码表示，使用自定义的<code>console.log</code>方法，可以在显示结果添加当前时间。</p>
+<h3 id="consolewarnconsoleerror">console.warn()，console.error()</h3>
+<p><code>warn</code>方法和<code>error</code>方法也是在控制台输出信息，它们与<code>log</code>方法的不同之处在于，<code>warn</code>方法输出信息时，在最前面加一个黄色三角，表示警告；<code>error</code>方法输出信息时，在最前面加一个红色的叉，表示出错。同时，还会高亮显示输出文字和错误发生的堆栈。其他方面都一样。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error: %s (%i)&#39;</span><span class="p">,</span> <span class="s1">&#39;Server is not responding&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Error: Server is not responding (500)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;Warning! Too few nodes (%d)&#39;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Warning! Too few nodes (1)
+</span></span></span></code></pre></div><p>可以这样理解，<code>log</code>方法是写入标准输出（<code>stdout</code>），<code>warn</code>方法和<code>error</code>方法是写入标准错误（<code>stderr</code>）。</p>
+<h3 id="consoletable">console.table()</h3>
+<p>对于某些复合类型的数据，<code>console.table</code>方法可以将其转为表格显示。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">languages</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;JavaScript&#34;</span><span class="p">,</span> <span class="nx">fileExtension</span><span class="o">:</span> <span class="s2">&#34;.js&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;TypeScript&#34;</span><span class="p">,</span> <span class="nx">fileExtension</span><span class="o">:</span> <span class="s2">&#34;.ts&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;CoffeeScript&#34;</span><span class="p">,</span> <span class="nx">fileExtension</span><span class="o">:</span> <span class="s2">&#34;.coffee&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">table</span><span class="p">(</span><span class="nx">languages</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码的<code>language</code>变量，转为表格显示如下。</p>
+<table>
+<thead>
+<tr>
+<th>(index)</th>
+<th>name</th>
+<th>fileExtension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>&ldquo;JavaScript&rdquo;</td>
+<td>&ldquo;.js&rdquo;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>&ldquo;TypeScript&rdquo;</td>
+<td>&ldquo;.ts&rdquo;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>&ldquo;CoffeeScript&rdquo;</td>
+<td>&ldquo;.coffee&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<p>下面是显示表格内容的例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">languages</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">csharp</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;C#&#34;</span><span class="p">,</span> <span class="nx">paradigm</span><span class="o">:</span> <span class="s2">&#34;object-oriented&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fsharp</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;F#&#34;</span><span class="p">,</span> <span class="nx">paradigm</span><span class="o">:</span> <span class="s2">&#34;functional&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">table</span><span class="p">(</span><span class="nx">languages</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码的<code>language</code>，转为表格显示如下。</p>
+<table>
+<thead>
+<tr>
+<th>(index)</th>
+<th>name</th>
+<th>paradigm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>csharp</td>
+<td>&ldquo;C#&rdquo;</td>
+<td>&ldquo;object-oriented&rdquo;</td>
+</tr>
+<tr>
+<td>fsharp</td>
+<td>&ldquo;F#&rdquo;</td>
+<td>&ldquo;functional&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="consolecount">console.count()</h3>
+<p><code>count</code>方法用于计数，输出它被调用了多少次。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">count</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="s1">&#39;hi &#39;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">greet</span><span class="p">(</span><span class="s1">&#39;bob&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  : 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;hi bob&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">greet</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  : 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;hi alice&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">greet</span><span class="p">(</span><span class="s1">&#39;bob&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  : 3
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;hi bob&#34;
+</span></span></span></code></pre></div><p>上面代码每次调用<code>greet</code>函数，内部的<code>console.count</code>方法就输出执行次数。</p>
+<p>该方法可以接受一个字符串作为参数，作为标签，对执行次数进行分类。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="s2">&#34;hi &#34;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">greet</span><span class="p">(</span><span class="s1">&#39;bob&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// bob: 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;hi bob&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">greet</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// alice: 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;hi alice&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">greet</span><span class="p">(</span><span class="s1">&#39;bob&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// bob: 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;hi bob&#34;
+</span></span></span></code></pre></div><p>上面代码根据参数的不同，显示<code>bob</code>执行了两次，<code>alice</code>执行了一次。</p>
+<h3 id="consoledirconsoledirxml">console.dir()，console.dirxml()</h3>
+<p><code>dir</code>方法用来对一个对象进行检查（inspect），并以易于阅读和打印的格式显示。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span><span class="nx">f1</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nx">f2</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Object {f1: &#34;foo&#34;, f2: &#34;bar&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">({</span><span class="nx">f1</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nx">f2</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Object
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   f1: &#34;foo&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   f2: &#34;bar&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   __proto__: Object
+</span></span></span></code></pre></div><p>上面代码显示<code>dir</code>方法的输出结果，比<code>log</code>方法更易读，信息也更丰富。</p>
+<p>该方法对于输出 DOM 对象非常有用，因为会显示 DOM 对象的所有属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+</span></span></code></pre></div><p>Node 环境之中，还可以指定以代码高亮的形式输出。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">colors</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+</span></span></code></pre></div><p><code>dirxml</code>方法主要用于以目录树的形式，显示 DOM 节点。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">dirxml</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+</span></span></code></pre></div><p>如果参数不是 DOM 节点，而是普通的 JavaScript 对象，<code>console.dirxml</code>等同于<code>console.dir</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">dirxml</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span></code></pre></div><h3 id="consoleassert">console.assert()</h3>
+<p><code>console.assert</code>方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序执行。这样就相当于提示用户，内部状态不正确。</p>
+<p>它接受两个参数，第一个参数是表达式，第二个参数是字符串。只有当第一个参数为<code>false</code>，才会提示有错误，在控制台输出第二个参数，否则不会有任何结果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="s1">&#39;判断条件不成立&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Assertion failed: 判断条件不成立
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 相当于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;判断条件不成立&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>下面是一个例子，判断子节点的个数是否大于等于500。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;节点个数大于等于500&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>上面代码中，如果符合条件的节点小于500个，不会有任何输出；只有大于等于500时，才会在控制台提示错误，并且显示指定文本。</p>
+<h3 id="consoletimeconsoletimeend">console.time()，console.timeEnd()</h3>
+<p>这两个方法用于计时，可以算出一个操作所花费的准确时间。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;Array initialize&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">array</span><span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;Array initialize&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Array initialize: 1914.481ms
+</span></span></span></code></pre></div><p><code>time</code>方法表示计时开始，<code>timeEnd</code>方法表示计时结束。它们的参数是计时器的名称。调用<code>timeEnd</code>方法之后，控制台会显示“计时器名称: 所耗费的时间”。</p>
+<h3 id="consolegroupconsolegroupendconsolegroupcollapsed">console.group()，console.groupEnd()，console.groupCollapsed()</h3>
+<p><code>console.group</code>和<code>console.groupEnd</code>这两个方法用于将显示的信息分组。它只在输出大量信息时有用，分在一组的信息，可以用鼠标折叠/展开。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="s1">&#39;一级分组&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;一级分组的内容&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="s1">&#39;二级分组&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;二级分组的内容&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">groupEnd</span><span class="p">();</span> <span class="c1">// 二级分组结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">groupEnd</span><span class="p">();</span> <span class="c1">// 一级分组结束
+</span></span></span></code></pre></div><p>上面代码会将“二级分组”显示在“一级分组”内部，并且“一级分组”和“二级分组”前面都有一个折叠符号，可以用来折叠本级的内容。</p>
+<p><code>console.groupCollapsed</code>方法与<code>console.group</code>方法很类似，唯一的区别是该组的内容，在第一次显示时是收起的（collapsed），而不是展开的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">groupCollapsed</span><span class="p">(</span><span class="s1">&#39;Fetching Data&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Request Sent&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error: Server not responding (500)&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">groupEnd</span><span class="p">();</span>
+</span></span></code></pre></div><p>上面代码只显示一行”Fetching Data“，点击后才会展开，显示其中包含的两行。</p>
+<h3 id="consoletraceconsoleclear">console.trace()，console.clear()</h3>
+<p><code>console.trace</code>方法显示当前执行的代码在堆栈中的调用路径。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// console.trace()
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   (anonymous function)
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   InjectedScript._evaluateOn
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   InjectedScript._evaluateAndWrap
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   InjectedScript.evaluate
+</span></span></span></code></pre></div><p><code>console.clear</code>方法用于清除当前控制台的所有输出，将光标回置到第一行。如果用户选中了控制台的“Preserve log”选项，<code>console.clear</code>方法将不起作用。</p>
+<h2 id="控制台命令行-api">控制台命令行 API</h2>
+<p>浏览器控制台中，除了使用<code>console</code>对象，还可以使用一些控制台自带的命令行方法。</p>
+<p>（1）<code>$_</code></p>
+<p><code>$_</code>属性返回上一个表达式的值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">$_</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 4
+</span></span></span></code></pre></div><p>（2）<code>$0</code> - <code>$4</code></p>
+<p>控制台保存了最近5个在 Elements 面板选中的 DOM 元素，<code>$0</code>代表倒数第一个（最近一个），<code>$1</code>代表倒数第二个，以此类推直到<code>$4</code>。</p>
+<p>（3）<code>$(selector)</code></p>
+<p><code>$(selector)</code>返回第一个匹配的元素，等同于<code>document.querySelector()</code>。注意，如果页面脚本对<code>$</code>有定义，则会覆盖原始的定义。比如，页面里面有 jQuery，控制台执行<code>$(selector)</code>就会采用 jQuery 的实现，返回一个数组。</p>
+<p>（4）<code>$$(selector)</code></p>
+<p><code>$$(selector)</code>返回选中的 DOM 对象，等同于<code>document.querySelectorAll</code>。</p>
+<p>（5）<code>$x(path)</code></p>
+<p><code>$x(path)</code>方法返回一个数组，包含匹配特定 XPath 表达式的所有 DOM 元素。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">$x</span><span class="p">(</span><span class="s2">&#34;//p[a]&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>上面代码返回所有包含<code>a</code>元素的<code>p</code>元素。</p>
+<p>（6）<code>inspect(object)</code></p>
+<p><code>inspect(object)</code>方法打开相关面板，并选中相应的元素，显示它的细节。DOM 元素在<code>Elements</code>面板中显示，比如<code>inspect(document)</code>会在 Elements 面板显示<code>document</code>元素。JavaScript 对象在控制台面板<code>Profiles</code>面板中显示，比如<code>inspect(window)</code>。</p>
+<p>（7）<code>getEventListeners(object)</code></p>
+<p><code>getEventListeners(object)</code>方法返回一个对象，该对象的成员为<code>object</code>登记了回调函数的各种事件（比如<code>click</code>或<code>keydown</code>），每个事件对应一个数组，数组的成员为该事件的回调函数。</p>
+<p>（8）<code>keys(object)</code>，<code>values(object)</code></p>
+<p><code>keys(object)</code>方法返回一个数组，包含<code>object</code>的所有键名。</p>
+<p><code>values(object)</code>方法返回一个数组，包含<code>object</code>的所有键值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;p1&#39;</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;p2&#39;</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">keys</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// [&#34;p1&#34;, &#34;p2&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">values</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// [&#34;a&#34;, &#34;b&#34;]
+</span></span></span></code></pre></div><p>（9）<code>monitorEvents(object[, events]) ，unmonitorEvents(object[, events])</code></p>
+<p><code>monitorEvents(object[, events])</code>方法监听特定对象上发生的特定事件。事件发生时，会返回一个<code>Event</code>对象，包含该事件的相关信息。<code>unmonitorEvents</code>方法用于停止监听。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">monitorEvents</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s2">&#34;resize&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">monitorEvents</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;resize&#34;</span><span class="p">,</span> <span class="s2">&#34;scroll&#34;</span><span class="p">])</span>
+</span></span></code></pre></div><p>上面代码分别表示单个事件和多个事件的监听方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">monitorEvents</span><span class="p">(</span><span class="nx">$0</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">unmonitorEvents</span><span class="p">(</span><span class="nx">$0</span><span class="p">,</span> <span class="s1">&#39;mousemove&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码表示如何停止监听。</p>
+<p><code>monitorEvents</code>允许监听同一大类的事件。所有事件可以分成四个大类。</p>
+<ul>
+<li>mouse：&ldquo;mousedown&rdquo;, &ldquo;mouseup&rdquo;, &ldquo;click&rdquo;, &ldquo;dblclick&rdquo;, &ldquo;mousemove&rdquo;, &ldquo;mouseover&rdquo;, &ldquo;mouseout&rdquo;, &ldquo;mousewheel&rdquo;</li>
+<li>key：&ldquo;keydown&rdquo;, &ldquo;keyup&rdquo;, &ldquo;keypress&rdquo;, &ldquo;textInput&rdquo;</li>
+<li>touch：&ldquo;touchstart&rdquo;, &ldquo;touchmove&rdquo;, &ldquo;touchend&rdquo;, &ldquo;touchcancel&rdquo;</li>
+<li>control：&ldquo;resize&rdquo;, &ldquo;scroll&rdquo;, &ldquo;zoom&rdquo;, &ldquo;focus&rdquo;, &ldquo;blur&rdquo;, &ldquo;select&rdquo;, &ldquo;change&rdquo;, &ldquo;submit&rdquo;, &ldquo;reset&rdquo;</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">monitorEvents</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#msg&#34;</span><span class="p">),</span> <span class="s2">&#34;key&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码表示监听所有<code>key</code>大类的事件。</p>
+<p>（10）其他方法</p>
+<p>命令行 API 还提供以下方法。</p>
+<ul>
+<li><code>clear()</code>：清除控制台的历史。</li>
+<li><code>copy(object)</code>：复制特定 DOM 元素到剪贴板。</li>
+<li><code>dir(object)</code>：显示特定对象的所有属性，是<code>console.dir</code>方法的别名。</li>
+<li><code>dirxml(object)</code>：显示特定对象的 XML 形式，是<code>console.dirxml</code>方法的别名。</li>
+</ul>
+<h2 id="debugger-语句">debugger 语句</h2>
+<p><code>debugger</code>语句主要用于除错，作用是设置断点。如果有正在运行的除错工具，程序运行到<code>debugger</code>语句时会自动停下。如果没有除错工具，<code>debugger</code>语句不会产生任何结果，JavaScript 引擎自动跳过这一句。</p>
+<p>Chrome 浏览器中，当代码运行到<code>debugger</code>语句时，就会暂停运行，自动打开脚本源码界面。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="kr">debugger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面代码打印出0，1，2以后，就会暂停，自动打开源码界面，等待进一步处理。</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li>Chrome Developer Tools, <a href="https://developers.google.com/chrome-developer-tools/docs/console" target="_blank" rel="noopener noreffer ">Using the Console</a></li>
+<li>Matt West, <a href="http://blog.teamtreehouse.com/mastering-developer-tools-console" target="_blank" rel="noopener noreffer ">Mastering The Developer Tools Console</a></li>
+<li>Firebug Wiki, <a href="https://getfirebug.com/wiki/index.php/Console_API" target="_blank" rel="noopener noreffer ">Console API</a></li>
+<li>Axel Rauschmayer, <a href="http://www.2ality.com/2013/10/console-api.html" target="_blank" rel="noopener noreffer ">The JavaScript console API</a></li>
+<li>Marius Schulz, <a href="http://blog.mariusschulz.com/2013/11/13/advanced-javascript-debugging-with-consoletable" target="_blank" rel="noopener noreffer ">Advanced JavaScript Debugging with console.table()</a></li>
+<li>Google Developer, <a href="https://developers.google.com/chrome-developer-tools/docs/commandline-api" target="_blank" rel="noopener noreffer ">Command Line API Reference</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/features/console/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/features/console/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/features/console/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/features/console/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/features/console/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/features/conversion/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/events/touch/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

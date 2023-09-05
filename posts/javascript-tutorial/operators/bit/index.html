@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="二进制位运算符 概述 二进制位运算符用于直接对二进制位进行计算，一共有7个。 二进制或运算符（or）：符号为|，表示若两个二进制位都为0，则结果为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/operators/bit/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="二进制位运算符 概述 二进制位运算符用于直接对二进制位进行计算，一共有7个。 二进制或运算符（or）：符号为|，表示若两个二进制位都为0，则结果为"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/operators/bit/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/operators/boolean/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/operators/arithmetic/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/operators\/bit\/"
+        },"genre": "posts","wordcount":  3954 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/operators\/bit\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3954 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#二进制或运算符">二进制或运算符</a></li>
+    <li><a href="#二进制与运算符">二进制与运算符</a></li>
+    <li><a href="#二进制否运算符">二进制否运算符</a></li>
+    <li><a href="#异或运算符">异或运算符</a></li>
+    <li><a href="#左移运算符">左移运算符</a></li>
+    <li><a href="#右移运算符">右移运算符</a></li>
+    <li><a href="#头部补零的右移运算符">头部补零的右移运算符</a></li>
+    <li><a href="#开关作用">开关作用</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="二进制位运算符">二进制位运算符</h1>
+<h2 id="概述">概述</h2>
+<p>二进制位运算符用于直接对二进制位进行计算，一共有7个。</p>
+<ul>
+<li><strong>二进制或运算符</strong>（or）：符号为<code>|</code>，表示若两个二进制位都为<code>0</code>，则结果为<code>0</code>，否则为<code>1</code>。</li>
+<li><strong>二进制与运算符</strong>（and）：符号为<code>&amp;</code>，表示若两个二进制位都为1，则结果为1，否则为0。</li>
+<li><strong>二进制否运算符</strong>（not）：符号为<code>~</code>，表示对一个二进制位取反。</li>
+<li><strong>异或运算符</strong>（xor）：符号为<code>^</code>，表示若两个二进制位不相同，则结果为1，否则为0。</li>
+<li><strong>左移运算符</strong>（left shift）：符号为<code>&lt;&lt;</code>，详见下文解释。</li>
+<li><strong>右移运算符</strong>（right shift）：符号为<code>&gt;&gt;</code>，详见下文解释。</li>
+<li><strong>头部补零的右移运算符</strong>（zero filled right shift）：符号为<code>&gt;&gt;&gt;</code>，详见下文解释。</li>
+</ul>
+<p>这些位运算符直接处理每一个比特位（bit），所以是非常底层的运算，好处是速度极快，缺点是很不直观，许多场合不能使用它们，否则会使代码难以理解和查错。</p>
+<p>有一点需要特别注意，位运算符只对整数起作用，如果一个运算子不是整数，会自动转为整数后再执行。另外，虽然在 JavaScript 内部，数值都是以64位浮点数的形式储存，但是做位运算的时候，是以32位带符号的整数进行运算的，并且返回值也是一个32位带符号的整数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面这行代码的意思，就是将<code>i</code>（不管是整数或小数）转为32位整数。</p>
+<p>利用这个特性，可以写出一个函数，将任意数值转为32位整数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">toInt32</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">x</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面这个函数将任意值与<code>0</code>进行一次或运算，这个位运算会自动将一个值转为32位整数。下面是这个函数的用法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">toInt32</span><span class="p">(</span><span class="mf">1.001</span><span class="p">)</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">toInt32</span><span class="p">(</span><span class="mf">1.999</span><span class="p">)</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">toInt32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">toInt32</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// -1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">toInt32</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">toInt32</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// -1
+</span></span></span></code></pre></div><p>上面代码中，<code>toInt32</code>可以将小数转为整数。对于一般的整数，返回值不会有任何变化。对于大于或等于2的32次方的整数，大于32位的数位都会被舍去。</p>
+<h2 id="二进制或运算符">二进制或运算符</h2>
+<p>二进制或运算符（<code>|</code>）逐位比较两个运算子，两个二进制位之中只要有一个为<code>1</code>，就返回<code>1</code>，否则返回<code>0</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">0</span> <span class="o">|</span> <span class="mi">3</span> <span class="c1">// 3
+</span></span></span></code></pre></div><p>上面代码中，<code>0</code>和<code>3</code>的二进制形式分别是<code>00</code>和<code>11</code>，所以进行二进制或运算会得到<code>11</code>（即<code>3</code>）。</p>
+<p>位运算只对整数有效，遇到小数时，会将小数部分舍去，只保留整数部分。所以，将一个小数与<code>0</code>进行二进制或运算，等同于对该数去除小数部分，即取整数位。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">2.9</span> <span class="o">|</span> <span class="mi">0</span> <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">-</span><span class="mf">2.9</span> <span class="o">|</span> <span class="mi">0</span> <span class="c1">// -2
+</span></span></span></code></pre></div><p>需要注意的是，这种取整方法不适用超过32位整数最大值<code>2147483647</code>的数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">2147483649.4</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// -2147483647
+</span></span></span></code></pre></div><h2 id="二进制与运算符">二进制与运算符</h2>
+<p>二进制与运算符（<code>&amp;</code>）的规则是逐位比较两个运算子，两个二进制位之中只要有一个位为<code>0</code>，就返回<code>0</code>，否则返回<code>1</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">0</span> <span class="o">&amp;</span> <span class="mi">3</span> <span class="c1">// 0
+</span></span></span></code></pre></div><p>上面代码中，0（二进制<code>00</code>）和3（二进制<code>11</code>）进行二进制与运算会得到<code>00</code>（即<code>0</code>）。</p>
+<h2 id="二进制否运算符">二进制否运算符</h2>
+<p>二进制否运算符（<code>~</code>）将每个二进制位都变为相反值（<code>0</code>变为<code>1</code>，<code>1</code>变为<code>0</code>）。它的返回结果有时比较难理解，因为涉及到计算机内部的数值表示机制。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">~</span> <span class="mi">3</span> <span class="c1">// -4
+</span></span></span></code></pre></div><p>上面表达式对<code>3</code>进行二进制否运算，得到<code>-4</code>。之所以会有这样的结果，是因为位运算时，JavaScript 内部将所有的运算子都转为32位的二进制整数再进行运算。</p>
+<p><code>3</code>的32位整数形式是<code>00000000000000000000000000000011</code>，二进制否运算以后得到<code>11111111111111111111111111111100</code>。由于第一位（符号位）是1，所以这个数是一个负数。JavaScript 内部采用补码形式表示负数，即需要将这个数减去1，再取一次反，然后加上负号，才能得到这个负数对应的10进制值。这个数减去1等于<code>11111111111111111111111111111011</code>，再取一次反得到<code>00000000000000000000000000000100</code>，再加上负号就是<code>-4</code>。考虑到这样的过程比较麻烦，可以简单记忆成，一个数与自身的取反值相加，等于-1。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">~</span> <span class="o">-</span><span class="mi">3</span> <span class="c1">// 2
+</span></span></span></code></pre></div><p>上面表达式可以这样算，<code>-3</code>的取反值等于<code>-1</code>减去<code>-3</code>，结果为<code>2</code>。</p>
+<p>对一个整数连续两次二进制否运算，得到它自身。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">~~</span><span class="mi">3</span> <span class="c1">// 3
+</span></span></span></code></pre></div><p>所有的位运算都只对整数有效。二进制否运算遇到小数时，也会将小数部分舍去，只保留整数部分。所以，对一个小数连续进行两次二进制否运算，能达到取整效果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">~~</span><span class="mf">2.9</span> <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~~</span><span class="mf">47.11</span> <span class="c1">// 47
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~~</span><span class="mf">1.9999</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~~</span><span class="mi">3</span> <span class="c1">// 3
+</span></span></span></code></pre></div><p>使用二进制否运算取整，是所有取整方法中最快的一种。</p>
+<p>对字符串进行二进制否运算，JavaScript 引擎会先调用<code>Number</code>函数，将字符串转为数值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 相当于~Number(&#39;011&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="s1">&#39;011&#39;</span>  <span class="c1">// -12
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 相当于~Number(&#39;42 cats&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="s1">&#39;42 cats&#39;</span> <span class="c1">// -1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 相当于~Number(&#39;0xcafebabe&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="s1">&#39;0xcafebabe&#39;</span> <span class="c1">// 889275713
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 相当于~Number(&#39;deadbeef&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="s1">&#39;deadbeef&#39;</span> <span class="c1">// -1
+</span></span></span></code></pre></div><p><code>Number</code>函数将字符串转为数值的规则，参见《数据的类型转换》一章。</p>
+<p>对于其他类型的值，二进制否运算也是先用<code>Number</code>转为数值，然后再进行处理。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 相当于 ~Number([])
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="p">[]</span> <span class="c1">// -1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 相当于 ~Number(NaN)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="kc">NaN</span> <span class="c1">// -1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 相当于 ~Number(null)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">~</span><span class="kc">null</span> <span class="c1">// -1
+</span></span></span></code></pre></div><h2 id="异或运算符">异或运算符</h2>
+<p>异或运算（<code>^</code>）在两个二进制位不同时返回<code>1</code>，相同时返回<code>0</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">0</span> <span class="o">^</span> <span class="mi">3</span> <span class="c1">// 3
+</span></span></span></code></pre></div><p>上面表达式中，<code>0</code>（二进制<code>00</code>）与<code>3</code>（二进制<code>11</code>）进行异或运算，它们每一个二进制位都不同，所以得到<code>11</code>（即<code>3</code>）。</p>
+<p>“异或运算”有一个特殊运用，连续对两个数<code>a</code>和<code>b</code>进行三次异或运算，<code>a^=b; b^=a; a^=b;</code>，可以<a href="http://en.wikipedia.org/wiki/XOR_swap_algorithm" target="_blank" rel="noopener noreffer ">互换</a>它们的值。这意味着，使用“异或运算”可以在不引入临时变量的前提下，互换两个变量的值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">99</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">a</span> <span class="o">^=</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">b</span> <span class="o">^=</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">a</span> <span class="o">^=</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">a</span> <span class="c1">// 99
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">b</span> <span class="c1">// 10
+</span></span></span></code></pre></div><p>这是互换两个变量的值的最快方法。</p>
+<p>异或运算也可以用来取整。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">12.9</span> <span class="o">^</span> <span class="mi">0</span> <span class="c1">// 12
+</span></span></span></code></pre></div><h2 id="左移运算符">左移运算符</h2>
+<p>左移运算符（<code>&lt;&lt;</code>）表示将一个数的二进制值向左移动指定的位数，尾部补<code>0</code>，即乘以<code>2</code>的指定次方。向左移动的时候，最高位的符号位是一起移动的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 4 的二进制形式为100，
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 左移一位为1000（即十进制的8）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 相当于乘以2的1次方
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">4</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mi">4</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// -8
+</span></span></span></code></pre></div><p>上面代码中，<code>-4</code>左移一位得到<code>-8</code>，是因为<code>-4</code>的二进制形式是<code>11111111111111111111111111111100</code>，左移一位后得到<code>11111111111111111111111111111000</code>，该数转为十进制（减去1后取反，再加上负号）即为<code>-8</code>。</p>
+<p>如果左移0位，就相当于将该数值转为32位整数，等同于取整，对于正数和负数都有效。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">13.5</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 13
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mf">13.5</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// -13
+</span></span></span></code></pre></div><p>左移运算符用于二进制数值非常方便。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="p">{</span><span class="nx">r</span><span class="o">:</span> <span class="mi">186</span><span class="p">,</span> <span class="nx">g</span><span class="o">:</span> <span class="mi">218</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">85</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// RGB to HEX
+</span></span></span><span class="line"><span class="cl"><span class="c1">// (1 &lt;&lt; 24)的作用为保证结果是6位数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">rgb2hex</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">g</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">r</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">g</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="nx">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="c1">// 先转成十六进制，然后返回字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>   <span class="c1">// 去除字符串的最高位，返回后面六个字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">rgb2hex</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nx">r</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nx">g</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nx">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;#bada55&#34;
+</span></span></span></code></pre></div><p>上面代码使用左移运算符，将颜色的 RGB 值转为 HEX 值。</p>
+<h2 id="右移运算符">右移运算符</h2>
+<p>右移运算符（<code>&gt;&gt;</code>）表示将一个数的二进制值向右移动指定的位数。如果是正数，头部全部补<code>0</code>；如果是负数，头部全部补<code>1</code>。右移运算符基本上相当于除以<code>2</code>的指定次方（最高位即符号位参与移动）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">4</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 因为4的二进制形式为 00000000000000000000000000000100，
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 右移一位得到 00000000000000000000000000000010，
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 即为十进制的2
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mi">4</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// -2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 因为-4的二进制形式为 11111111111111111111111111111100，
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 右移一位，头部补1，得到 11111111111111111111111111111110,
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 即为十进制的-2
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></div><p>右移运算可以模拟 2 的整除运算。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">5</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 相当于 5 / 2 = 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="mi">21</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 5
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 相当于 21 / 4 = 5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="mi">21</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 相当于 21 / 8 = 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="mi">21</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 相当于 21 / 16 = 1
+</span></span></span></code></pre></div><h2 id="头部补零的右移运算符">头部补零的右移运算符</h2>
+<p>头部补零的右移运算符（<code>&gt;&gt;&gt;</code>）与右移运算符（<code>&gt;&gt;</code>）只有一个差别，就是一个数的二进制形式向右移动时，头部一律补零，而不考虑符号位。所以，该运算总是得到正值。对于正数，该运算的结果与右移运算符（<code>&gt;&gt;</code>）完全一致，区别主要在于负数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">4</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mi">4</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2147483646
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 因为-4的二进制形式为11111111111111111111111111111100，
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 带符号位的右移一位，得到01111111111111111111111111111110，
+</span></span></span><span class="line"><span class="cl"><span class="cm">// 即为十进制的2147483646。
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></div><p>这个运算实际上将一个值转为32位无符号整数。</p>
+<p>查看一个负整数在计算机内部的储存形式，最快的方法就是使用这个运算符。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span> <span class="c1">// 4294967295
+</span></span></span></code></pre></div><p>上面代码表示，<code>-1</code>作为32位整数时，内部的储存形式使用无符号整数格式解读，值为 4294967295（即<code>(2^32)-1</code>，等于<code>11111111111111111111111111111111</code>）。</p>
+<h2 id="开关作用">开关作用</h2>
+<p>位运算符可以用作设置对象属性的开关。</p>
+<p>假定某个对象有四个开关，每个开关都是一个变量。那么，可以设置一个四位的二进制数，它的每个位对应一个开关。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">FLAG_A</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 0001
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">FLAG_B</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 0010
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">FLAG_C</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// 0100
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">FLAG_D</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="c1">// 1000
+</span></span></span></code></pre></div><p>上面代码设置 A、B、C、D 四个开关，每个开关分别占有一个二进制位。</p>
+<p>然后，就可以用二进制与运算，检查当前设置是否打开了指定开关。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">flags</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 二进制的0101
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">flags</span> <span class="o">&amp;</span> <span class="nx">FLAG_C</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 0101 &amp; 0100 =&gt; 0100 =&gt; true
+</span></span></span></code></pre></div><p>上面代码检验是否打开了开关<code>C</code>。如果打开，会返回<code>true</code>，否则返回<code>false</code>。</p>
+<p>现在假设需要打开<code>A</code>、<code>B</code>、<code>D</code>三个开关，我们可以构造一个掩码变量。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="nx">FLAG_A</span> <span class="o">|</span> <span class="nx">FLAG_B</span> <span class="o">|</span> <span class="nx">FLAG_D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 0001 | 0010 | 1000 =&gt; 1011
+</span></span></span></code></pre></div><p>上面代码对<code>A</code>、<code>B</code>、<code>D</code>三个变量进行二进制或运算，得到掩码值为二进制的<code>1011</code>。</p>
+<p>有了掩码，二进制或运算可以确保打开指定的开关。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">flags</span> <span class="o">=</span> <span class="nx">flags</span> <span class="o">|</span> <span class="nx">mask</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面代码中，计算后得到的<code>flags</code>变量，代表三个开关的二进制位都打开了。</p>
+<p>二进制与运算可以将当前设置中凡是与开关设置不一样的项，全部关闭。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">flags</span> <span class="o">=</span> <span class="nx">flags</span> <span class="o">&amp;</span> <span class="nx">mask</span><span class="p">;</span>
+</span></span></code></pre></div><p>异或运算可以切换（toggle）当前设置，即第一次执行可以得到当前设置的相反值，再执行一次又得到原来的值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">flags</span> <span class="o">=</span> <span class="nx">flags</span> <span class="o">^</span> <span class="nx">mask</span><span class="p">;</span>
+</span></span></code></pre></div><p>二进制否运算可以翻转当前设置，即原设置为<code>0</code>，运算后变为<code>1</code>；原设置为<code>1</code>，运算后变为<code>0</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">flags</span> <span class="o">=</span> <span class="o">~</span><span class="nx">flags</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="参考链接">参考链接</h2>
+<ul>
+<li>Michal Budzynski, <a href="https://michalbe.blogspot.com/2013/03/javascript-less-known-parts-bitwise.html" target="_blank" rel="noopener noreffer ">JavaScript: The less known parts. Bitwise Operators</a></li>
+<li>Axel Rauschmayer, <a href="http://www.2ality.com/2013/06/basic-javascript.html" target="_blank" rel="noopener noreffer ">Basic JavaScript for the impatient programmer</a></li>
+<li>Mozilla Developer Network, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener noreffer ">Bitwise Operators</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/operators/bit/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/operators/bit/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/operators/bit/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/operators/bit/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/operators/bit/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/operators/boolean/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/operators/arithmetic/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

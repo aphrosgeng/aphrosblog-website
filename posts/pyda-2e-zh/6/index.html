@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="第 6 章 数据加载、存储与文件格式 访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍 pandas 的数据输入与输出，虽然别的库中也有不少以此为目的的工" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/pyda-2e-zh/6/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="第 6 章 数据加载、存储与文件格式 访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍 pandas 的数据输入与输出，虽然别的库中也有不少以此为目的的工"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/pyda-2e-zh/6/" /><link rel="prev" href="http://localhost:1313/posts/pyda-2e-zh/7/" /><link rel="next" href="http://localhost:1313/posts/pyda-2e-zh/5/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/pyda-2e-zh\/6\/"
+        },"genre": "posts","wordcount":  8619 ,
+        "url": "http:\/\/localhost:1313\/posts\/pyda-2e-zh\/6\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8619 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;18 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#逐块读取文本文件">逐块读取文本文件</a></li>
+    <li><a href="#将数据写出到文本格式">将数据写出到文本格式</a></li>
+    <li><a href="#处理分隔符格式">处理分隔符格式</a></li>
+    <li><a href="#json-数据">JSON 数据</a></li>
+    <li><a href="#xml-和-htmlweb-信息收集">XML 和 HTML：Web 信息收集</a></li>
+    <li><a href="#利用lxmlobjectify解析-xml">利用<code>lxml.objectify</code>解析 XML</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#使用-hdf5-格式">使用 HDF5 格式</a></li>
+    <li><a href="#读取-microsoft-excel-文件">读取 Microsoft Excel 文件</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="第-6-章-数据加载存储与文件格式">第 6 章 数据加载、存储与文件格式</h1>
+<p>访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍 pandas 的数据输入与输出，虽然别的库中也有不少以此为目的的工具。</p>
+<p>输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用 Web API 操作网络资源。</p>
+<h1 id="61-读写文本格式的数据">6.1 读写文本格式的数据</h1>
+<p>pandas 提供了一些用于将表格型数据读取为<code>DataFrame</code>对象的函数。表 6-1 对它们进行了总结，其中<code>read_csv</code>和<code>read_table</code>可能会是你今后用得最多的。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-958f849e6067b19b.png"
+        data-srcset="img/7178691-958f849e6067b19b.png, img/7178691-958f849e6067b19b.png 1.5x, img/7178691-958f849e6067b19b.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-958f849e6067b19b.png"
+        title="表 6-1 pandas 中的解析函数" /></p>
+<p>我将大致介绍一下这些函数在将文本数据转换为<code>DataFrame</code>时所用到的一些技术。这些函数的选项可以划分为以下几个大类：</p>
+<ul>
+<li>索引：将一个或多个列当做返回的<code>DataFrame</code>处理，以及是否从文件、用户获取列名。</li>
+<li>类型推断和数据转换：包括用户定义值的转换、和自定义的缺失值标记列表等。</li>
+<li>日期解析：包括组合功能，比如将分散在多个列中的日期时间信息组合成结果中的单个列。</li>
+<li>迭代：支持对大文件进行逐块迭代。</li>
+<li>不规整数据问题：跳过一些行、页脚、注释或其他一些不重要的东西（比如由成千上万个逗号隔开的数值数据）。</li>
+</ul>
+<p>因为工作中实际碰到的数据可能十分混乱，一些数据加载函数（尤其是<code>read_csv</code>）的选项逐渐变得复杂起来。面对不同的参数，感到头痛很正常（<code>read_csv</code>有超过 50 个参数）。pandas 文档有这些参数的例子，如果你感到阅读某个文件很难，可以通过相似的足够多的例子找到正确的参数。</p>
+<p>其中一些函数，比如<code>pandas.read_csv</code>，有类型推断功能，因为列数据的类型不属于数据类型。也就是说，你不需要指定列的类型到底是数值、整数、布尔值，还是字符串。其它的数据格式，如 HDF5、Feather 和 msgpack，会在格式中存储数据类型。</p>
+<p>日期和其他自定义类型的处理需要多花点工夫才行。首先我们来看一个以逗号分隔的（CSV）文本文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">ex1</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span></code></pre></div><blockquote>
+<p>笔记：这里，我用的是 Unix 的<code>cat</code> shell 命令将文件的原始内容打印到屏幕上。如果你用的是 Windows，你可以使用<code>type</code>达到同样的效果。</p>
+</blockquote>
+<p>由于该文件以逗号分隔，所以我们可以使用<code>read_csv</code>将其读入一个<code>DataFrame</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex1.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">df</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>我们还可以使用<code>read_table</code>，并指定分隔符：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;examples/ex1.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>并不是所有文件都有标题行。看看下面这个文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">ex2</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span></code></pre></div><p>读入该文件的办法有两个。你可以让 pandas 为其分配默认的列名，也可以自己定义列名：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex2.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="mi">0</span>   <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>      <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>  <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>  <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>    <span class="n">foo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex2.csv&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>假设你希望将<code>message</code>列做成<code>DataFrame</code>的索引。你可以明确表示要将该列放到索引 4 的位置上，也可以通过<code>index_col</code>参数指定<code>&quot;message&quot;</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex2.csv&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">         <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span>               
+</span></span><span class="line"><span class="cl"><span class="n">hello</span>    <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">world</span>    <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">foo</span>      <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>
+</span></span></code></pre></div><p>如果希望将多个列做成一个层次化索引，只需传入由列编号或列名组成的列表即可：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">csv_mindex</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="n">key1</span><span class="p">,</span><span class="n">key2</span><span class="p">,</span><span class="n">value1</span><span class="p">,</span><span class="n">value2</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">parsed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/csv_mindex.csv&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>                      <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">parsed</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">value1</span>  <span class="n">value2</span>
+</span></span><span class="line"><span class="cl"><span class="n">key1</span> <span class="n">key2</span>                
+</span></span><span class="line"><span class="cl"><span class="n">one</span>  <span class="n">a</span>          <span class="mi">1</span>       <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">     <span class="n">b</span>          <span class="mi">3</span>       <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">     <span class="n">c</span>          <span class="mi">5</span>       <span class="mi">6</span>
+</span></span><span class="line"><span class="cl">     <span class="n">d</span>          <span class="mi">7</span>       <span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span>  <span class="n">a</span>          <span class="mi">9</span>      <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">     <span class="n">b</span>         <span class="mi">11</span>      <span class="mi">12</span>
+</span></span><span class="line"><span class="cl">     <span class="n">c</span>         <span class="mi">13</span>      <span class="mi">14</span>
+</span></span><span class="line"><span class="cl">     <span class="n">d</span>         <span class="mi">15</span>      <span class="mi">16</span>
+</span></span></code></pre></div><p>有些情况下，有些表格可能不是用固定的分隔符去分隔字段的（比如空白符或其它模式）。看看下面这个文本文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;examples/ex3.txt&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;            A         B         C</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;aaa -0.264438 -1.026059 -0.619500</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;bbb  0.927272  0.302904 -0.032399</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;ccc -0.264273 -0.386314 -0.217601</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;ddd -0.871858 -0.348382  1.100491</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">]</span>
+</span></span></code></pre></div><p>虽然可以手动对数据进行规整，这里的字段是被数量不同的空白字符间隔开的。这种情况下，你可以传递一个正则表达式作为<code>read_table</code>的分隔符。可以用正则表达式表达为<code>\s+</code>，于是有：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;examples/ex3.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">22</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">A</span>         <span class="n">B</span>         <span class="n">C</span>
+</span></span><span class="line"><span class="cl"><span class="n">aaa</span> <span class="o">-</span><span class="mf">0.264438</span> <span class="o">-</span><span class="mf">1.026059</span> <span class="o">-</span><span class="mf">0.619500</span>
+</span></span><span class="line"><span class="cl"><span class="n">bbb</span>  <span class="mf">0.927272</span>  <span class="mf">0.302904</span> <span class="o">-</span><span class="mf">0.032399</span>
+</span></span><span class="line"><span class="cl"><span class="n">ccc</span> <span class="o">-</span><span class="mf">0.264273</span> <span class="o">-</span><span class="mf">0.386314</span> <span class="o">-</span><span class="mf">0.217601</span>
+</span></span><span class="line"><span class="cl"><span class="n">ddd</span> <span class="o">-</span><span class="mf">0.871858</span> <span class="o">-</span><span class="mf">0.348382</span>  <span class="mf">1.100491</span>
+</span></span></code></pre></div><p>这里，由于列名比数据行的数量少，所以<code>read_table</code>推断第一列应该是<code>DataFrame</code>的索引。</p>
+<p>这些解析器函数还有许多参数可以帮助你处理各种各样的异形文件格式（表 6-2 列出了一些）。比如说，你可以用<code>skiprows</code>跳过文件的第一行、第三行和第四行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">ex4</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># hey!</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># just wanted to make things more difficult for you</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># who reads CSV files with computers, anyway?</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex4.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>缺失值处理是文件解析任务中的一个重要组成部分。缺失数据经常是要么没有（空字符串），要么用某个标记值表示。默认情况下，pandas 会用一组经常出现的标记值进行识别，比如 NA 及<code>NULL</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">ex5</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="n">something</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">NA</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="n">three</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex5.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">27</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">something</span>  <span class="n">a</span>   <span class="n">b</span>     <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>       <span class="n">one</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mf">3.0</span>   <span class="mi">4</span>     <span class="n">NaN</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>       <span class="n">two</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="n">NaN</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>     <span class="n">three</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mf">11.0</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">something</span>      <span class="n">a</span>      <span class="n">b</span>      <span class="n">c</span>      <span class="n">d</span>  <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>      <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>     <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>      <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>   <span class="kc">True</span>  <span class="kc">False</span>    <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>      <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>  <span class="kc">False</span>    <span class="kc">False</span>
+</span></span></code></pre></div><p><code>na_values</code>可以用一个列表或集合的字符串表示缺失值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex5.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NULL&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">something</span>  <span class="n">a</span>   <span class="n">b</span>     <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>       <span class="n">one</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mf">3.0</span>   <span class="mi">4</span>     <span class="n">NaN</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>       <span class="n">two</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="n">NaN</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>     <span class="n">three</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mf">11.0</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>字典的各列可以使用不同的 NA 标记值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="n">sentinels</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;NA&#39;</span><span class="p">],</span> <span class="s1">&#39;something&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;two&#39;</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">32</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex5.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="n">sentinels</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl"><span class="n">something</span>  <span class="n">a</span>   <span class="n">b</span>     <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>       <span class="n">one</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mf">3.0</span>   <span class="mi">4</span>     <span class="n">NaN</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>       <span class="n">NaN</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="n">NaN</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>     <span class="n">three</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mf">11.0</span>  <span class="mi">12</span>     <span class="n">NaN</span>
+</span></span></code></pre></div><p>表 6-2 列出了<code>pandas.read_csv</code>和<code>pandas.read_table</code>常用的选项。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-082daf4a00ed9494.png"
+        data-srcset="img/7178691-082daf4a00ed9494.png, img/7178691-082daf4a00ed9494.png 1.5x, img/7178691-082daf4a00ed9494.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-082daf4a00ed9494.png"
+        title="img/7178691-082daf4a00ed9494.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-f2bcc0a703c7236f.png"
+        data-srcset="img/7178691-f2bcc0a703c7236f.png, img/7178691-f2bcc0a703c7236f.png 1.5x, img/7178691-f2bcc0a703c7236f.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-f2bcc0a703c7236f.png"
+        title="img/7178691-f2bcc0a703c7236f.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-597327ade3e94c7a.png"
+        data-srcset="img/7178691-597327ade3e94c7a.png, img/7178691-597327ade3e94c7a.png 1.5x, img/7178691-597327ade3e94c7a.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-597327ade3e94c7a.png"
+        title="img/7178691-597327ade3e94c7a.png" /></p>
+<h2 id="逐块读取文本文件">逐块读取文本文件</h2>
+<p>在处理很大的文件时，或找出大文件中的参数集以便于后续处理时，你可能只想读取文件的一小部分或逐块对文件进行迭代。</p>
+<p>在看大文件之前，我们先设置 pandas 显示地更紧些：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span></code></pre></div><p>然后有：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex6.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">one</span>       <span class="n">two</span>     <span class="n">three</span>      <span class="n">four</span> <span class="n">key</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>     <span class="mf">0.467976</span> <span class="o">-</span><span class="mf">0.038649</span> <span class="o">-</span><span class="mf">0.295344</span> <span class="o">-</span><span class="mf">1.824726</span>   <span class="n">L</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>    <span class="o">-</span><span class="mf">0.358893</span>  <span class="mf">1.404453</span>  <span class="mf">0.704965</span> <span class="o">-</span><span class="mf">0.200638</span>   <span class="n">B</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>    <span class="o">-</span><span class="mf">0.501840</span>  <span class="mf">0.659254</span> <span class="o">-</span><span class="mf">0.421691</span> <span class="o">-</span><span class="mf">0.057688</span>   <span class="n">G</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>     <span class="mf">0.204886</span>  <span class="mf">1.074134</span>  <span class="mf">1.388361</span> <span class="o">-</span><span class="mf">0.982404</span>   <span class="n">R</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>     <span class="mf">0.354628</span> <span class="o">-</span><span class="mf">0.133116</span>  <span class="mf">0.283763</span> <span class="o">-</span><span class="mf">0.837063</span>   <span class="n">Q</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>        <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>  <span class="o">..</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9995</span>  <span class="mf">2.311896</span> <span class="o">-</span><span class="mf">0.417070</span> <span class="o">-</span><span class="mf">1.409599</span> <span class="o">-</span><span class="mf">0.515821</span>   <span class="n">L</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9996</span> <span class="o">-</span><span class="mf">0.479893</span> <span class="o">-</span><span class="mf">0.650419</span>  <span class="mf">0.745152</span> <span class="o">-</span><span class="mf">0.646038</span>   <span class="n">E</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9997</span>  <span class="mf">0.523331</span>  <span class="mf">0.787112</span>  <span class="mf">0.486066</span>  <span class="mf">1.093156</span>   <span class="n">K</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9998</span> <span class="o">-</span><span class="mf">0.362559</span>  <span class="mf">0.598894</span> <span class="o">-</span><span class="mf">1.843201</span>  <span class="mf">0.887292</span>   <span class="n">G</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9999</span> <span class="o">-</span><span class="mf">0.096376</span> <span class="o">-</span><span class="mf">1.012999</span> <span class="o">-</span><span class="mf">0.657431</span> <span class="o">-</span><span class="mf">0.573315</span>   <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">10000</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">5</span> <span class="n">columns</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">If</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">only</span> <span class="n">read</span> <span class="n">a</span> <span class="n">small</span>
+</span></span></code></pre></div><p>如果只想读取几行（避免读取整个文件），通过<code>nrows</code>进行指定即可：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex6.csv&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">one</span>       <span class="n">two</span>     <span class="n">three</span>      <span class="n">four</span> <span class="n">key</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mf">0.467976</span> <span class="o">-</span><span class="mf">0.038649</span> <span class="o">-</span><span class="mf">0.295344</span> <span class="o">-</span><span class="mf">1.824726</span>   <span class="n">L</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span> <span class="o">-</span><span class="mf">0.358893</span>  <span class="mf">1.404453</span>  <span class="mf">0.704965</span> <span class="o">-</span><span class="mf">0.200638</span>   <span class="n">B</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span> <span class="o">-</span><span class="mf">0.501840</span>  <span class="mf">0.659254</span> <span class="o">-</span><span class="mf">0.421691</span> <span class="o">-</span><span class="mf">0.057688</span>   <span class="n">G</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>  <span class="mf">0.204886</span>  <span class="mf">1.074134</span>  <span class="mf">1.388361</span> <span class="o">-</span><span class="mf">0.982404</span>   <span class="n">R</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>  <span class="mf">0.354628</span> <span class="o">-</span><span class="mf">0.133116</span>  <span class="mf">0.283763</span> <span class="o">-</span><span class="mf">0.837063</span>   <span class="n">Q</span>
+</span></span></code></pre></div><p>要逐块读取文件，可以指定<code>chunksize</code>（行数）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">874</span><span class="p">]:</span> <span class="n">chunker</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ch06/ex6.csv&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">875</span><span class="p">]:</span> <span class="n">chunker</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">875</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">pandas</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">parsers</span><span class="o">.</span><span class="n">TextParser</span> <span class="n">at</span> <span class="mh">0x8398150</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p><code>read_csv</code>所返回的这个<code>TextParser</code>对象使你可以根据<code>chunksize</code>对文件进行逐块迭代。比如说，我们可以迭代处理<code>ex6.csv</code>，将值计数聚合到<code>&quot;key&quot;</code>列中，如下所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">chunker</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex6.csv&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">chunker</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tot</span> <span class="o">=</span> <span class="n">tot</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">piece</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tot</span> <span class="o">=</span> <span class="n">tot</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span></code></pre></div><p>然后有：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">40</span><span class="p">]:</span> <span class="n">tot</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">E</span>    <span class="mf">368.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span>    <span class="mf">364.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">L</span>    <span class="mf">346.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">O</span>    <span class="mf">343.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Q</span>    <span class="mf">340.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">M</span>    <span class="mf">338.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">J</span>    <span class="mf">337.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">F</span>    <span class="mf">335.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">K</span>    <span class="mf">334.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">H</span>    <span class="mf">330.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</span></span></code></pre></div><p><code>TextParser</code>还有一个<code>get_chunk</code>方法，它使你可以读取任意大小的块。</p>
+<h2 id="将数据写出到文本格式">将数据写出到文本格式</h2>
+<p>数据也可以被输出为分隔符格式的文本。我们再来看看之前读过的一个 CSV 文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">41</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex5.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">42</span><span class="p">]:</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">42</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">something</span>  <span class="n">a</span>   <span class="n">b</span>     <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>       <span class="n">one</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mf">3.0</span>   <span class="mi">4</span>     <span class="n">NaN</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>       <span class="n">two</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="n">NaN</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>     <span class="n">three</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mf">11.0</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>利用<code>DataFrame</code>的<code>to_csv</code>方法，我们可以将数据写到一个以逗号分隔的文件中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">43</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;examples/out.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">44</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">out</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="p">,</span><span class="n">something</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span><span class="p">,</span><span class="n">one</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="n">two</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="p">,</span><span class="n">three</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">11.0</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span></code></pre></div><p>当然，还可以使用其他分隔符（由于这里直接写出到<code>sys.stdout</code>，所以仅仅是打印出文本结果而已）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">45</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">46</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">something</span><span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">b</span><span class="o">|</span><span class="n">c</span><span class="o">|</span><span class="n">d</span><span class="o">|</span><span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span><span class="o">|</span><span class="n">one</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="mi">2</span><span class="o">|</span><span class="mf">3.0</span><span class="o">|</span><span class="mi">4</span><span class="o">|</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="o">|</span><span class="n">two</span><span class="o">|</span><span class="mi">5</span><span class="o">|</span><span class="mi">6</span><span class="o">||</span><span class="mi">8</span><span class="o">|</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="o">|</span><span class="n">three</span><span class="o">|</span><span class="mi">9</span><span class="o">|</span><span class="mi">10</span><span class="o">|</span><span class="mf">11.0</span><span class="o">|</span><span class="mi">12</span><span class="o">|</span><span class="n">foo</span>
+</span></span></code></pre></div><p>缺失值在输出结果中会被表示为空字符串。你可能希望将其表示为别的标记值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;NULL&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">,</span><span class="n">something</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span><span class="p">,</span><span class="n">one</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">NULL</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="n">two</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">NULL</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="p">,</span><span class="n">three</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">11.0</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span></code></pre></div><p>如果没有设置其他选项，则会写出行和列的标签。当然，它们也都可以被禁用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,,</span><span class="mi">8</span><span class="p">,</span><span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="n">three</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">11.0</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">foo</span>
+</span></span></code></pre></div><p>此外，你还可以只写出一部分的列，并以你指定的顺序排列：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.0</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">11.0</span>
+</span></span></code></pre></div><p><code>Series</code>也有一个<code>to_csv</code>方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="n">ts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;examples/tseries.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">53</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">tseries</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">02</span><span class="p">,</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">03</span><span class="p">,</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">04</span><span class="p">,</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">05</span><span class="p">,</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">06</span><span class="p">,</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">07</span><span class="p">,</span><span class="mi">6</span>
+</span></span></code></pre></div><h2 id="处理分隔符格式">处理分隔符格式</h2>
+<p>大部分存储在磁盘上的表格型数据都能用<code>pandas.read_table</code>进行加载。然而，有时还是需要做一些手工处理。由于接收到含有畸形行的文件而使<code>read_table</code>出毛病的情况并不少见。为了说明这些基本工具，看看下面这个简单的 CSV 文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">54</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">ex7</span><span class="o">.</span><span class="n">csv</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1&#34;</span><span class="p">,</span><span class="s2">&#34;2&#34;</span><span class="p">,</span><span class="s2">&#34;3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1&#34;</span><span class="p">,</span><span class="s2">&#34;2&#34;</span><span class="p">,</span><span class="s2">&#34;3&#34;</span>
+</span></span></code></pre></div><p>对于任何单字符分隔符文件，可以直接使用 Python 内置的<code>csv</code>模块。将任意已打开的文件或文件型的对象传给<code>csv.reader</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">csv</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;examples/ex7.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span></code></pre></div><p>对这个<code>reader</code>进行迭代将会为每行产生一个元组（并移除了所有的引号）：对这个<code>reader</code>进行迭代将会为每行产生一个元组（并移除了所有的引号）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">56</span><span class="p">]:</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>     <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">]</span>
+</span></span></code></pre></div><p>现在，为了使数据格式合乎要求，你需要对其做一些整理工作。我们一步一步来做。首先，读取文件到一个多行的列表中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">57</span><span class="p">]:</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;examples/ex7.csv&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>     <span class="n">lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</span></span></code></pre></div><p>然后，我们将这些行分为标题行和数据行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="n">header</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+</span></span></code></pre></div><p>然后，我们可以用字典构造式和<code>zip(*values)</code>，后者将行转置为列，创建数据列的字典：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">59</span><span class="p">]:</span> <span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">))}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">60</span><span class="p">]:</span> <span class="n">data_dict</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">60</span><span class="p">]:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">),</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)}</span>
+</span></span></code></pre></div><p>CSV 文件的形式有很多。只需定义<code>csv.Dialect</code>的一个子类即可定义出新格式（如专门的分隔符、字符串引用约定、行结束符等）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">my_dialect</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">Dialect</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lineterminator</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">quotechar</span> <span class="o">=</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">quoting</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span>
+</span></span><span class="line"><span class="cl"><span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dialect</span><span class="o">=</span><span class="n">my_dialect</span><span class="p">)</span>
+</span></span></code></pre></div><p>各个 CSV 语支的参数也可以用关键字的形式提供给<code>csv.reader</code>，而无需定义子类：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>可用的选项（<code>csv.Dialect</code>的属性）及其功能如表 6-3 所示。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-7a1cee622459072b.png"
+        data-srcset="img/7178691-7a1cee622459072b.png, img/7178691-7a1cee622459072b.png 1.5x, img/7178691-7a1cee622459072b.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-7a1cee622459072b.png"
+        title="img/7178691-7a1cee622459072b.png" /></p>
+<blockquote>
+<p>笔记：对于那些使用复杂分隔符或多字符分隔符的文件，<code>csv</code>模块就无能为力了。这种情况下，你就只能使用字符串的<code>split</code>方法或正则表达式方法<code>re.split</code>进行行拆分和其他整理工作了。</p>
+</blockquote>
+<p>要手工输出分隔符文件，你可以使用<code>csv.writer</code>。它接受一个已打开且可写的文件对象以及跟<code>csv.reader</code>相同的那些语支和格式化选项：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mydata.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dialect</span><span class="o">=</span><span class="n">my_dialect</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">))</span>
+</span></span></code></pre></div><h2 id="json-数据">JSON 数据</h2>
+<p>JSON（JavaScript Object Notation 的简称）已经成为通过 HTTP 请求在 Web 浏览器和其他应用程序之间发送数据的标准格式之一。它是一种比表格型文本格式（如 CSV）灵活得多的数据格式。下面是一个例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">obj</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">{&#34;name&#34;: &#34;Wes&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2"> &#34;places_lived&#34;: [&#34;United States&#34;, &#34;Spain&#34;, &#34;Germany&#34;],
+</span></span></span><span class="line"><span class="cl"><span class="s2"> &#34;pet&#34;: null,
+</span></span></span><span class="line"><span class="cl"><span class="s2"> &#34;siblings&#34;: [{&#34;name&#34;: &#34;Scott&#34;, &#34;age&#34;: 30, &#34;pets&#34;: [&#34;Zeus&#34;, &#34;Zuko&#34;]},
+</span></span></span><span class="line"><span class="cl"><span class="s2">              {&#34;name&#34;: &#34;Katie&#34;, &#34;age&#34;: 38,
+</span></span></span><span class="line"><span class="cl"><span class="s2">               &#34;pets&#34;: [&#34;Sixes&#34;, &#34;Stache&#34;, &#34;Cisco&#34;]}]
+</span></span></span><span class="line"><span class="cl"><span class="s2">}
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><p>除其空值<code>null</code>和一些其他的细微差别（如列表末尾不允许存在多余的逗号）之外，JSON 非常接近于有效的 Python 代码。基本类型有对象（字典）、数组（列表）、字符串、数值、布尔值以及<code>null</code>。对象中所有的键都必须是字符串。许多 Python 库都可以读写 JSON 数据。我将使用<code>json</code>，因为它是构建于 Python 标准库中的。通过<code>json.loads</code>即可将 JSON 字符串转换成 Python 形式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">62</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">63</span><span class="p">]:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">64</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Wes&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;pet&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;places_lived&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;United States&#39;</span><span class="p">,</span> <span class="s1">&#39;Spain&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;siblings&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Scott&#39;</span><span class="p">,</span> <span class="s1">&#39;pets&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Zeus&#39;</span><span class="p">,</span> <span class="s1">&#39;Zuko&#39;</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Katie&#39;</span><span class="p">,</span> <span class="s1">&#39;pets&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sixes&#39;</span><span class="p">,</span> <span class="s1">&#39;Stache&#39;</span><span class="p">,</span> <span class="s1">&#39;Cisco&#39;</span><span class="p">]}]}</span>
+</span></span></code></pre></div><p><code>json.dumps</code>则将 Python 对象转换成 JSON 格式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="n">asjson</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span></code></pre></div><p>如何将（一个或一组）JSON 对象转换为<code>DataFrame</code>或其他便于分析的数据结构就由你决定了。最简单方便的方式是：向<code>DataFrame</code>构造器传入一个字典的列表（就是原先的 JSON 对象），并选取数据字段的子集：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="n">siblings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;siblings&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="n">siblings</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">67</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">name</span>  <span class="n">age</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="n">Scott</span>   <span class="mi">30</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="n">Katie</span>   <span class="mi">38</span>
+</span></span></code></pre></div><p><code>pandas.read_json</code>可以自动将特别格式的 JSON 数据集转换为<code>Series</code>或<code>DataFrame</code>。例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="n">examples</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl"><span class="p">[{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}]</span>
+</span></span></code></pre></div><p><code>pandas.read_json</code>的默认选项假设 JSON 数组中的每个对象是表格中的一行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;examples/example.json&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">70</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>  <span class="n">b</span>  <span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">5</span>  <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">7</span>  <span class="mi">8</span>  <span class="mi">9</span>
+</span></span></code></pre></div><p>第 7 章中关于 USDA 食品数据库的那个例子进一步讲解了 JSON 数据的读取和处理（包括嵌套记录）。</p>
+<p>如果你需要将数据从 pandas 输出到 JSON，可以使用<code>to_json</code>方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:{</span><span class="s2">&#34;0&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;1&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;2&#34;</span><span class="p">:</span><span class="mi">7</span><span class="p">},</span><span class="s2">&#34;b&#34;</span><span class="p">:{</span><span class="s2">&#34;0&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;1&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;2&#34;</span><span class="p">:</span><span class="mi">8</span><span class="p">},</span><span class="s2">&#34;c&#34;</span><span class="p">:{</span><span class="s2">&#34;0&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;1&#34;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s2">&#34;2&#34;</span><span class="p">:</span><span class="mi">9</span><span class="p">}}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">[{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">},{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">6</span><span class="p">},{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">9</span><span class="p">}]</span>
+</span></span></code></pre></div><h2 id="xml-和-htmlweb-信息收集">XML 和 HTML：Web 信息收集</h2>
+<p>Python 有许多可以读写常见的 HTML 和 XML 格式数据的库，包括<code>lxml</code>、Beautiful Soup 和 <code>html5lib</code>。<code>lxml</code>的速度比较快，但其它的库处理有误的 HTML 或 XML 文件更好。</p>
+<p>pandas 有一个内置的功能，<code>read_html</code>，它可以使用<code>lxml</code>和 Beautiful Soup 自动将 HTML 文件中的表格解析为<code>DataFrame</code>对象。为了进行展示，我从美国联邦存款保险公司下载了一个 HTML 文件（pandas 文档中也使用过），它记录了银行倒闭的情况。首先，你需要安装<code>read_html</code>用到的库：</p>
+<pre tabindex="0"><code>conda install lxml
+pip install beautifulsoup4 html5lib
+</code></pre><p>如果你用的不是<code>conda</code>，可以使用<code>pip install lxml</code>。</p>
+<p><code>pandas.read_html</code>有一些选项，默认条件下，它会搜索、尝试解析<!-- raw HTML omitted -->标签内的的表格数据。结果是一个列表的<code>DataFrame</code>对象：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="n">tables</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="s1">&#39;examples/fdic_failed_bank_list.html&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">74</span><span class="p">]:</span> <span class="nb">len</span><span class="p">(</span><span class="n">tables</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">74</span><span class="p">]:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">75</span><span class="p">]:</span> <span class="n">failures</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">76</span><span class="p">]:</span> <span class="n">failures</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">76</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">                      <span class="n">Bank</span> <span class="n">Name</span>             <span class="n">City</span>  <span class="n">ST</span>   <span class="n">CERT</span>  \
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>                   <span class="n">Allied</span> <span class="n">Bank</span>         <span class="n">Mulberry</span>  <span class="n">AR</span>     <span class="mi">91</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="n">The</span> <span class="n">Woodbury</span> <span class="n">Banking</span> <span class="n">Company</span>         <span class="n">Woodbury</span>  <span class="n">GA</span>  <span class="mi">11297</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>        <span class="n">First</span> <span class="n">CornerStone</span> <span class="n">Bank</span>  <span class="n">King</span> <span class="n">of</span> <span class="n">Prussia</span>  <span class="n">PA</span>  <span class="mi">35312</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>            <span class="n">Trust</span> <span class="n">Company</span> <span class="n">Bank</span>          <span class="n">Memphis</span>  <span class="n">TN</span>   <span class="mi">9956</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>    <span class="n">North</span> <span class="n">Milwaukee</span> <span class="n">State</span> <span class="n">Bank</span>        <span class="n">Milwaukee</span>  <span class="n">WI</span>  <span class="mi">20364</span>   
+</span></span><span class="line"><span class="cl">                 <span class="n">Acquiring</span> <span class="n">Institution</span>        <span class="n">Closing</span> <span class="n">Date</span>       <span class="n">Updated</span> <span class="n">Date</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>                         <span class="n">Today</span><span class="s1">&#39;s Bank  September 23, 2016  November 17, 2016  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>                          <span class="n">United</span> <span class="n">Bank</span>     <span class="n">August</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2016</span>  <span class="n">November</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2016</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="n">First</span><span class="o">-</span><span class="n">Citizens</span> <span class="n">Bank</span> <span class="o">&amp;</span> <span class="n">Trust</span> <span class="n">Company</span>         <span class="n">May</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2016</span>  <span class="n">September</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2016</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>           <span class="n">The</span> <span class="n">Bank</span> <span class="n">of</span> <span class="n">Fayette</span> <span class="n">County</span>      <span class="n">April</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">2016</span>  <span class="n">September</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2016</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>  <span class="n">First</span><span class="o">-</span><span class="n">Citizens</span> <span class="n">Bank</span> <span class="o">&amp;</span> <span class="n">Trust</span> <span class="n">Company</span>      <span class="n">March</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2016</span>      <span class="n">June</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">2016</span>
+</span></span></code></pre></div><p>因为<code>failures</code>有许多列，pandas 插入了一个换行符<code>\</code>。</p>
+<p>这里，我们可以做一些数据清洗和分析（后面章节会进一步讲解），比如计算按年份计算倒闭的银行数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">77</span><span class="p">]:</span> <span class="n">close_timestamps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">failures</span><span class="p">[</span><span class="s1">&#39;Closing Date&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">78</span><span class="p">]:</span> <span class="n">close_timestamps</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">78</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">2010</span>    <span class="mi">157</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2009</span>    <span class="mi">140</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2011</span>     <span class="mi">92</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2012</span>     <span class="mi">51</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2008</span>     <span class="mi">25</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">2004</span>      <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2001</span>      <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2007</span>      <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2003</span>      <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2000</span>      <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span> <span class="n">Closing</span> <span class="n">Date</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
+</span></span></code></pre></div><h2 id="利用lxmlobjectify解析-xml">利用<code>lxml.objectify</code>解析 XML</h2>
+<p>XML（Extensible Markup Language）是另一种常见的支持分层、嵌套数据以及元数据的结构化数据格式。本书所使用的这些文件实际上来自于一个很大的 XML 文档。</p>
+<p>前面，我介绍了<code>pandas.read_html</code>函数，它可以使用<code>lxml</code>或 Beautiful Soup 从 HTML 解析数据。XML 和 HTML 的结构很相似，但 XML 更为通用。这里，我会用一个例子演示如何利用<code>lxml</code>从 XML 格式解析数据。</p>
+<p>纽约大都会运输署发布了<a href="http://www.mta.info/developers/download.html" target="_blank" rel="noopener noreffer ">一些有关其公交和列车服务的数据资料</a>。这里，我们将看看包含在一组 XML 文件中的运行情况数据。每项列车或公交服务都有各自的文件（如 Metro-North Railroad 的文件是<code>Performance_MNR.xml</code>），其中每条 XML 记录就是一条月度数据，如下所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;INDICATOR&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;INDICATOR_SEQ&gt;</span>373889<span class="nt">&lt;/INDICATOR_SEQ&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;PARENT_SEQ&gt;&lt;/PARENT_SEQ&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;AGENCY_NAME&gt;</span>Metro-North Railroad<span class="nt">&lt;/AGENCY_NAME&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;INDICATOR_NAME&gt;</span>Escalator Availability<span class="nt">&lt;/INDICATOR_NAME&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DESCRIPTION&gt;</span>Percent of the time that escalators are operational
+</span></span><span class="line"><span class="cl">  systemwide. The availability rate is based on physical observations performed
+</span></span><span class="line"><span class="cl">  the morning of regular business days only. This is a new indicator the agency
+</span></span><span class="line"><span class="cl">  began reporting in 2009.<span class="nt">&lt;/DESCRIPTION&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;PERIOD_YEAR&gt;</span>2011<span class="nt">&lt;/PERIOD_YEAR&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;PERIOD_MONTH&gt;</span>12<span class="nt">&lt;/PERIOD_MONTH&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;CATEGORY&gt;</span>Service Indicators<span class="nt">&lt;/CATEGORY&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;FREQUENCY&gt;</span>M<span class="nt">&lt;/FREQUENCY&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DESIRED_CHANGE&gt;</span>U<span class="nt">&lt;/DESIRED_CHANGE&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;INDICATOR_UNIT&gt;</span>%<span class="nt">&lt;/INDICATOR_UNIT&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DECIMAL_PLACES&gt;</span>1<span class="nt">&lt;/DECIMAL_PLACES&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;YTD_TARGET&gt;</span>97.00<span class="nt">&lt;/YTD_TARGET&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;YTD_ACTUAL&gt;&lt;/YTD_ACTUAL&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;MONTHLY_TARGET&gt;</span>97.00<span class="nt">&lt;/MONTHLY_TARGET&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;MONTHLY_ACTUAL&gt;&lt;/MONTHLY_ACTUAL&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/INDICATOR&gt;</span>
+</span></span></code></pre></div><p>我们先用<code>lxml.objectify</code>解析该文件，然后通过<code>getroot</code>得到该 XML 文件的根节点的引用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">objectify</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;datasets/mta_perf/Performance_MNR.xml&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">parsed</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+</span></span></code></pre></div><p><code>root.INDICATOR</code>返回一个用于产生各个<code>&lt;INDICATOR&gt;</code>XML 元素的生成器。对于每条记录，我们可以用标记名（如<code>YTD_ACTUAL</code>）和数据值填充一个字典（排除几个标记）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">skip_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PARENT_SEQ&#39;</span><span class="p">,</span> <span class="s1">&#39;INDICATOR_SEQ&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="s1">&#39;DESIRED_CHANGE&#39;</span><span class="p">,</span> <span class="s1">&#39;DECIMAL_PLACES&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">INDICATOR</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">el_data</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">elt</span><span class="o">.</span><span class="n">getchildren</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="n">skip_fields</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="n">el_data</span><span class="p">[</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">pyval</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el_data</span><span class="p">)</span>
+</span></span></code></pre></div><p>最后，将这组字典转换为一个<code>DataFrame</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">81</span><span class="p">]:</span> <span class="n">perf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">82</span><span class="p">]:</span> <span class="n">perf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">82</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl"><span class="n">Empty</span> <span class="n">DataFrame</span>
+</span></span><span class="line"><span class="cl"><span class="n">Columns</span><span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Index</span><span class="p">:</span> <span class="p">[]</span>
+</span></span></code></pre></div><p>XML 数据可以比本例复杂得多。每个标记都可以有元数据。看看下面这个 HTML 的链接标签（它也算是一段有效的 XML）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+</span></span><span class="line"><span class="cl"><span class="n">tag</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&#34;http://www.google.com&#34;&gt;Google&lt;/a&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">tag</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+</span></span></code></pre></div><p>现在就可以访问标签或链接文本中的任何字段了（如<code>href</code>）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">84</span><span class="p">]:</span> <span class="n">root</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">84</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Element</span> <span class="n">a</span> <span class="n">at</span> <span class="mh">0x7f6b15817748</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">85</span><span class="p">]:</span> <span class="n">root</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">85</span><span class="p">]:</span> <span class="s1">&#39;http://www.google.com&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">86</span><span class="p">]:</span> <span class="n">root</span><span class="o">.</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">86</span><span class="p">]:</span> <span class="s1">&#39;Google&#39;</span>
+</span></span></code></pre></div><h1 id="62-二进制数据格式">6.2 二进制数据格式</h1>
+<p>实现数据的高效二进制格式存储最简单的办法之一是使用 Python 内置的 pickle 序列化。pandas 对象都有一个用于将数据以 pickle 格式保存到磁盘上的<code>to_pickle</code>方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">87</span><span class="p">]:</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/ex1.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">88</span><span class="p">]:</span> <span class="n">frame</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">88</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">89</span><span class="p">]:</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;examples/frame_pickle&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>你可以通过 pickle 直接读取被 pickle 化的数据，或是使用更为方便的<code>pandas.read_pickle</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">90</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;examples/frame_pickle&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">90</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><blockquote>
+<p>注意：pickle 仅建议用于短期存储格式。其原因是很难保证该格式永远是稳定的；今天 pickle 的对象可能无法被后续版本的库 unpickle 出来。虽然我尽力保证这种事情不会发生在 pandas 中，但是今后的某个时候说不定还是得“打破”该 pickle 格式。</p>
+</blockquote>
+<p>pandas 内置支持两个二进制数据格式：HDF5 和 MessagePack。下一节，我会给出几个 HDF5 的例子，但我建议你尝试下不同的文件格式，看看它们的速度以及是否适合你的分析工作。pandas 或 NumPy 数据的其它存储格式有：</p>
+<ul>
+<li>bcolz：一种可压缩的列存储二进制格式，基于 Blosc 压缩库。</li>
+<li>Feather：我与 R 语言社区的 Hadley Wickham 设计的一种跨语言的列存储文件格式。Feather 使用了 Apache Arrow 的列式内存格式。</li>
+</ul>
+<h2 id="使用-hdf5-格式">使用 HDF5 格式</h2>
+<p>HDF5 是一种存储大规模科学数组数据的非常好的文件格式。它可以被作为 C 标准库，带有许多语言的接口，如 Java、Python 和 MATLAB 等。HDF5 中的 HDF 指的是层次型数据格式（hierarchical data format）。每个 HDF5 文件都含有一个文件系统式的节点结构，它使你能够存储多个数据集并支持元数据。与其他简单格式相比，HDF5 支持多种压缩器的即时压缩，还能更高效地存储重复模式数据。对于那些非常大的无法直接放入内存的数据集，HDF5 就是不错的选择，因为它可以高效地分块读写。</p>
+<p>虽然可以用 PyTables 或 H5Py 库直接访问 HDF5 文件，pandas 提供了更为高级的接口，可以简化存储<code>Series</code>和<code>DataFrame</code>对象。HDFStore 类可以像字典一样，处理低级的细节：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">92</span><span class="p">]:</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="n">store</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="s1">&#39;mydata.h5&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="n">store</span><span class="p">[</span><span class="s1">&#39;obj1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="n">store</span><span class="p">[</span><span class="s1">&#39;obj1_col&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">96</span><span class="p">]:</span> <span class="n">store</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">96</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">pandas</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">pytables</span><span class="o">.</span><span class="n">HDFStore</span><span class="s1">&#39;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="n">path</span><span class="p">:</span> <span class="n">mydata</span><span class="o">.</span><span class="n">h5</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">obj1</span>                <span class="n">frame</span>        <span class="p">(</span><span class="n">shape</span><span class="o">-&gt;</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>                               
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">obj1_col</span>            <span class="n">series</span>       <span class="p">(</span><span class="n">shape</span><span class="o">-&gt;</span><span class="p">[</span><span class="mi">100</span><span class="p">])</span>                                 
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">obj2</span>                <span class="n">frame_table</span>  <span class="p">(</span><span class="n">typ</span><span class="o">-&gt;</span><span class="n">appendable</span><span class="p">,</span><span class="n">nrows</span><span class="o">-&gt;</span><span class="mi">100</span><span class="p">,</span><span class="n">ncols</span><span class="o">-&gt;</span><span class="mi">1</span><span class="p">,</span><span class="n">indexers</span><span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">obj3</span>                <span class="n">frame_table</span>  <span class="p">(</span><span class="n">typ</span><span class="o">-&gt;</span><span class="n">appendable</span><span class="p">,</span><span class="n">nrows</span><span class="o">-&gt;</span><span class="mi">100</span><span class="p">,</span><span class="n">ncols</span><span class="o">-&gt;</span><span class="mi">1</span><span class="p">,</span><span class="n">indexers</span><span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+</span></span></code></pre></div><p>HDF5 文件中的对象可以通过与字典一样的 API 进行获取：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">97</span><span class="p">]:</span> <span class="n">store</span><span class="p">[</span><span class="s1">&#39;obj1&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">97</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="o">-</span><span class="mf">0.204708</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>   <span class="mf">0.478943</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="o">-</span><span class="mf">0.519439</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>  <span class="o">-</span><span class="mf">0.555730</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>   <span class="mf">1.965781</span>
+</span></span><span class="line"><span class="cl"><span class="o">..</span>       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="mi">95</span>  <span class="mf">0.795253</span>
+</span></span><span class="line"><span class="cl"><span class="mi">96</span>  <span class="mf">0.118110</span>
+</span></span><span class="line"><span class="cl"><span class="mi">97</span> <span class="o">-</span><span class="mf">0.748532</span>
+</span></span><span class="line"><span class="cl"><span class="mi">98</span>  <span class="mf">0.584970</span>
+</span></span><span class="line"><span class="cl"><span class="mi">99</span>  <span class="mf">0.152677</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">100</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">1</span> <span class="n">columns</span><span class="p">]</span>
+</span></span></code></pre></div><p>HDFStore 支持两种存储模式，<code>'fixed'</code>和<code>'table'</code>。后者通常会更慢，但是支持使用特殊语法进行查询操作：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">98</span><span class="p">]:</span> <span class="n">store</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;obj2&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">99</span><span class="p">]:</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;obj2&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index &gt;= 10 and index &lt;= 15&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">99</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="mi">10</span>  <span class="mf">1.007189</span>
+</span></span><span class="line"><span class="cl"><span class="mi">11</span> <span class="o">-</span><span class="mf">1.296221</span>
+</span></span><span class="line"><span class="cl"><span class="mi">12</span>  <span class="mf">0.274992</span>
+</span></span><span class="line"><span class="cl"><span class="mi">13</span>  <span class="mf">0.228913</span>
+</span></span><span class="line"><span class="cl"><span class="mi">14</span>  <span class="mf">1.352917</span>
+</span></span><span class="line"><span class="cl"><span class="mi">15</span>  <span class="mf">0.886429</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">100</span><span class="p">]:</span> <span class="n">store</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span></code></pre></div><p><code>put</code>是<code>store['obj2'] = frame</code>方法的显示版本，允许我们设置其它的选项，比如格式。</p>
+<p><code>pandas.read_hdf</code>函数可以快捷使用这些工具：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">101</span><span class="p">]:</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s1">&#39;mydata.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;obj3&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">102</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s1">&#39;mydata.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;obj3&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index &lt; 5&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">102</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">          <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span> <span class="o">-</span><span class="mf">0.204708</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mf">0.478943</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span> <span class="o">-</span><span class="mf">0.519439</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span> <span class="o">-</span><span class="mf">0.555730</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>  <span class="mf">1.965781</span>
+</span></span></code></pre></div><blockquote>
+<p>笔记：如果你要处理的数据位于远程服务器，比如 Amazon S3 或 HDFS，使用专门为分布式存储（比如 Apache Parquet）的二进制格式也许更加合适。Python 的 Parquet 和其它存储格式还在不断的发展之中，所以这本书中没有涉及。</p>
+</blockquote>
+<p>如果需要本地处理海量数据，我建议你好好研究一下 PyTables 和 H5Py，看看它们能满足你的哪些需求。。由于许多数据分析问题都是 IO 密集型（而不是 CPU 密集型），利用 HDF5 这样的工具能显著提升应用程序的效率。</p>
+<blockquote>
+<p>注意：HDF5 不是数据库。它最适合用作“一次写多次读”的数据集。虽然数据可以在任何时候被添加到文件中，但如果同时发生多个写操作，文件就可能会被破坏。</p>
+</blockquote>
+<h2 id="读取-microsoft-excel-文件">读取 Microsoft Excel 文件</h2>
+<p>pandas 的<code>ExcelFile</code>类或<code>pandas.read_excel</code>函数支持读取存储在 Excel 2003（或更高版本）中的表格型数据。这两个工具分别使用扩展包 xlrd 和 OpenPyXL 读取 XLS 和 XLSX 文件。你可以用<code>pip</code>或<code>conda</code>安装它们。</p>
+<p>要使用<code>ExcelFile</code>，通过传递 xls 或 xlsx 路径创建一个实例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">104</span><span class="p">]:</span> <span class="n">xlsx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="s1">&#39;examples/ex1.xlsx&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>存储在表单中的数据可以<code>read_excel</code>读取到<code>DataFrame</code>（原书这里写的是用<code>parse</code>解析，但代码中用的是<code>read_excel</code>，是个笔误：只换了代码，没有改文字）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">105</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xlsx</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">105</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>如果要读取一个文件中的多个表单，创建<code>ExcelFile</code>会更快，但你也可以将文件名传递到<code>pandas.read_excel</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">106</span><span class="p">]:</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;examples/ex1.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">107</span><span class="p">]:</span> <span class="n">frame</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">107</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">a</span>   <span class="n">b</span>   <span class="n">c</span>   <span class="n">d</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="n">world</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>  <span class="mi">9</span>  <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>     <span class="n">foo</span>
+</span></span></code></pre></div><p>如果要将 pandas 数据写入为 Excel 格式，你必须首先创建一个<code>ExcelWriter</code>，然后使用 pandas 对象的<code>to_excel</code>方法将数据写入到其中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;examples/ex2.xlsx&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span></span></code></pre></div><p>你还可以不使用<code>ExcelWriter</code>，而是传递文件的路径到<code>to_excel</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">111</span><span class="p">]:</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;examples/ex2.xlsx&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h1 id="63-web-apis-交互">6.3 Web APIs 交互</h1>
+<p>许多网站都有一些通过 JSON 或其他格式提供数据的公共 API。通过 Python 访问这些 API 的办法有不少。一个简单易用的办法（推荐）是<a href="http://docs.python-requests.org" target="_blank" rel="noopener noreffer "><code>requests</code>包</a>。</p>
+<p>为了搜索最新的 30 个 GitHub 上的 pandas 主题，我们可以发一个 HTTP GET 请求，使用<code>requests</code>扩展库：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">113</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">114</span><span class="p">]:</span> <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api.github.com/repos/pandas-dev/pandas/issues&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">115</span><span class="p">]:</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">116</span><span class="p">]:</span> <span class="n">resp</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">116</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Response</span> <span class="p">[</span><span class="mi">200</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p>响应对象的<code>json</code>方法会返回一个包含被解析过的 JSON 字典，加载到一个 Python 对象中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">117</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">118</span><span class="p">]:</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">118</span><span class="p">]:</span> <span class="s1">&#39;Period does not round down for frequencies less that 1 hour&#39;</span>
+</span></span></code></pre></div><p><code>data</code>中的每个元素都是一个包含所有 GitHub 主题页数据（不包含评论）的字典。我们可以直接传递数据到<code>DataFrame</code>，并提取感兴趣的字段：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">119</span><span class="p">]:</span> <span class="n">issues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>                                      <span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">120</span><span class="p">]:</span> <span class="n">issues</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">120</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">number</span>                                              <span class="n">title</span>  \
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>    <span class="mi">17666</span>  <span class="n">Period</span> <span class="n">does</span> <span class="ow">not</span> <span class="nb">round</span> <span class="n">down</span> <span class="k">for</span> <span class="n">frequencies</span> <span class="n">les</span><span class="o">...</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>    <span class="mi">17665</span>           <span class="n">DOC</span><span class="p">:</span> <span class="n">improve</span> <span class="n">docstring</span> <span class="n">of</span> <span class="n">function</span> <span class="n">where</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>    <span class="mi">17664</span>               <span class="n">COMPAT</span><span class="p">:</span> <span class="n">skip</span> <span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="n">test</span> <span class="n">on</span> <span class="nb">int</span> <span class="nb">repr</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>    <span class="mi">17662</span>                          <span class="n">implement</span> <span class="n">Delegator</span> <span class="k">class</span>
+</span></span><span class="line"><span class="cl"><span class="err">4    17654  </span><span class="nc">BUG</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">series</span> <span class="n">rename</span> <span class="n">called</span> <span class="k">with</span> <span class="nb">str</span> <span class="n">alterin</span><span class="o">...</span>   
+</span></span><span class="line"><span class="cl"><span class="o">..</span>     <span class="o">...</span>                                                <span class="o">...</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">25</span>   <span class="mi">17603</span>  <span class="n">BUG</span><span class="p">:</span> <span class="n">Correctly</span> <span class="n">localize</span> <span class="n">naive</span> <span class="n">datetime</span> <span class="n">strings</span><span class="o">...</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">26</span>   <span class="mi">17599</span>                     <span class="n">core</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">generic</span> <span class="o">--&gt;</span> <span class="n">cython</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">27</span>   <span class="mi">17596</span>   <span class="n">Merge</span> <span class="n">cdate_range</span> <span class="n">functionality</span> <span class="n">into</span> <span class="n">bdate_range</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">28</span>   <span class="mi">17587</span>  <span class="n">Time</span> <span class="n">Grouper</span> <span class="n">bug</span> <span class="n">fix</span> <span class="n">when</span> <span class="n">applied</span> <span class="k">for</span> <span class="nb">list</span> <span class="n">gro</span><span class="o">...</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">29</span>   <span class="mi">17583</span>  <span class="n">BUG</span><span class="p">:</span> <span class="n">fix</span> <span class="n">tz</span><span class="o">-</span><span class="n">aware</span> <span class="n">DatetimeIndex</span> <span class="o">+</span> <span class="n">TimedeltaInd</span><span class="o">...</span>   
+</span></span><span class="line"><span class="cl">                                               <span class="n">labels</span> <span class="n">state</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>                                                  <span class="p">[]</span>  <span class="nb">open</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>   <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">134699</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.com...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>   <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">563047854</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github....  open  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>                                                  <span class="p">[]</span>  <span class="nb">open</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>   <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">76811</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.com/...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="o">..</span>                                                <span class="o">...</span>   <span class="o">...</span>  
+</span></span><span class="line"><span class="cl"><span class="mi">25</span>  <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">76811</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.com/...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">26</span>  <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">49094459</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.c...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">27</span>  <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">35818298</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.c...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">28</span>  <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">233160</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.com...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="mi">29</span>  <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">76811</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.github.com/...  open  </span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">30</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">4</span> <span class="n">columns</span><span class="p">]</span>
+</span></span></code></pre></div><p>花费一些精力，你就可以创建一些更高级的常见的 Web API 的接口，返回<code>DataFrame</code>对象，方便进行分析。</p>
+<h1 id="64-数据库交互">6.4 数据库交互</h1>
+<p>在商业场景下，大多数数据可能不是存储在文本或 Excel 文件中。基于 SQL 的关系型数据库（如 SQL Server、PostgreSQL 和 MySQL 等）使用非常广泛，其它一些数据库也很流行。数据库的选择通常取决于性能、数据完整性以及应用程序的伸缩性需求。</p>
+<p>将数据从 SQL 加载到<code>DataFrame</code>的过程很简单，此外 pandas 还有一些能够简化该过程的函数。例如，我将使用 SQLite 数据库（通过 Python 内置的<code>sqlite3</code>驱动器）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">121</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">sqlite3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">122</span><span class="p">]:</span> <span class="n">query</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">   .....: CREATE TABLE test
+</span></span></span><span class="line"><span class="cl"><span class="s2">   .....: (a VARCHAR(20), b VARCHAR(20),
+</span></span></span><span class="line"><span class="cl"><span class="s2">   .....:  c REAL,        d INTEGER
+</span></span></span><span class="line"><span class="cl"><span class="s2">   .....: );&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">123</span><span class="p">]:</span> <span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;mydata.sqlite&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">124</span><span class="p">]:</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">124</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">Cursor</span> <span class="n">at</span> <span class="mh">0x7f6b12a50f10</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">125</span><span class="p">]:</span> <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span></span></code></pre></div><p>然后插入几行数据：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">126</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Atlanta&#39;</span><span class="p">,</span> <span class="s1">&#39;Georgia&#39;</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>         <span class="p">(</span><span class="s1">&#39;Tallahassee&#39;</span><span class="p">,</span> <span class="s1">&#39;Florida&#39;</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>         <span class="p">(</span><span class="s1">&#39;Sacramento&#39;</span><span class="p">,</span> <span class="s1">&#39;California&#39;</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">127</span><span class="p">]:</span> <span class="n">stmt</span> <span class="o">=</span> <span class="s2">&#34;INSERT INTO test VALUES(?, ?, ?, ?)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">128</span><span class="p">]:</span> <span class="n">con</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">128</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">Cursor</span> <span class="n">at</span> <span class="mh">0x7f6b15c66ce0</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p>从表中选取数据时，大部分 Python SQL 驱动器（<code>PyODBC</code>、<code>psycopg2</code>、<code>MySQLdb</code>、<code>pymssql</code>等）都会返回一个元组列表：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">130</span><span class="p">]:</span> <span class="n">cursor</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;select * from test&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">131</span><span class="p">]:</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">132</span><span class="p">]:</span> <span class="n">rows</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">132</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="p">[(</span><span class="s1">&#39;Atlanta&#39;</span><span class="p">,</span> <span class="s1">&#39;Georgia&#39;</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="s1">&#39;Tallahassee&#39;</span><span class="p">,</span> <span class="s1">&#39;Florida&#39;</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="s1">&#39;Sacramento&#39;</span><span class="p">,</span> <span class="s1">&#39;California&#39;</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+</span></span></code></pre></div><p>你可以将这个元组列表传给<code>DataFrame</code>构造器，但还需要列名（位于光标的<code>description</code>属性中）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">133</span><span class="p">]:</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">133</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">134</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">134</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">             <span class="n">a</span>           <span class="n">b</span>     <span class="n">c</span>  <span class="n">d</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>      <span class="n">Atlanta</span>     <span class="n">Georgia</span>  <span class="mf">1.25</span>  <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="n">Tallahassee</span>     <span class="n">Florida</span>  <span class="mf">2.60</span>  <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>   <span class="n">Sacramento</span>  <span class="n">California</span>  <span class="mf">1.70</span>  <span class="mi">5</span>
+</span></span></code></pre></div><p>这种数据规整操作相当多，你肯定不想每查一次数据库就重写一次。<a href="http://www.sqlalchemy.org/" target="_blank" rel="noopener noreffer ">SQLAlchemy 项目</a>是一个流行的 Python SQL 工具，它抽象出了 SQL 数据库中的许多常见差异。pandas 有一个<code>read_sql</code>函数，可以让你轻松的从 SQLAlchemy 连接读取数据。这里，我们用 SQLAlchemy 连接 SQLite 数据库，并从之前创建的表读取数据：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">135</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sqla</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">136</span><span class="p">]:</span> <span class="n">db</span> <span class="o">=</span> <span class="n">sqla</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///mydata.sqlite&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">137</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;select * from test&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">137</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">             <span class="n">a</span>           <span class="n">b</span>     <span class="n">c</span>  <span class="n">d</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>      <span class="n">Atlanta</span>     <span class="n">Georgia</span>  <span class="mf">1.25</span>  <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="n">Tallahassee</span>     <span class="n">Florida</span>  <span class="mf">2.60</span>  <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>   <span class="n">Sacramento</span>  <span class="n">California</span>  <span class="mf">1.70</span>  <span class="mi">5</span>
+</span></span></code></pre></div><h1 id="65-总结">6.5 总结</h1>
+<p>访问数据通常是数据分析的第一步。在本章中，我们已经学了一些有用的工具。在接下来的章节中，我们将深入研究数据规整、数据可视化、时间序列分析和其它主题。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/pyda-2e-zh/6/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/pyda-2e-zh/6/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/pyda-2e-zh/6/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/pyda-2e-zh/6/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/pyda-2e-zh/6/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/pyda-2e-zh/7/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/pyda-2e-zh/5/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

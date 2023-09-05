@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="属性的操作 HTML 元素包括标签名和若干个键值对，这个键值对就称为“属性”（attribute）。 &lt;a id=&#34;test&#34; href=&#34;http://www.example.com&#34;&gt; 链接 &lt;/a&gt; 上面代码中，a元素包括两个属性：id属" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/dom/attributes/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="属性的操作 HTML 元素包括标签名和若干个键值对，这个键值对就称为“属性”（attribute）。 &lt;a id=&#34;test&#34; href=&#34;http://www.example.com&#34;&gt; 链接 &lt;/a&gt; 上面代码中，a元素包括两个属性：id属"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/dom/attributes/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/dom/css/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/bom/xmlhttprequest/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/dom\/attributes\/"
+        },"genre": "posts","wordcount":  2759 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/dom\/attributes\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2759 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#elementattributes-属性">Element.attributes 属性</a></li>
+    <li><a href="#元素的标准属性">元素的标准属性</a></li>
+    <li><a href="#属性操作的标准方法">属性操作的标准方法</a>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#elementgetattribute">Element.getAttribute()</a></li>
+        <li><a href="#elementgetattributenames">Element.getAttributeNames()</a></li>
+        <li><a href="#elementsetattribute">Element.setAttribute()</a></li>
+        <li><a href="#elementhasattribute">Element.hasAttribute()</a></li>
+        <li><a href="#elementhasattributes">Element.hasAttributes()</a></li>
+        <li><a href="#elementremoveattribute">Element.removeAttribute()</a></li>
+      </ul>
+    </li>
+    <li><a href="#dataset-属性">dataset 属性</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="属性的操作">属性的操作</h1>
+<p>HTML 元素包括标签名和若干个键值对，这个键值对就称为“属性”（attribute）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;test&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;http://www.example.com&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  链接
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>上面代码中，<code>a</code>元素包括两个属性：<code>id</code>属性和<code>href</code>属性。</p>
+<p>属性本身是一个对象（<code>Attr</code>对象），但是实际上，这个对象极少使用。一般都是通过元素节点对象（<code>HTMlElement</code>对象）来操作属性。本章介绍如何操作这些属性。</p>
+<h2 id="elementattributes-属性">Element.attributes 属性</h2>
+<p>元素对象有一个<code>attributes</code>属性，返回一个类似数组的动态对象，成员是该元素标签的所有属性节点对象，属性的实时变化都会反映在这个节点对象上。其他类型的节点对象，虽然也有<code>attributes</code>属性，但返回的都是<code>null</code>，因此可以把这个属性视为元素对象独有的。</p>
+<p>单个属性可以通过序号引用，也可以通过属性名引用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;body bgcolor=&#34;yellow&#34; onload=&#34;&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">attributes</span><span class="p">.</span><span class="nx">bgcolor</span>
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">attributes</span><span class="p">[</span><span class="s1">&#39;ONLOAD&#39;</span><span class="p">]</span>
+</span></span></code></pre></div><p>注意，上面代码的三种方法，返回的都是属性节点对象，而不是属性值。</p>
+<p>属性节点对象有<code>name</code>和<code>value</code>属性，对应该属性的属性名和属性值，等同于<code>nodeName</code>属性和<code>nodeValue</code>属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML代码为
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;div id=&#34;mydiv&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;mydiv&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">n</span><span class="p">.</span><span class="nx">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span> <span class="c1">// &#34;id&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">n</span><span class="p">.</span><span class="nx">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">nodeName</span> <span class="c1">// &#34;id&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">n</span><span class="p">.</span><span class="nx">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">value</span> <span class="c1">// &#34;mydiv&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">n</span><span class="p">.</span><span class="nx">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">nodeValue</span> <span class="c1">// &#34;mydiv&#34;
+</span></span></span></code></pre></div><p>下面代码可以遍历一个元素节点的所有属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">para</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">para</span><span class="p">.</span><span class="nx">hasAttributes</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="nx">para</span><span class="p">.</span><span class="nx">attributes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">attrs</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">output</span> <span class="o">+=</span> <span class="nx">attrs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">+</span> <span class="nx">attrs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">result</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">output</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">result</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;No attributes to show&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="元素的标准属性">元素的标准属性</h2>
+<p>HTML 元素的标准属性（即在标准中定义的属性），会自动成为元素节点对象的属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">a</span><span class="p">.</span><span class="nx">id</span> <span class="c1">// &#34;test&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="c1">// &#34;http://www.example.com/&#34;
+</span></span></span></code></pre></div><p>上面代码中，<code>a</code>元素标签的属性<code>id</code>和<code>href</code>，自动成为节点对象的属性。</p>
+<p>这些属性都是可写的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myImage&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;http://www.example.com/image.jpg&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面的写法，会立刻替换掉<code>img</code>对象的<code>src</code>属性，即会显示另外一张图片。</p>
+<p>这种修改属性的方法，常常用于添加表单的属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">forms</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nx">f</span><span class="p">.</span><span class="nx">action</span> <span class="o">=</span> <span class="s1">&#39;submit.php&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">f</span><span class="p">.</span><span class="nx">method</span> <span class="o">=</span> <span class="s1">&#39;POST&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面代码为表单添加提交网址和提交方法。</p>
+<p>注意，这种用法虽然可以读写属性，但是无法删除属性，<code>delete</code>运算符在这里不会生效。</p>
+<p>HTML 元素的属性名是大小写不敏感的，但是 JavaScript 对象的属性名是大小写敏感的。转换规则是，转为 JavaScript 属性名时，一律采用小写。如果属性名包括多个单词，则采用骆驼拼写法，即从第二个单词开始，每个单词的首字母采用大写，比如<code>onClick</code>。</p>
+<p>有些 HTML 属性名是 JavaScript 的保留字，转为 JavaScript 属性时，必须改名。主要是以下两个。</p>
+<ul>
+<li><code>for</code>属性改为<code>htmlFor</code></li>
+<li><code>class</code>属性改为<code>className</code></li>
+</ul>
+<p>另外，HTML 属性值一般都是字符串，但是 JavaScript 属性会自动转换类型。比如，将字符串<code>true</code>转为布尔值，将<code>onClick</code>的值转为一个函数，将<code>style</code>属性的值转为一个<code>CSSStyleDeclaration</code>对象。因此，可以对这些属性赋予各种类型的值。</p>
+<h2 id="属性操作的标准方法">属性操作的标准方法</h2>
+<h3 id="概述">概述</h3>
+<p>元素节点提供六个方法，用来操作属性。</p>
+<ul>
+<li><code>getAttribute()</code></li>
+<li><code>getAttributeNames()</code></li>
+<li><code>setAttribute()</code></li>
+<li><code>hasAttribute()</code></li>
+<li><code>hasAttributes()</code></li>
+<li><code>removeAttribute()</code></li>
+</ul>
+<p>这有几点注意。</p>
+<p>（1）适用性</p>
+<p>这六个方法对所有属性（包括用户自定义的属性）都适用。</p>
+<p>（2）返回值</p>
+<p><code>getAttribute()</code>只返回字符串，不会返回其他类型的值。</p>
+<p>（3）属性名</p>
+<p>这些方法只接受属性的标准名称，不用改写保留字，比如<code>for</code>和<code>class</code>都可以直接使用。另外，这些方法对于属性名是大小写不敏感的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">images</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nx">image</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;myImage&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码中，<code>setAttribute</code>方法直接使用<code>class</code>作为属性名，不用写成<code>className</code>。</p>
+<h3 id="elementgetattribute">Element.getAttribute()</h3>
+<p><code>Element.getAttribute</code>方法返回当前元素节点的指定属性。如果指定属性不存在，则返回<code>null</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码为
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;div id=&#34;div1&#34; align=&#34;left&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">div</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">)</span> <span class="c1">// &#34;left&#34;
+</span></span></span></code></pre></div><h3 id="elementgetattributenames">Element.getAttributeNames()</h3>
+<p><code>Element.getAttributeNames()</code>返回一个数组，成员是当前元素的所有属性的名字。如果当前元素没有任何属性，则返回一个空数组。使用<code>Element.attributes</code>属性，也可以拿到同样的结果，唯一的区别是它返回的是类似数组的对象。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">mydiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;mydiv&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">mydiv</span><span class="p">.</span><span class="nx">getAttributeNames</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">mydiv</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>上面代码用于遍历某个节点的所有属性。</p>
+<h3 id="elementsetattribute">Element.setAttribute()</h3>
+<p><code>Element.setAttribute</code>方法用于为当前元素节点新增属性。如果同名属性已存在，则相当于编辑已存在的属性。该方法没有返回值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码为
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;button&gt;Hello World&lt;/button&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">b</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;myButton&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">b</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面代码中，<code>button</code>元素的<code>name</code>属性被设成<code>myButton</code>，<code>disabled</code>属性被设成<code>true</code>。</p>
+<p>这里有两个地方需要注意，首先，属性值总是字符串，其他类型的值会自动转成字符串，比如布尔值<code>true</code>就会变成字符串<code>true</code>；其次，上例的<code>disable</code>属性是一个布尔属性，对于<code>&lt;button&gt;</code>元素来说，这个属性不需要属性值，只要设置了就总是会生效，因此<code>setAttribute</code>方法里面可以将<code>disabled</code>属性设成任意值。</p>
+<h3 id="elementhasattribute">Element.hasAttribute()</h3>
+<p><code>Element.hasAttribute</code>方法返回一个布尔值，表示当前元素节点是否包含指定属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">d</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">,</span> <span class="s1">&#39;center&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面代码检查<code>div</code>节点是否含有<code>align</code>属性。如果有，则设置为居中对齐。</p>
+<h3 id="elementhasattributes">Element.hasAttributes()</h3>
+<p><code>Element.hasAttributes</code>方法返回一个布尔值，表示当前元素是否有属性，如果没有任何属性，就返回<code>false</code>，否则返回<code>true</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">foo</span><span class="p">.</span><span class="nx">hasAttributes</span><span class="p">()</span> <span class="c1">// true
+</span></span></span></code></pre></div><h3 id="elementremoveattribute">Element.removeAttribute()</h3>
+<p><code>Element.removeAttribute</code>方法移除指定属性。该方法没有返回值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码为
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;div id=&#34;div1&#34; align=&#34;left&#34; width=&#34;200px&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;div1&#39;</span><span class="p">).</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="s1">&#39;align&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 现在的HTML代码为
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;div id=&#34;div1&#34; width=&#34;200px&#34;&gt;
+</span></span></span></code></pre></div><h2 id="dataset-属性">dataset 属性</h2>
+<p>有时，需要在HTML元素上附加数据，供 JavaScript 脚本使用。一种解决方法是自定义属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;mydiv&#34;</span> <span class="na">foo</span><span class="o">=</span><span class="s">&#34;bar&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>上面代码为<code>div</code>元素自定义了<code>foo</code>属性，然后可以用<code>getAttribute()</code>和<code>setAttribute()</code>读写这个属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;mydiv&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">n</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="c1">// bar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">n</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>这种方法虽然可以达到目的，但是会使得 HTML 元素的属性不符合标准，导致网页代码通不过校验。</p>
+<p>更好的解决方法是，使用标准提供的<code>data-*</code>属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;mydiv&#34;</span> <span class="na">data-foo</span><span class="o">=</span><span class="s">&#34;bar&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>然后，使用元素节点对象的<code>dataset</code>属性，它指向一个对象，可以用来操作 HTML 元素标签的<code>data-*</code>属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;mydiv&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">n</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">foo</span> <span class="c1">// bar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">n</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s1">&#39;baz&#39;</span>
+</span></span></code></pre></div><p>上面代码中，通过<code>dataset.foo</code>读写<code>data-foo</code>属性。</p>
+<p>删除一个<code>data-*</code>属性，可以直接使用<code>delete</code>命令。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">delete</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDiv&#39;</span><span class="p">).</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">foo</span><span class="p">;</span>
+</span></span></code></pre></div><p>除了<code>dataset</code>属性，也可以用<code>getAttribute('data-foo')</code>、<code>removeAttribute('data-foo')</code>、<code>setAttribute('data-foo')</code>、<code>hasAttribute('data-foo')</code>等方法操作<code>data-*</code>属性。</p>
+<p>注意，<code>data-</code>后面的属性名有限制，只能包含字母、数字、连词线（<code>-</code>）、点（<code>.</code>）、冒号（<code>:</code>）和下划线（<code>_</code>)。而且，属性名不应该使用<code>A</code>到<code>Z</code>的大写字母，比如不能有<code>data-helloWorld</code>这样的属性名，而要写成<code>data-hello-world</code>。</p>
+<p>转成<code>dataset</code>的键名时，连词线后面如果跟着一个小写字母，那么连词线会被移除，该小写字母转为大写字母，其他字符不变。反过来，<code>dataset</code>的键名转成属性名时，所有大写字母都会被转成连词线+该字母的小写形式，其他字符不变。比如，<code>dataset.helloWorld</code>会转成<code>data-hello-world</code>。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/dom/attributes/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/dom/attributes/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/dom/attributes/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/dom/attributes/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/dom/attributes/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/dom/css/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/bom/xmlhttprequest/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="概率图模型 贝叶斯分类器 概述 贝叶斯分类器是一类基于贝叶斯定理的分类算法，它假设样本的特征在给定类别下是条件独立的，然后通过计算后验概率来进行分" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="概率图模型 贝叶斯分类器 概述 贝叶斯分类器是一类基于贝叶斯定理的分类算法，它假设样本的特征在给定类别下是条件独立的，然后通过计算后验概率来进行分"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" /><link rel="prev" href="http://localhost:1313/posts/programming/06.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" /><link rel="next" href="http://localhost:1313/posts/programming/04.%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/programming\/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B\/"
+        },"genre": "posts","wordcount":  2874 ,
+        "url": "http:\/\/localhost:1313\/posts\/programming\/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2874 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#贝叶斯分类器">贝叶斯分类器</a>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#朴素贝叶斯">朴素贝叶斯</a></li>
+        <li><a href="#贝叶斯网络">贝叶斯网络</a></li>
+      </ul>
+    </li>
+    <li><a href="#em-算法">EM 算法</a>
+      <ul>
+        <li><a href="#概述-1">概述</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="概率图模型">概率图模型</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2023/08/24/image-20230824235302663.png"
+        data-srcset="http://192.168.0.103:7788/images/2023/08/24/image-20230824235302663.png, http://192.168.0.103:7788/images/2023/08/24/image-20230824235302663.png 1.5x, http://192.168.0.103:7788/images/2023/08/24/image-20230824235302663.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2023/08/24/image-20230824235302663.png"
+        title="image-20230824235302663" /></p>
+<h2 id="贝叶斯分类器">贝叶斯分类器</h2>
+<h3 id="概述">概述</h3>
+<p>贝叶斯分类器是一类基于贝叶斯定理的分类算法，它假设样本的特征在给定类别下是条件独立的，然后通过计算后验概率来进行分类。贝叶斯分类器包括朴素贝叶斯分类器和贝叶斯网络等。</p>
+<h3 id="朴素贝叶斯">朴素贝叶斯</h3>
+<p>贝叶斯分类算法是统计学是一种概率分类方法，朴素贝叶斯分类时贝叶斯分类中最简单的一种。</p>
+<p>利用贝叶斯公式根据某特征的先验概率计算出其后验概率，然后选择具有最大后验概率的类作为该特征所属的类。</p>
+<p>朴素贝叶斯，称之为“朴素”，是因为整个形式化过程只做了最原始、最简单的假设，具体假设如下：</p>
+<ul>
+<li>特征之间相互独立</li>
+<li>每个特征同等重要</li>
+</ul>
+<p>在sklearn中，朴素贝叶斯种类有三种，分别是GaussianNB、MultinomialNB和BernoulliNB。</p>
+<h4 id="高斯朴素贝叶斯gaussiannb">高斯朴素贝叶斯(GaussianNB)</h4>
+<p>GaussianNB是先验为高斯分布（正态分布）的朴素贝叶斯，假设每个标签的数据都服从高斯分布（正态分布）。正态分布的概率密度函数计算公式如下：
+$$
+P(X_i=x_i|Y=C_k)=\frac{1}{\sqrt{2\pi\sigma_k^2}}e^{-\frac{(x_i-\mu_k)^2}{2\sigma_k^2}}
+$$</p>
+<p>其中， $C_k$为 Y 的第 k 类类别。 $\mu_k$和$\sigma_k^2$为第 k 类样本在第 i 个属性上的取值的均值和方差。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 导入包</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>  <span class="c1"># 高斯分布，假定特征服从正态分布的</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span> <span class="c1"># 数据集划分</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 导入数据集</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 拆分数据集</span>
+</span></span><span class="line"><span class="cl"><span class="n">train_x</span><span class="p">,</span><span class="n">test_x</span><span class="p">,</span><span class="n">train_y</span><span class="p">,</span><span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 建模</span>
+</span></span><span class="line"><span class="cl"><span class="n">gnb_clf</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">gnb_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span><span class="n">train_y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 对测试集进行预测</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># predict()：直接给出预测的类别</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># predict_proba()：输出的是每个样本属于某种类别的概率</span>
+</span></span><span class="line"><span class="cl"><span class="n">predict_class</span> <span class="o">=</span> <span class="n">gnb_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">predict_class_proba</span> <span class="o">=</span> <span class="n">gnb_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;测试集准确率为：&#34;</span><span class="p">,</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span><span class="n">predict_class</span><span class="p">))</span>
+</span></span></code></pre></div><h4 id="多项式朴素贝叶斯-multinomialnb">多项式朴素贝叶斯 (MultinomialNB)</h4>
+<p>多项式朴素贝叶斯是先验为多项式分布的朴素贝叶斯。 它假设特征是由一个简单多项式分布生成的。多项分布可以描述各种类型样本出现次数的概率，因此多项式朴素贝叶斯非常适合用于描述出现次数的特征。该模型常用于文本分类，特征表示的是次数，例如某个词语的出现次数。
+$$
+P(X=x_i|Y=C)=\frac{|D_{c,x_i}|+\lambda}{|D_c|+\lambda N_i}
+$$
+其中， $P(X=x_i|Y=c) $表示 c 类别下第 i 个属性上取值为$x_i$的条件概率。 $|D_c,x_i|$ 是 c 类别下第 i 个属性上取值为$x_i $的样本数，$|D_c|$是 c 类的样本数。 $N_i $表示第 i 个属性可能的取值数。$\lambda$被称为平滑系数，令$\lambda&gt;0$来防止训练数据中出现过的一些词汇没有出现在测试集中导致的0概率。如果$\lambda=1$，则这个平滑叫做拉普拉斯平滑，$\lambda&lt;1$，叫做利德斯通平滑。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">sklearn</span><span class="o">.</span><span class="n">naive_bayes</span><span class="o">.</span><span class="n">MultinomialNB</span> <span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">fit_prior</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">class_prior</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># alpha : 浮点数, 可不填 【默认为1.0】</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 平滑系数λ，如果为0，则表示完全没有平滑选项。需注意，平滑相当于人为给概率加上一些噪音，因此λ设置得越大，精确性会越低（虽然影响不是非常大）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># fit_prior : 布尔值, 可不填【默认为True】</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 是否学习先验概率P(Y=c)。如果为False，则所有的样本类别输出都有相同的类别先验概率。即认为每个标签类出现的概率是1/总类别数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># class_prior：形似数组的结构，结构为(n_classes，)，可不填【默认为None】 表示类的先验概率P(Y=c)。如果没有给出具体的先验概率则自动根据数据来进行计算。</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 建立数据集</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 建立一个多项式朴素贝叶斯分类器</span>
+</span></span><span class="line"><span class="cl"><span class="n">mnb</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">fit_prior</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">class_prior</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 由于概率永远是在[0,1]之间，mnb给出的是对数先验概率，因此返回的永远是负值</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 类先验概率=各类的个数/类的总个数</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;类先验概率：&#34;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mnb</span><span class="o">.</span><span class="n">class_log_prior_</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回一个固定标签类别下的每个特征的对数概率log(P(Xi | y))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># print(&#34;每个特征的对数概率:&#34;,mnb.feature_log_prob_)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># &#39;&#39;&#39;重要属性：在fit时每个标签类别下包含的样本数。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 当fit接口中的sample_weight被设置时，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 该接口返回的值也会受到加权的影响&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;每个标签类别下包含的样本数:&#34;</span><span class="p">,</span><span class="n">mnb</span><span class="o">.</span><span class="n">class_count_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;预测的分类：&#34;</span><span class="p">,</span> <span class="n">mnb</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">]]))</span>  <span class="c1"># 输出3</span>
+</span></span></code></pre></div><h4 id="伯努利朴素贝叶斯bernoullinb">伯努利朴素贝叶斯(BernoulliNB)</h4>
+<p>BernoulliNB就是先验为伯努利分布的朴素贝叶斯。假设特征的先验概率为二元伯努利分布，在文本分类中 ，就是一个特征有没有在一个文档中出现。
+$$
+P(X=x_i|Y=C)=P(x_i=1|Y=c)x_i+P(x_i=0|Y=c)x_i\
+\Downarrow\
+P(X=x_i|Y=C)=\frac{|D_{c,x_i}|+\lambda}{|D_c|+2\lambda}
+$$</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">sklearn</span><span class="o">.</span><span class="n">naive_bayes</span><span class="o">.</span><span class="n">BernoulliNB</span> <span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">binarize</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">fit_prior</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">class_prior</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># binarize：将数据特征二值化的阈值，大于binarize的值处理为1 ，小于等于binarize的值处理为0；</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">BernoulliNB</span>  <span class="c1"># 伯努利朴素贝叶斯</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">bnb</span> <span class="o">=</span> <span class="n">BernoulliNB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">binarize</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">fit_prior</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;预测结果：</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">bnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>  <span class="c1"># 输出1s</span>
+</span></span></code></pre></div><h3 id="贝叶斯网络">贝叶斯网络</h3>
+<p><strong>贝叶斯网络（Bayesian Network）</strong>，又称为信念网络（Belief Network）或概率网络（Probabilistic Network），是一种用图形模型表示变量之间的依赖关系的方法。它基于贝叶斯定理，用有向无环图（DAG）来表示变量之间的条件依赖关系，并使用概率分布来描述变量之间的联合概率分布。</p>
+<p>贝叶斯网络的主要特点包括：</p>
+<ul>
+<li><strong>有向无环图（DAG）结构：</strong> 贝叶斯网络使用有向边表示变量之间的依赖关系，且不允许存在环，这确保了变量之间的关系是有序的。</li>
+<li><strong>条件独立性：</strong> 贝叶斯网络假设给定父节点的情况下，每个节点与它的非后代节点是条件独立的。这种条件独立性使得贝叶斯网络能够通过已知信息进行推理和预测。</li>
+<li><strong>参数化：</strong> 贝叶斯网络使用概率分布来描述变量之间的关系。每个节点的条件概率分布由其父节点的状态确定。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pgmpy.models</span> <span class="kn">import</span> <span class="n">BayesianNetwork</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pgmpy.factors.discrete</span> <span class="kn">import</span> <span class="n">TabularCPD</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pgmpy.inference</span> <span class="kn">import</span> <span class="n">VariableElimination</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建贝叶斯网络模型</span>
+</span></span><span class="line"><span class="cl"><span class="n">bayesian_network</span> <span class="o">=</span> <span class="n">BayesianNetwork</span><span class="p">([(</span><span class="s1">&#39;Weather&#39;</span><span class="p">,</span> <span class="s1">&#39;LawnHumidity&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                                    <span class="p">(</span><span class="s1">&#39;Weather&#39;</span><span class="p">,</span> <span class="s1">&#39;Sprinkler&#39;</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 定义节点的条件概率分布</span>
+</span></span><span class="line"><span class="cl"><span class="n">cpd_weather</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;Weather&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl"><span class="n">cpd_lawn_humidity</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;LawnHumidity&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Weather&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">cpd_sprinkler</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="n">variable</span><span class="o">=</span><span class="s1">&#39;Sprinkler&#39;</span><span class="p">,</span> <span class="n">variable_card</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">values</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Weather&#39;</span><span class="p">],</span> <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将条件概率分布添加到贝叶斯网络模型中</span>
+</span></span><span class="line"><span class="cl"><span class="n">bayesian_network</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="n">cpd_weather</span><span class="p">,</span> <span class="n">cpd_lawn_humidity</span><span class="p">,</span> <span class="n">cpd_sprinkler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建变量消除推理对象</span>
+</span></span><span class="line"><span class="cl"><span class="n">inference</span> <span class="o">=</span> <span class="n">VariableElimination</span><span class="p">(</span><span class="n">bayesian_network</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算条件概率</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LawnHumidity&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">evidence</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Weather&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Sprinkler&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="em-算法">EM 算法</h2>
+<h3 id="概述-1">概述</h3>
+<p>**EM算法（Expectation-Maximization Algorithm）**是一种迭代优化算法，用于在含有隐变量的概率模型中估计参数。EM算法通过交替进行两个主要步骤：E步骤（Expectation Step）和M步骤（Maximization Step），以迭代地优化参数估计。</p>
+<p><strong>算法步骤：</strong></p>
+<ul>
+<li><strong>E步骤（Expectation Step）：</strong> 在这一步，算法通过当前参数估计计算隐变量的后验概率。</li>
+</ul>
+<p>$$
+Q(\theta | \theta^{(t)}) = E_{Z|X,\theta^{(t)}}[\log P(X, Z | \theta)]
+$$</p>
+<ul>
+<li><strong>M步骤（Maximization Step）：</strong> 在这一步，算法通过最大化上一步中计算的后验概率的期望来更新参数估计。</li>
+</ul>
+<p>$$
+\theta^{(t+1)} = \arg\max_{\theta} Q(\theta | \theta^{(t)})
+$$</p>
+<p>EM算法通过交替执行E步骤和M步骤，迭代地优化参数估计，直到收敛。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 生成样本数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 初始化参数估计</span>
+</span></span><span class="line"><span class="cl"><span class="n">mu</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">sigma</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># EM算法迭代</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_iterations</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># E步骤：计算后验概率</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gamma</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">likelihoods</span> <span class="o">=</span> <span class="p">[</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">mean</span><span class="o">=</span><span class="n">mu</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">weighted_likelihoods</span> <span class="o">=</span> <span class="p">[</span><span class="n">weights</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">likelihoods</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total_likelihood</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">weighted_likelihoods</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gamma</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">weighted_likelihoods</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_likelihood</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">))])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># M步骤：最大化似然估计</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Nk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nk</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mu</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))])</span> <span class="o">/</span> <span class="n">Nk</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sigma</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))])</span> <span class="o">/</span> <span class="n">Nk</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Estimated weights:&#34;</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Estimated means:&#34;</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Estimated sigmas:&#34;</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/programming/05.%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/programming/06.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/programming/04.%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="declare 关键字 简介 declare 关键字用来告诉编译器，某个类型是存在的，可以在当前文件中使用。 它的主要作用，就是让当前文件可以使用其他文件声明的类型。举例来说" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/typescript-tutorial/declare/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="declare 关键字 简介 declare 关键字用来告诉编译器，某个类型是存在的，可以在当前文件中使用。 它的主要作用，就是让当前文件可以使用其他文件声明的类型。举例来说"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/typescript-tutorial/declare/" /><link rel="prev" href="http://localhost:1313/posts/typescript-tutorial/decorator-legacy/" /><link rel="next" href="http://localhost:1313/posts/typescript-tutorial/d.ts/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/declare\/"
+        },"genre": "posts","wordcount":  2881 ,
+        "url": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/declare\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2881 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#declare-variable">declare variable</a></li>
+    <li><a href="#declare-function">declare function</a></li>
+    <li><a href="#declare-class">declare class</a></li>
+    <li><a href="#declare-moduledeclare-namespace">declare module，declare namespace</a></li>
+    <li><a href="#declare-global">declare global</a></li>
+    <li><a href="#declare-enum">declare enum</a></li>
+    <li><a href="#declare-module-用于类型声明文件">declare module 用于类型声明文件</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="declare-关键字">declare 关键字</h1>
+<h2 id="简介">简介</h2>
+<p>declare 关键字用来告诉编译器，某个类型是存在的，可以在当前文件中使用。</p>
+<p>它的主要作用，就是让当前文件可以使用其他文件声明的类型。举例来说，自己的脚本使用外部库定义的函数，编译器会因为不知道外部函数的类型定义而报错，这时就可以在自己的脚本里面使用<code>declare</code>关键字，告诉编译器外部函数的类型。这样的话，编译单个脚本就不会因为使用了外部类型而报错。</p>
+<p>declare 关键字可以描述以下类型。</p>
+<ul>
+<li>变量（const、let、var 命令声明）</li>
+<li>type 或者 interface 命令声明的类型</li>
+<li>class</li>
+<li>enum</li>
+<li>函数（function）</li>
+<li>模块（module）</li>
+<li>命名空间（namespace）</li>
+</ul>
+<p>declare 关键字的重要特点是，它只是通知编译器某个类型是存在的，不用给出具体实现。比如，只描述函数的类型，不给出函数的实现，如果不使用<code>declare</code>，这是做不到的。</p>
+<p>declare 只能用来描述已经存在的变量和数据结构，不能用来声明新的变量和数据结构。另外，所有 declare 语句都不会出现在编译后的文件里面。</p>
+<h2 id="declare-variable">declare variable</h2>
+<p>declare 关键字可以给出外部变量的类型描述。</p>
+<p>举例来说，当前脚本使用了其他脚本定义的全局变量<code>x</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">x</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span> <span class="c1">// 报错
+</span></span></span></code></pre></div><p>上面示例中，变量<code>x</code>是其他脚本定义的，当前脚本不知道它的类型，编译器就会报错。</p>
+<p>这时使用 declare 命令给出它的类型，就不会报错了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kd">let</span> <span class="nx">x</span>:<span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>如果 declare 关键字没有给出变量的具体类型，那么变量类型就是<code>any</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kd">let</span> <span class="nx">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，变量<code>x</code>的类型为<code>any</code>。</p>
+<p>下面的例子是脚本使用浏览器全局对象<code>document</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kd">var</span> <span class="nb">document</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，declare 告诉编译器，变量<code>document</code>的类型是外部定义的（具体定义在 TypeScript 内置文件<code>lib.d.ts</code>）。</p>
+<p>如果 TypeScript 没有找到<code>document</code>的外部定义，这里就会假定它的类型是<code>any</code>。</p>
+<p>注意，declare 关键字只用来给出类型描述，是纯的类型代码，不允许设置变量的初始值，即不能涉及值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">declare</span> <span class="kd">let</span> <span class="nx">x</span>:<span class="kt">number</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，declare 设置了变量的初始值，结果就报错了。</p>
+<h2 id="declare-function">declare function</h2>
+<p>declare 关键字可以给出外部函数的类型描述。</p>
+<p>下面是一个例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kd">function</span> <span class="nx">sayHello</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span>:<span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="o">:</span><span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">sayHello</span><span class="p">(</span><span class="s1">&#39;张三&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面示例中，declare 命令给出了<code>sayHello()</code>的类型描述，因此可以直接使用它。</p>
+<p>注意，这种单独的函数类型声明语句，只能用于<code>declare</code>命令后面。一方面，TypeScript 不支持单独的函数类型声明语句；另一方面，declare 关键字后面也不能带有函数的具体实现。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">sayHello</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span>:<span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="o">:</span><span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">sayHello</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="s1">&#39;你好，&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，单独写函数的类型声明就会报错。</p>
+<h2 id="declare-class">declare class</h2>
+<p>declare 给出 class 类型描述的写法如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">name</span>:<span class="kt">string</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">eat</span><span class="p">()</span><span class="o">:</span><span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">sleep</span><span class="p">()</span><span class="o">:</span><span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>下面是一个复杂一点的例子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 静态成员
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">public</span> <span class="kr">static</span> <span class="nx">s0</span><span class="p">()</span><span class="o">:</span><span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">static</span> <span class="nx">s1</span>:<span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">public</span> <span class="nx">a</span>:<span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">b</span>:<span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">constructor</span><span class="p">(</span><span class="nx">arg</span>:<span class="kt">number</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">m</span><span class="p">(</span><span class="nx">x</span>:<span class="kt">number</span><span class="p">,</span> <span class="nx">y</span>:<span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 存取器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">get</span> <span class="nx">c</span><span class="p">()</span><span class="o">:</span><span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="nx">c</span><span class="p">(</span><span class="nx">value</span>:<span class="kt">number</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 索引签名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">[</span><span class="nx">index</span>:<span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="kt">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>同样的，declare 后面不能给出 Class 的具体实现或初始值。</p>
+<h2 id="declare-moduledeclare-namespace">declare module，declare namespace</h2>
+<p>如果想把变量、函数、类组织在一起，可以将 declare 与 module 或 namespace 一起使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">namespace</span> <span class="nx">AnimalLib</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">constructor</span><span class="p">(</span><span class="nx">name</span>:<span class="kt">string</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">eat</span><span class="p">()</span><span class="o">:</span><span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">sleep</span><span class="p">()</span><span class="o">:</span><span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">type</span> <span class="nx">Animals</span> <span class="o">=</span> <span class="s1">&#39;Fish&#39;</span> <span class="o">|</span> <span class="s1">&#39;Dog&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 或者
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">declare</span> <span class="kr">module</span> <span class="nx">AnimalLib</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">constructor</span><span class="p">(</span><span class="nx">name</span>:<span class="kt">string</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">eat</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">sleep</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">type</span> <span class="nx">Animals</span> <span class="o">=</span> <span class="s1">&#39;Fish&#39;</span> <span class="o">|</span> <span class="s1">&#39;Dog&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，declare 关键字给出了 module 或 namespace 的类型描述。</p>
+<p>declare module 和 declare namespace 里面，加不加 export 关键字都可以。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">namespace</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">var</span> <span class="nx">a</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s1">&#39;io&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">function</span> <span class="nx">readFile</span><span class="p">(</span><span class="nx">filename</span>:<span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，namespace 和 module 里面使用了 export 关键字。</p>
+<p>下面的例子是当前脚本使用了<code>myLib</code>这个外部库，它有方法<code>makeGreeting()</code>和属性<code>numberOfGreetings</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">myLib</span><span class="p">.</span><span class="nx">makeGreeting</span><span class="p">(</span><span class="s1">&#39;你好&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;欢迎词：&#39;</span> <span class="o">+</span> <span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">myLib</span><span class="p">.</span><span class="nx">numberOfGreetings</span><span class="p">;</span>
+</span></span></code></pre></div><p><code>myLib</code>的类型描述就可以这样写。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">namespace</span> <span class="nx">myLib</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">makeGreeting</span><span class="p">(</span><span class="nx">s</span>:<span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">numberOfGreetings</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>declare 关键字的另一个用途，是为外部模块添加属性和方法时，给出新增部分的类型描述。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Foo</span> <span class="kr">as</span> <span class="nx">Bar</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;moduleA&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s1">&#39;moduleA&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nx">Bar</span> <span class="kr">extends</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">custom</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">prop1</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，从模块<code>moduleA</code>导入了<code>Foo</code>接口，将其重命名为<code>Bar</code>，并用 declare 关键字为<code>Bar</code>增加一个属性<code>custom</code>。</p>
+<p>下面是另一个例子。一个项目有多个模块，可以在一个模块中，对另一个模块的接口进行类型扩展。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// a.ts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">x</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// b.ts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">A</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./a&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s1">&#39;./a&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">y</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">a</span>:<span class="kt">A</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span>: <span class="kt">0</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">0</span> <span class="p">};</span>
+</span></span></code></pre></div><p>上面示例中，脚本<code>a.ts</code>定义了一个接口<code>A</code>，脚本<code>b.ts</code>为这个接口添加了属性<code>y</code>。<code>declare module './a' {}</code>表示对<code>a.ts</code>里面的模块，进行类型声明，而同名 interface 会自动合并，所以等同于扩展类型。</p>
+<p>使用这种语法进行模块的类型扩展时，有两点需要注意：</p>
+<p>（1）<code>declare module NAME</code>语法里面的模块名<code>NAME</code>，跟 import 和 export 的模块名规则是一样的，且必须跟当前文件加载该模块的语句写法（上例<code>import { A } from './a'</code>）保持一致。</p>
+<p>（2）不能创建新的顶层类型。也就是说，只能对<code>a.ts</code>模块中已经存在的类型进行扩展，不允许增加新的顶层类型，比如新定义一个接口<code>B</code>。</p>
+<p>（3）不能对默认的<code>default</code>接口进行扩展，只能对 export 命令输出的命名接口进行扩充。这是因为在进行类型扩展时，需要依赖输出的接口名。</p>
+<p>某些第三方模块，原始作者没有提供接口类型，这时可以在自己的脚本顶部加上下面一行命令。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s2">&#34;模块名&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 例子
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">declare</span> <span class="nx">module</span> <span class="s2">&#34;hot-new-module&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>加上上面的命令以后，外部模块即使没有类型声明，也可以通过编译。但是，从该模块输入的所有接口都将为<code>any</code>类型。</p>
+<p>declare module 描述的模块名可以使用通配符。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s1">&#39;my-plugin-*&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nx">PluginOptions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">enabled</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">priority</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">initialize</span><span class="p">(</span><span class="nx">options</span>: <span class="kt">PluginOptions</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="o">=</span> <span class="nx">initialize</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，模块名<code>my-plugin-*</code>表示适配所有以<code>my-plugin-</code>开头的模块名（比如<code>my-plugin-logger</code>）。</p>
+<h2 id="declare-global">declare global</h2>
+<p>如果要为 JavaScript 引擎的原生对象添加属性和方法，可以使用<code>declare global {}</code>语法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">global</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">toSmallString</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toSmallString</span> <span class="o">=</span> <span class="p">()</span><span class="o">:</span><span class="kt">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 具体实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>上面示例中，为 JavaScript 原生的<code>String</code>对象添加了<code>toSmallString()</code>方法。declare global 给出这个新增方法的类型描述。</p>
+<p>这个示例第一行的空导出语句<code>export {}</code>，作用是强制编译器将这个脚本当作模块处理。这是因为<code>declare global</code>必须用在模块里面。</p>
+<p>下面的示例是为 window 对象添加一个属性<code>myAppConfig</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">global</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">interface</span> <span class="nb">window</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">myAppConfig</span>:<span class="kt">object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">myAppConfig</span><span class="p">;</span>
+</span></span></code></pre></div><p>declare global 只能扩充现有对象的类型描述，不能增加新的顶层类型。</p>
+<h2 id="declare-enum">declare enum</h2>
+<p>declare 关键字给出 enum 类型描述的例子如下，下面的写法都是允许的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">enum</span> <span class="nx">E1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">enum</span> <span class="nx">E2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">const</span> <span class="kr">enum</span> <span class="nx">E3</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="kr">const</span> <span class="kr">enum</span> <span class="nx">E4</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="declare-module-用于类型声明文件">declare module 用于类型声明文件</h2>
+<p>我们可以为每个模块脚本，定义一个<code>.d.ts</code>文件，把该脚本用到的类型定义都放在这个文件里面。但是，更方便的做法是为整个项目，定义一个大的<code>.d.ts</code>文件，在这个文件里面使用<code>declare module</code>定义每个模块脚本的类型。</p>
+<p>下面的示例是<code>node.d.ts</code>文件的一部分。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s2">&#34;url&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kr">interface</span> <span class="nx">Url</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">protocol?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hostname?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pathname?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">function</span> <span class="nx">parse</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">urlStr</span>: <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">parseQueryString</span><span class="o">?</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slashesDenoteHost</span><span class="o">?</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span><span class="o">:</span> <span class="nx">Url</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">declare</span> <span class="nx">module</span> <span class="s2">&#34;path&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">function</span> <span class="nx">normalize</span><span class="p">(</span><span class="nx">p</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">function</span> <span class="nx">join</span><span class="p">(...</span><span class="nx">paths</span>: <span class="kt">any</span><span class="p">[])</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">var</span> <span class="nx">sep</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>url</code>和<code>path</code>都是单独的模块脚本，但是它们的类型都定义在<code>node.d.ts</code>这个文件里面。</p>
+<p>使用时，自己的脚本使用三斜杠命令，加载这个类型声明文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">/// &lt;reference path=&#34;node.d.ts&#34;/&gt;
+</span></span></span></code></pre></div><p>如果没有上面这一行命令，自己的脚本使用外部模块时，就需要在脚本里面使用 declare 命令单独给出外部模块的类型。</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://timmousk.com/blog/typescript-declare/" target="_blank" rel="noopener noreffer ">How Does The Declare Keyword Work In TypeScript?</a>, Tim Mouskhelichvili</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/typescript-tutorial/declare/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/typescript-tutorial/declare/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/typescript-tutorial/declare/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/typescript-tutorial/declare/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/typescript-tutorial/declare/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/typescript-tutorial/decorator-legacy/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/typescript-tutorial/d.ts/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

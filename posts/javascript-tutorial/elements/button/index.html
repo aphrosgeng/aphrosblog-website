@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="元素 &lt;button&gt;元素继承了HTMLButtonElement接口。它有以下的实例属性。 （1）HTMLButtonElemen" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/elements/button/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="元素 &lt;button&gt;元素继承了HTMLButtonElement接口。它有以下的实例属性。 （1）HTMLButtonElemen"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/elements/button/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/elements/form/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/elements/a/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/elements\/button\/"
+        },"genre": "posts","wordcount":  2084 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/elements\/button\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2084 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="button-元素"><!-- raw HTML omitted --> 元素</h1>
+<p><code>&lt;button&gt;</code>元素继承了<code>HTMLButtonElement</code>接口。它有以下的实例属性。</p>
+<p><strong>（1）HTMLButtonElement.accessKey</strong></p>
+<p><code>HTMLButtonElement.accessKey</code>属性返回一个字符串，表示键盘上对应的键，通过<code>Alt + 这个键</code>可以让按钮获得焦点。该属性可读写。</p>
+<p><strong>（2）HTMLButtonElement.autofocus</strong></p>
+<p><code>HTMLButtonElement.autofocus</code>属性是一个布尔值，表示页面加载过程中，按钮是否会自动获得焦点。该属性可读写。</p>
+<p><strong>（3）HTMLButtonElement.disabled</strong></p>
+<p><code>HTMLButtonElement.disabled</code>属性是一个布尔值，表示该按钮是否禁止点击。该属性可读写。</p>
+<p><strong>（4）HTMLButtonElement.form</strong></p>
+<p><code>HTMLButtonElement.form</code>属性是一个表单元素，返回该按钮所在的表单。该属性只读。如果按钮不属于任何表单，该属性返回<code>null</code>。</p>
+<p><strong>（5）HTMLButtonElement.formAction</strong></p>
+<p><code>HTMLButtonElement.formAction</code>返回一个字符串，表示表单提交的 URL。该属性可读写，一旦设置了值，点击按钮就会提交到该属性指定的 URL，而不是<code>&lt;form&gt;</code>元素指定的 URL。</p>
+<p><strong>（6）HTMLButtonElement.formEnctype</strong></p>
+<p><code>HTMLButtonElement.formEnctype</code>属性是一个字符串，表示数据提交到服务器的编码类型。该属性可读写，一旦设置了值，点击按钮会按照该属性指定的编码方式，而不是<code>&lt;form&gt;</code>元素指定的编码方式。</p>
+<p>该属性可以取以下的值。</p>
+<ul>
+<li><code>application/x-www-form-urlencoded</code>（默认值）</li>
+<li><code>multipart/form-data</code>（上传文件的编码方式）</li>
+<li><code>text/plain</code></li>
+</ul>
+<p><strong>（7）HTMLButtonElement.formMethod</strong></p>
+<p><code>HTMLButtonElement.formMethod</code>属性是一个字符串，表示浏览器提交表单的 HTTP 方法。该属性可读写，一旦设置了值，点击后就会采用该属性指定的 HTTP 方法，而不是<code>&lt;form&gt;</code>元素指定的编码方法。</p>
+<p><strong>（8）HTMLButtonElement.formNoValidate</strong></p>
+<p><code>HTMLButtonElement.formNoValidate</code>属性是一个布尔值，表示点击按钮提交表单时，是否要跳过表单校验的步骤。该属性可读写，一旦设置会覆盖<code>&lt;form&gt;</code>元素的<code>novalidate</code>属性。</p>
+<p><strong>（9）HTMLButtonElement.formTarget</strong></p>
+<p><code>HTMLButtonElement.formTarget</code>属性是一个字符串，指定了提交了表单以后，哪个窗口展示服务器返回的内容。该属性可读写，一旦设置会覆盖<code>&lt;form&gt;</code>元素的<code>target</code>属性。</p>
+<p><strong>（10）HTMLButtonElement.labels</strong></p>
+<p><code>HTMLButtonElement.labels</code>返回<code>NodeList</code>实例，表示那些绑定按钮的<code>&lt;label&gt;</code>元素。该属性只读。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/* HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="cm">  &lt;label id=&#34;label1&#34; for=&#34;test&#34;&gt;Label 1&lt;/label&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">  &lt;button id=&#34;test&#34;&gt;Button&lt;/button&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">  &lt;label id=&#34;label2&#34; for=&#34;test&#34;&gt;Label 2&lt;/label&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">button</span><span class="p">.</span><span class="nx">labels</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">button</span><span class="p">.</span><span class="nx">labels</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">textContent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;Label 1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;Label 2&#34;
+</span></span></span></code></pre></div><p>上面代码中，两个<code>&lt;label&gt;</code>元素绑定<code>&lt;button&gt;</code>元素。<code>button.labels</code>返回这两个<code>&lt;label&gt;</code>元素。</p>
+<p><strong>（11）HTMLButtonElement.name</strong></p>
+<p><code>HTMLButtonElement.name</code>属性是一个字符串，表示按钮元素的<code>name</code>属性。如果没有设置<code>name</code>属性，则返回空字符串。该属性可读写。</p>
+<p><strong>（12）HTMLButtonElement.tabIndex</strong></p>
+<p><code>HTMLButtonElement.tabIndex</code>是一个整数，代表按钮元素的 Tab 键顺序。该属性可读写。</p>
+<p><strong>（13）HTMLButtonElement.type</strong></p>
+<p><code>HTMLButtonElement.type</code>属性是一个字符串，表示按钮的行为。该属性可读写，可能取以下的值。</p>
+<ul>
+<li><code>submit</code>：默认值，表示提交表单。</li>
+<li><code>reset</code>：重置表单。</li>
+<li><code>button</code>：没有任何默认行为。</li>
+</ul>
+<p><strong>（14）HTMLButtonElement.validationMessage</strong></p>
+<p><code>HTMLButtonElement.validationMessage</code>属性是一个字符串，表示没有通过校验时显示的提示信息。该属性只读。</p>
+<p><strong>（15）HTMLButtonElement.validity</strong></p>
+<p><code>HTMLButtonElement.validity</code>属性返回该按钮的校验状态（<code>ValidityState</code>）。该属性只读。</p>
+<p><strong>（16）HTMLButtonElement.value</strong></p>
+<p><code>HTMLButtonElement.value</code>属性返回该按钮绑定的值。该属性可读写。</p>
+<p><strong>（17）HTMLButtonElement.willValidate</strong></p>
+<p><code>HTMLButtonElement.willValidate</code>属性是一个布尔值，表示该按钮提交表单时是否将被校验，默认为<code>false</code>。该属性只读。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/elements/button/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/elements/button/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/elements/button/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/elements/button/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/elements/button/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/elements/form/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/elements/a/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

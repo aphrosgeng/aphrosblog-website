@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="GlobalEventHandlers 接口 指定事件的回调函数，推荐使用的方法是元素的addEventListener方法。 div.addEventListener(&#39;click&#39;, clickHandler, false); 除了之外，还有一种方法可以直接指定事件的回调函数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="GlobalEventHandlers 接口 指定事件的回调函数，推荐使用的方法是元素的addEventListener方法。 div.addEventListener(&#39;click&#39;, clickHandler, false); 除了之外，还有一种方法可以直接指定事件的回调函数"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/events/keyboard/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/events/form/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/events\/globaleventhandlers\/"
+        },"genre": "posts","wordcount":  1802 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/events\/globaleventhandlers\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1802 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#globaleventhandlersonabort">GlobalEventHandlers.onabort</a></li>
+    <li><a href="#globaleventhandlersonerror">GlobalEventHandlers.onerror</a></li>
+    <li><a href="#globaleventhandlersonloadglobaleventhandlersonloadstart">GlobalEventHandlers.onload、GlobalEventHandlers.onloadstart</a></li>
+    <li><a href="#globaleventhandlersonfocusglobaleventhandlersonblur">GlobalEventHandlers.onfocus，GlobalEventHandlers.onblur</a></li>
+    <li><a href="#globaleventhandlersonscroll">GlobalEventHandlers.onscroll</a></li>
+    <li><a href="#globaleventhandlersoncontextmenuglobaleventhandlersonshow">GlobalEventHandlers.oncontextmenu，GlobalEventHandlers.onshow</a></li>
+    <li><a href="#其他的事件属性">其他的事件属性</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="globaleventhandlers-接口">GlobalEventHandlers 接口</h1>
+<p>指定事件的回调函数，推荐使用的方法是元素的<code>addEventListener</code>方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">div</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">clickHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span></code></pre></div><p>除了之外，还有一种方法可以直接指定事件的回调函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">div</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">clickHandler</span><span class="p">;</span>
+</span></span></code></pre></div><p>这个接口是由<code>GlobalEventHandlers</code>接口提供的。它的优点是使用比较方便，缺点是只能为每个事件指定一个回调函数，并且无法指定事件触发的阶段（捕获阶段还是冒泡阶段）。</p>
+<p><code>HTMLElement</code>、<code>Document</code>和<code>Window</code>都继承了这个接口，也就是说，各种 HTML 元素、<code>document</code>对象、<code>window</code>对象上面都可以使用<code>GlobalEventHandlers</code>接口提供的属性。下面就列出这个接口提供的主要的事件属性。</p>
+<h2 id="globaleventhandlersonabort">GlobalEventHandlers.onabort</h2>
+<p>某个对象的<code>abort</code>事件（停止加载）发生时，就会调用<code>onabort</code>属性指定的回调函数。</p>
+<p>各种元素的停止加载事件，到底如何触发，目前并没有统一的规定。因此实际上，这个属性现在一般只用在<code>&lt;img&gt;</code>元素上面。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// HTML 代码如下
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;img src=&#34;example.jpg&#34; id=&#34;img&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">onabort</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;image load aborted.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="globaleventhandlersonerror">GlobalEventHandlers.onerror</h2>
+<p><code>error</code>事件发生时，就会调用<code>onerror</code>属性指定的回调函数。</p>
+<p><code>error</code>事件分成两种。</p>
+<p>一种是 JavaScript 的运行时错误，这会传到<code>window</code>对象，导致<code>window.onerror()</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">lineno</span><span class="p">,</span> <span class="nx">colno</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p><code>window.onerror</code>的处理函数共接受五个参数，含义如下。</p>
+<ul>
+<li>message：错误信息字符串</li>
+<li>source：报错脚本的 URL</li>
+<li>lineno：报错的行号，是一个整数</li>
+<li>colno：报错的列号，是一个整数</li>
+<li>error： 错误对象</li>
+</ul>
+<p>另一种是资源加载错误，比如<code>&lt;img&gt;</code>或<code>&lt;script&gt;</code>加载的资源出现加载错误。这时，Error 对象会传到对应的元素，导致该元素的<code>onerror</code>属性开始执行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>注意，一般来说，资源的加载错误不会触发<code>window.onerror</code>。</p>
+<h2 id="globaleventhandlersonloadglobaleventhandlersonloadstart">GlobalEventHandlers.onload、GlobalEventHandlers.onloadstart</h2>
+<p>元素完成加载时，会触发<code>load</code>事件，执行<code>onload()</code>。它的典型使用场景是<code>window</code>对象和<code>&lt;img&gt;</code>元素。对于<code>window</code>对象来说，只有页面的所有资源加载完成（包括图片、脚本、样式表、字体等所有外部资源），才会触发<code>load</code>事件。</p>
+<p>对于<code>&lt;img&gt;</code>和<code>&lt;video&gt;</code>等元素，加载开始时还会触发<code>loadstart</code>事件，导致执行<code>onloadstart</code>。</p>
+<h2 id="globaleventhandlersonfocusglobaleventhandlersonblur">GlobalEventHandlers.onfocus，GlobalEventHandlers.onblur</h2>
+<p>当前元素获得焦点时，会触发<code>element.onfocus</code>；失去焦点时，会触发<code>element.onblur</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">onfocus</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;onfocus event detected!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">onblur</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;onblur event detected!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>注意，如果不是可以接受用户输入的元素，要触发<code>onfocus</code>，该元素必须有<code>tabindex</code>属性。</p>
+<h2 id="globaleventhandlersonscroll">GlobalEventHandlers.onscroll</h2>
+<p>页面或元素滚动时，会触发<code>scroll</code>事件，导致执行<code>onscroll()</code>。</p>
+<h2 id="globaleventhandlersoncontextmenuglobaleventhandlersonshow">GlobalEventHandlers.oncontextmenu，GlobalEventHandlers.onshow</h2>
+<p>用户在页面上按下鼠标的右键，会触发<code>contextmenu</code>事件，导致执行<code>oncontextmenu()</code>。如果该属性执行后返回<code>false</code>，就等于禁止了右键菜单。<code>document.oncontextmenu</code>与<code>window.oncontextmenu</code>效果一样。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">oncontextmenu</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>上面代码中，<code>oncontextmenu</code>属性执行后返回<code>false</code>，右键菜单就不会出现。</p>
+<p>元素的右键菜单显示时，会触发该元素的<code>onshow</code>监听函数。</p>
+<h2 id="其他的事件属性">其他的事件属性</h2>
+<p>鼠标的事件属性。</p>
+<ul>
+<li>onclick</li>
+<li>ondblclick</li>
+<li>onmousedown</li>
+<li>onmouseenter</li>
+<li>onmouseleave</li>
+<li>onmousemove</li>
+<li>onmouseout</li>
+<li>onmouseover</li>
+<li>onmouseup</li>
+<li>onwheel</li>
+</ul>
+<p>键盘的事件属性。</p>
+<ul>
+<li>onkeydown</li>
+<li>onkeypress</li>
+<li>onkeyup</li>
+</ul>
+<p>焦点的事件属性。</p>
+<ul>
+<li>onblur</li>
+<li>onfocus</li>
+</ul>
+<p>表单的事件属性。</p>
+<ul>
+<li>oninput</li>
+<li>onchange</li>
+<li>onsubmit</li>
+<li>onreset</li>
+<li>oninvalid</li>
+<li>onselect</li>
+</ul>
+<p>触摸的事件属性。</p>
+<ul>
+<li>ontouchcancel</li>
+<li>ontouchend</li>
+<li>ontouchmove</li>
+<li>ontouchstart</li>
+</ul>
+<p>拖动的事件属性分成两类：一类与被拖动元素相关，另一类与接收被拖动元素的容器元素相关。</p>
+<p>被拖动元素的事件属性。</p>
+<ul>
+<li>ondragstart：拖动开始</li>
+<li>ondrag：拖动过程中，每隔几百毫秒触发一次</li>
+<li>ondragend：拖动结束</li>
+</ul>
+<p>接收被拖动元素的容器元素的事件属性。</p>
+<ul>
+<li>ondragenter：被拖动元素进入容器元素。</li>
+<li>ondragleave：被拖动元素离开容器元素。</li>
+<li>ondragover：被拖动元素在容器元素上方，每隔几百毫秒触发一次。</li>
+<li>ondrop：松开鼠标后，被拖动元素放入容器元素。</li>
+</ul>
+<p><code>&lt;dialog&gt;</code>对话框元素的事件属性。</p>
+<ul>
+<li>oncancel</li>
+<li>onclose</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/events/globaleventhandlers/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/events/keyboard/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/events/form/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="时间序列 概述 分类 研究对象： 一元时间序列 多元时间序列 时间连续性 离散时间序列 连续时间序列 序列的特性 平稳时间序列 非平稳时间序列 分析方法 效应分解法 将" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="时间序列 概述 分类 研究对象： 一元时间序列 多元时间序列 时间连续性 离散时间序列 连续时间序列 序列的特性 平稳时间序列 非平稳时间序列 分析方法 效应分解法 将"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" /><link rel="prev" href="http://localhost:1313/posts/pyda-2e-zh/1/" /><link rel="next" href="http://localhost:1313/posts/programming/08.%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/programming\/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97\/"
+        },"genre": "posts","wordcount":  2045 ,
+        "url": "http:\/\/localhost:1313\/posts\/programming\/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2045 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#效应分解法">效应分解法</a>
+      <ul>
+        <li><a href="#加法模型">加法模型</a></li>
+        <li><a href="#乘法模型">乘法模型</a></li>
+        <li><a href="#代码实现">代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#平稳时间序列模型">平稳时间序列模型</a>
+      <ul>
+        <li><a href="#ar-模型">AR 模型</a></li>
+        <li><a href="#ma-模型">MA 模型</a></li>
+        <li><a href="#arma-模型">ARMA 模型</a></li>
+        <li><a href="#模型的定阶与识别">模型的定阶与识别</a></li>
+        <li><a href="#代码实现-1">代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#非平稳时间序列模型">非平稳时间序列模型</a>
+      <ul>
+        <li><a href="#arima-模型">ARIMA 模型</a></li>
+        <li><a href="#代码实现-2">代码实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="时间序列">时间序列</h1>
+<h2 id="概述">概述</h2>
+<ul>
+<li>
+<p>分类</p>
+<ul>
+<li>研究对象：
+<ul>
+<li>一元时间序列</li>
+<li>多元时间序列</li>
+</ul>
+</li>
+<li>时间连续性
+<ul>
+<li>离散时间序列</li>
+<li>连续时间序列</li>
+</ul>
+</li>
+<li>序列的特性
+<ul>
+<li>平稳时间序列</li>
+<li>非平稳时间序列</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>分析方法</p>
+<ul>
+<li>
+<p>效应分解法</p>
+<ul>
+<li>
+<p>将时间序列分解为趋势、周期、随机三个部分，并对前两个部分使用曲线进行拟合</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921192716491.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921192716491.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921192716491.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921192716491.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921192716491.png"
+        title="image-20220921192716491" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>平稳时间序列模型</p>
+<ul>
+<li>通过分析前后观测点之间的相关关系构建动态微分方程，用于预测</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="效应分解法">效应分解法</h2>
+<h3 id="加法模型">加法模型</h3>
+<p>$$
+x_t = T_t + S_t + I_t
+$$</p>
+<p>其中，$T$代表趋势效应，$S$代表季节效应，$I$代表随机效应</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921193932538.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921193932538.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921193932538.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921193932538.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921193932538.png"
+        title="image-20220921193932538" /></p>
+<h3 id="乘法模型">乘法模型</h3>
+<p>$$
+x_t = T_t \times S_t \times I_t
+$$</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921194016435.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921194016435.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921194016435.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921194016435.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921194016435.png"
+        title="image-20220921194016435" /></p>
+<h3 id="代码实现">代码实现</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921194943397.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921194943397.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921194943397.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921194943397.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921194943397.png"
+        title="image-20220921194943397" /></p>
+<h4 id="加法模型-1">加法模型</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fbprophet</span> <span class="kn">import</span> <span class="n">Prophet</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数据读取</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AirPassengers.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">###################################################</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Prophet 只能处理单变量的时间序列</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 导入的数据第一列必须是日期类型的变量，变量名必须为&#39;ds&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 导入的数据第二列必须是数值类型的变量，变量名必须为&#39;y&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">####################################################</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DATE&#39;</span><span class="p">:</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="s1">&#39;AIR&#39;</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 模型训练</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 长期趋势部分的拟合函数为linear，可选项为 linear 和 logistic</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 置信区间为0.95 默认为0.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">growth</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="n">interval_width</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 模型预测</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># &#39;MS&#39; 表示月度数据 即36个月</span>
+</span></span><span class="line"><span class="cl"><span class="n">future_dates</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">forecast</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future_dates</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数据展示</span>
+</span></span><span class="line"><span class="cl"><span class="n">forecast</span><span class="p">[[</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span><span class="s1">&#39;yhat&#39;</span><span class="p">,</span><span class="s1">&#39;yhat_lower&#39;</span><span class="p">,</span><span class="s1">&#39;y_hat_upper&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># uncertainty 表示是否绘制置信区间</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span><span class="n">uncertainty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921195951163.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921195951163.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921195951163.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921195951163.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921195951163.png"
+        title="image-20220921195951163" /></p>
+<h4 id="乘法模型-1">乘法模型</h4>
+<p>如果需要做乘法模型，只需要对时间序列取自然对数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fbprophet</span> <span class="kn">import</span> <span class="n">Prophet</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数据读取</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AirPassengers.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;AIR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;AIR&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###################################################</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Prophet 只能处理单变量的时间序列</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 导入的数据第一列必须是日期类型的变量，变量名必须为&#39;ds&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 导入的数据第二列必须是数值类型的变量，变量名必须为&#39;y&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">####################################################</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DATE&#39;</span><span class="p">:</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="s1">&#39;AIR&#39;</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 模型训练</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 长期趋势部分的拟合函数为linear，可选项为 linear 和 logistic</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 置信区间为0.95 默认为0.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">growth</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="n">interval_width</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 模型预测</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># &#39;MS&#39; 表示月度数据 即36个月</span>
+</span></span><span class="line"><span class="cl"><span class="n">future_dates</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">forecast</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future_dates</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">forecast</span><span class="p">[[</span><span class="s1">&#39;yhat&#39;</span><span class="p">,</span><span class="s1">&#39;yhat_lower&#39;</span><span class="p">,</span><span class="s1">&#39;y_hat_upper&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">forecast</span><span class="p">[[</span><span class="s1">&#39;yhat&#39;</span><span class="p">,</span><span class="s1">&#39;yhat_lower&#39;</span><span class="p">,</span><span class="s1">&#39;y_hat_upper&#39;</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数据展示</span>
+</span></span><span class="line"><span class="cl"><span class="n">forecast</span><span class="p">[[</span><span class="s1">&#39;yhat&#39;</span><span class="p">,</span><span class="s1">&#39;yhat_lower&#39;</span><span class="p">,</span><span class="s1">&#39;y_hat_upper&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># uncertainty 表示是否绘制置信区间</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span><span class="n">uncertainty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921200943923.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921200943923.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921200943923.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921200943923.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921200943923.png"
+        title="image-20220921200943923" /></p>
+<h2 id="平稳时间序列模型">平稳时间序列模型</h2>
+<ul>
+<li>序列分类
+<ul>
+<li>严平稳时间序列
+<ul>
+<li>一个时间序列中，各期数据的联合概率分布与时间t无关</li>
+</ul>
+</li>
+<li>宽平稳时间序列
+<ul>
+<li>对任意时间，序列的均值、方差存在并为常数，且自协方差函数与自相关系数只与时间间隔k有关</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>==平稳时间序列分析在于挖掘时间序列之间的关系，当时间序列中的关系被提取出来后，剩下的序列就应该是一个白噪声序列==</p>
+<ul>
+<li>
+<p>模型分类</p>
+<ul>
+<li>自回归模型（Auto Regression Model, AR）</li>
+<li>移动平均模型（Moving Average Model, MA）</li>
+<li>自回归移动平均模型（Auto Regression Moving Average Model, ARMA）</li>
+</ul>
+</li>
+<li>
+<p>自相关函数（Autocorrelation Function, ACF）</p>
+<ul>
+<li>描述时间序列任意两个时间间隔k的相关系数</li>
+</ul>
+</li>
+</ul>
+<p>$$
+ACF(k)=\rho_k=\frac{Cov(y_t,y_{t-k})}{Var(y_t)}
+$$</p>
+<ul>
+<li>偏自相关函数（Partial Autocorrelation Function, PACF）
+<ul>
+<li>描述时间序列中在任意两个时间间隔k的时刻，去除1至k-1这个时间段中的其他数据的相关系数</li>
+</ul>
+</li>
+</ul>
+<p>$$
+\rho^<em>_k = Corr[y_t -E^</em>(y_t|y_{t-1},\cdots,y_{t-k+1}),y_{t-k}]
+$$</p>
+<h3 id="ar-模型">AR 模型</h3>
+<p>AR模型认为时间序列档期观测值与前n期有线性关系，而与前n+1期无线性关系
+$$
+X_t = \alpha_o+\alpha_1X_{t-1}+\alpha_2X_{t-2}+\cdots+\alpha_nX_{t-n}+\epsilon_t\
+\epsilon_t \sim N(0,\sigma^2)
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921205022452.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921205022452.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921205022452.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921205022452.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921205022452.png"
+        title="image-20220921205022452" /></p>
+<h3 id="ma-模型">MA 模型</h3>
+<p>MA模型认为，如果一个系统$t$时刻的响应$X_t$，与其以前时刻$t-1,t-2,\cdots$的响应$X_{t-1},X_{t-2},\cdots$无关，而与其以前时刻$t-1,t-2,\cdots,t-m$进入系统的扰动项$\epsilon_{t-1},\epsilon_{t-2},\cdots,\epsilon_{t-m}$存在一定的相关关系
+$$
+X_t = \mu+\beta_1X_{\epsilon-1}+\beta_2X_{\epsilon-2}+\cdots+\beta_mX_{\epsilon-m}+\epsilon_t
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921205101120.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921205101120.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921205101120.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921205101120.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921205101120.png"
+        title="image-20220921205101120" /></p>
+<h3 id="arma-模型">ARMA 模型</h3>
+<p>ARMA模型结合了AR模型和MA模型的共同特点，其认为序列是受到前期观测数据与系统扰动的共同影响
+$$
+X_t = \alpha_o+\alpha_1X_{t-1}+\alpha_2X_{t-2}+\cdots+\alpha_nX_{t-n}+\epsilon_t -\beta_1X_{\epsilon-1}-\beta_2X_{\epsilon-2}-\cdots-\beta_mX_{\epsilon-m}
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921205120782.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921205120782.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921205120782.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921205120782.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921205120782.png"
+        title="image-20220921205120782" /></p>
+<h3 id="模型的定阶与识别">模型的定阶与识别</h3>
+<h4 id="使用acf与pacf">使用ACF与PACF)</h4>
+<p>自相关系数 (ACF) 与偏自相关系数 (PACF) 可以用于判断平稳时间序列数据适合哪一种模型和阶数</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>AR(p) 模型</th>
+<th>MA(q) 模型</th>
+<th>ARMA(p,q) 模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACF</td>
+<td>拖尾</td>
+<td>q阶截尾</td>
+<td>拖尾</td>
+</tr>
+<tr>
+<td>PACF</td>
+<td>p阶截尾</td>
+<td>拖尾</td>
+<td>拖尾</td>
+</tr>
+</tbody>
+</table>
+<h4 id="使用aic与bic">使用AIC与BIC</h4>
+<p>使用ACF与PACF进行定阶时，只能精确AR模型与MA模型的阶数，而对于ARMA模型无法确定阶数</p>
+<p>AIC或BIC准则特别适用于ARMA模型，也适用于AR模型与MA模型</p>
+<h3 id="代码实现-1">代码实现</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 读取数据，探索数据的平稳性</span>
+</span></span><span class="line"><span class="cl"><span class="n">ts_simu200</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ts_simu200.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">datas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2017/01/01&#39;</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ts_simu200</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">dta</span> <span class="o">=</span> <span class="n">ts_simu200</span><span class="p">[</span><span class="s1">&#39;AR1_a&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">dta</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921223259445.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921223259445.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921223259445.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921223259445.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921223259445.png"
+        title="image-20220921223259445" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定阶</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">dta</span><span class="p">,</span><span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#lags 表示滞后的阶数</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">dta</span><span class="p">,</span><span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921223356364.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921223356364.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921223356364.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921223356364.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921223356364.png"
+        title="image-20220921223356364" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># AR 建模</span>
+</span></span><span class="line"><span class="cl"><span class="n">ar10</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">ARMA</span><span class="p">(</span><span class="n">dta</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 残差白噪声检验</span>
+</span></span><span class="line"><span class="cl"><span class="n">resid</span> <span class="o">=</span> <span class="n">ar10</span><span class="o">.</span><span class="n">resid</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span><span class="n">values</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span><span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span><span class="n">legs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921223437184.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921223437184.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921223437184.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921223437184.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921223437184.png"
+        title="image-20220921223437184" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># AR模型预测</span>
+</span></span><span class="line"><span class="cl"><span class="n">predict_dta</span> <span class="o">=</span> <span class="n">ar10</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datatime</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">ar10</span><span class="o">.</span><span class="n">plot_predict</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">)</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">190</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                     <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">)</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">220</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                     <span class="n">dynamic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">plot_insasmple</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921223453911.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921223453911.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921223453911.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921223453911.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921223453911.png"
+        title="image-20220921223453911" /></p>
+<h2 id="非平稳时间序列模型">非平稳时间序列模型</h2>
+<h3 id="arima-模型">ARIMA 模型</h3>
+<p>很多时间序列模型数据都是非平稳的，直接以平稳时间序列分析方法进行分析是不合适的。可以通过差分等手段，将非平稳时间序列数据变成平稳时间序列，再采用ARIMA模型建模。
+$$
+\grad x_t^{(1)} = x_t-x_{t-1}\
+\grad x_t^{(2)} = \grad x_t^{(1)} - \grad x_{t-1}^{(1)}\
+\grad x_t^{(d)} = \grad x_t^{(d-1)} - \grad x_{t-1}^{(d-1)}
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921230326667.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921230326667.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921230326667.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921230326667.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921230326667.png"
+        title="image-20220921230326667" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921230339302.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921230339302.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921230339302.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921230339302.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921230339302.png"
+        title="image-20220921230339302" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921230357360.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921230357360.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921230357360.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921230357360.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921230357360.png"
+        title="image-20220921230357360" /></p>
+<p>对于季节性的数据，可以采用一定周期s的差分运算（季节差分）提取季节信息
+$$
+\grad_sx_t = x_t-x_{t-s}
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921231324983.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921231324983.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921231324983.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921231324983.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921231324983.png"
+        title="image-20220921231324983" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921231340246.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921231340246.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921231340246.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921231340246.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921231340246.png"
+        title="image-20220921231340246" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921231352780.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921231352780.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921231352780.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921231352780.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921231352780.png"
+        title="image-20220921231352780" /></p>
+<h3 id="代码实现-2">代码实现</h3>
+<h4 id="一阶差分模型">一阶差分模型</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 读取数据，探索数据的平稳性</span>
+</span></span><span class="line"><span class="cl"><span class="n">ts_simu200</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ts_simu200.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">datas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2017/01/01&#39;</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ts_simu200</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">dta</span> <span class="o">=</span> <span class="n">ts_simu200</span><span class="p">[</span><span class="s1">&#39;ARIMA_110&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">dta</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">dta</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ADF Statistic:</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value:</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># p值为0.333，无法拒绝平稳假设，认为数据非平稳</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921231748265.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921231748265.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921231748265.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921231748265.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921231748265.png"
+        title="image-20220921231748265" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 对原数据进行差分</span>
+</span></span><span class="line"><span class="cl"><span class="n">diff1</span> <span class="o">=</span> <span class="n">dta</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921232312783.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921232312783.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921232312783.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921232312783.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921232312783.png"
+        title="image-20220921232312783" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定阶</span>
+</span></span><span class="line"><span class="cl"><span class="n">ddta</span> <span class="o">=</span> <span class="n">diff1</span>
+</span></span><span class="line"><span class="cl"><span class="n">ddta</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">ddta</span><span class="p">,</span><span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#lags 表示滞后的阶数</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">ddta</span><span class="p">,</span><span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921232523534.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921232523534.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921232523534.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921232523534.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921232523534.png"
+        title="image-20220921232523534" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921232538861.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921232538861.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921232538861.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921232538861.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921232538861.png"
+        title="image-20220921232538861" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># ARIMA 建模</span>
+</span></span><span class="line"><span class="cl"><span class="n">arima10</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">ARIMA</span><span class="p">(</span><span class="n">dta</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 残差白噪声检验</span>
+</span></span><span class="line"><span class="cl"><span class="n">resid</span> <span class="o">=</span> <span class="n">arima10</span><span class="o">.</span><span class="n">resid</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span><span class="n">values</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span><span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span><span class="n">legs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921232729598.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921232729598.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921232729598.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921232729598.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921232729598.png"
+        title="image-20220921232729598" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921232739425.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921232739425.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921232739425.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921232739425.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921232739425.png"
+        title="image-20220921232739425" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># ARIMA模型预测</span>
+</span></span><span class="line"><span class="cl"><span class="n">predict_dta</span> <span class="o">=</span> <span class="n">arima10</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datatime</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">arima10</span><span class="o">.</span><span class="n">plot_predict</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                     <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">)</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">220</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                     <span class="n">dynamic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">plot_insasmple</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921232946758.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921232946758.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921232946758.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921232946758.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921232946758.png"
+        title="image-20220921232946758" /></p>
+<h4 id="季节性差分模型">季节性差分模型</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220922021953944.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220922021953944.png, http://192.168.0.103:7788/images/2022/09/21/image-20220922021953944.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220922021953944.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220922021953944.png"
+        title="image-20220922021953944" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 读取数据，探索数据的平稳性</span>
+</span></span><span class="line"><span class="cl"><span class="n">sales_ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tractor_sales.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sales_ts</span><span class="p">))</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220921235558047.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220921235558047.png, http://192.168.0.103:7788/images/2022/09/21/image-20220921235558047.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220921235558047.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220921235558047.png"
+        title="image-20220921235558047" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sales_ts_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sales_ts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sales_ts_log</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sales_ts_log_diff</span> <span class="o">=</span> <span class="n">sales_ts_log</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sales_ts_log_diff</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sharex</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">smt</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">sales_ts_log_diff</span><span class="p">,</span><span class="n">lags</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">smt</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">sales_ts_log_diff</span><span class="p">,</span><span class="n">lags</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://192.168.0.103:7788/images/2022/09/21/image-20220922000057275.png"
+        data-srcset="http://192.168.0.103:7788/images/2022/09/21/image-20220922000057275.png, http://192.168.0.103:7788/images/2022/09/21/image-20220922000057275.png 1.5x, http://192.168.0.103:7788/images/2022/09/21/image-20220922000057275.png 2x"
+        data-sizes="auto"
+        alt="http://192.168.0.103:7788/images/2022/09/21/image-20220922000057275.png"
+        title="image-20220922000057275" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">d</span> <span class="o">=</span> <span class="n">q</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pdq</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">q</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">seasonal_pdq</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pdq</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">best_aic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+</span></span><span class="line"><span class="cl"><span class="n">best_pdq</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl"><span class="n">best_seasonal_pdq</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl"><span class="n">temp_model</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">pdq</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">param_seasonal</span> <span class="ow">in</span> <span class="n">seasonal_pdq</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">statespace</span><span class="o">.</span><span class="n">SARIMAX</span><span class="p">(</span><span class="n">sales_ts_log</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">order</span> <span class="o">=</span> <span class="n">param</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">seasonal_order</span> <span class="o">=</span> <span class="n">param_seasonal</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">enforce_statopnarity</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">enforce_invertibility</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">results</span> <span class="o">=</span> <span class="n">temp_model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">aic</span> <span class="o">&lt;</span> <span class="n">best_aic</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">best_aic</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">aic</span>
+</span></span><span class="line"><span class="cl">                <span class="n">best_pdq</span> <span class="o">=</span> <span class="n">param</span>
+</span></span><span class="line"><span class="cl">                <span class="n">best_seasonal_pdq</span> <span class="o">=</span> <span class="n">param_seasonal</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">best_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">statespace</span><span class="o">.</span><span class="n">SARIMAX</span><span class="p">(</span><span class="n">sales_ts_log</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">seasonal_order</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">enforce_stationarity</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">enforce_invertibility</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">best_results</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">best_results</span><span class="o">.</span><span class="n">plot_diagnostics</span><span class="p">(</span><span class="n">lags</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">n_step</span> <span class="o">=</span> <span class="mi">36</span>
+</span></span><span class="line"><span class="cl"><span class="n">pred_uc_95</span> <span class="o">=</span> <span class="n">best_results</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">nsteps</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pred_pr_95</span> <span class="o">=</span> <span class="n">pred_uc_95</span><span class="o">.</span><span class="n">predicted_mean</span>
+</span></span><span class="line"><span class="cl"><span class="n">pred_ci_95</span> <span class="o">=</span> <span class="n">pred_uc_95</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">sales_ts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">periods</span><span class="o">=</span><span class="n">n_steps</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fc_95</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pred_pr_95</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pred_ci_95</span><span class="p">)]),</span><span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;forecast&#39;</span><span class="p">,</span><span class="s1">&#39;lower_ci_95&#39;</span><span class="p">,</span><span class="s1">&#39;upper_ci_95&#39;</span><span class="p">])</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">axis</span> <span class="o">=</span> <span class="n">sales_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">fc_95</span><span class="p">[</span><span class="s1">&#39;forecast&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forecast&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">axis</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fc_all</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">fc_95</span><span class="p">[</span><span class="s1">&#39;lower_ci_95&#39;</span><span class="p">],</span><span class="n">fc_95</span><span class="p">[</span><span class="s1">&#39;upper_ci_95&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">axis</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">axis</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tractor Sales&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/programming/09.%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/pyda-2e-zh/1/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/programming/08.%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

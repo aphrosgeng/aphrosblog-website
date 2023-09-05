@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="TypeScript 的 Enum 类型 Enum 是 TypeScript 新增的一种数据结构和类型，中文译为“枚举”。 简介 实际开发中，经常需要定义一组相关的常量。 const RED = 1; const GREEN = 2; const BLUE = 3; let color = userInput(); if (color" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/typescript-tutorial/enum/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="TypeScript 的 Enum 类型 Enum 是 TypeScript 新增的一种数据结构和类型，中文译为“枚举”。 简介 实际开发中，经常需要定义一组相关的常量。 const RED = 1; const GREEN = 2; const BLUE = 3; let color = userInput(); if (color"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/typescript-tutorial/enum/" /><link rel="prev" href="http://localhost:1313/posts/typescript-tutorial/es6/" /><link rel="next" href="http://localhost:1313/posts/typescript-tutorial/decorator/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/enum\/"
+        },"genre": "posts","wordcount":  3721 ,
+        "url": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/enum\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3721 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#enum-成员的值">Enum 成员的值</a></li>
+    <li><a href="#同名-enum-的合并">同名 Enum 的合并</a></li>
+    <li><a href="#字符串-enum">字符串 Enum</a></li>
+    <li><a href="#keyof-运算符">keyof 运算符</a></li>
+    <li><a href="#反向映射">反向映射</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="typescript-的-enum-类型">TypeScript 的 Enum 类型</h1>
+<p>Enum 是 TypeScript 新增的一种数据结构和类型，中文译为“枚举”。</p>
+<h2 id="简介">简介</h2>
+<p>实际开发中，经常需要定义一组相关的常量。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">RED</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">GREEN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">BLUE</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">userInput</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">color</span> <span class="o">===</span> <span class="nx">RED</span><span class="p">)</span> <span class="p">{</span><span class="cm">/* */</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">color</span> <span class="o">===</span> <span class="nx">GREEN</span><span class="p">)</span> <span class="p">{</span><span class="cm">/* */</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">color</span> <span class="o">===</span> <span class="nx">BLUE</span><span class="p">)</span> <span class="p">{</span><span class="cm">/* */</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;wrong color&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面示例中，常量<code>RED</code>、<code>GREEN</code>、<code>BLUE</code>是相关的，意为变量<code>color</code>的三个可能的取值。它们具体等于什么值其实并不重要，只要不相等就可以了。</p>
+<p>TypeScript 就设计了 Enum 结构，用来将相关常量放在一个容器里面，方便使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>     <span class="c1">// 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Green</span><span class="p">,</span>   <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Blue</span>     <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例声明了一个 Enum 结构<code>Color</code>，里面包含三个成员<code>Red</code>、<code>Green</code>和<code>Blue</code>。第一个成员的值默认为整数<code>0</code>，第二个为<code>1</code>，第三个为<code>2</code>，以此类推。</p>
+<p>使用时，调用 Enum 的某个成员，与调用对象属性的写法一样，可以使用点运算符，也可以使用方括号运算符。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Green</span><span class="p">;</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">[</span><span class="s1">&#39;Green&#39;</span><span class="p">];</span> <span class="c1">// 1
+</span></span></span></code></pre></div><p>Enum 结构本身也是一种类型。比如，上例的变量<code>c</code>等于<code>1</code>，它的类型可以是 Color，也可以是<code>number</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">c</span>:<span class="kt">Color</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Green</span><span class="p">;</span> <span class="c1">// 正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">c</span>:<span class="kt">number</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Green</span><span class="p">;</span> <span class="c1">// 正确
+</span></span></span></code></pre></div><p>上面示例中，变量<code>c</code>的类型写成<code>Color</code>或<code>number</code>都可以。但是，<code>Color</code>类型的语义更好。</p>
+<p>Enum 结构的特别之处在于，它既是一种类型，也是一个值。绝大多数 TypeScript 语法都是类型语法，编译后会全部去除，但是 Enum 结构是一个值，编译后会变成 JavaScript 对象，留在代码中。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 编译前
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>     <span class="c1">// 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Green</span><span class="p">,</span>   <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Blue</span>     <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 编译后
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">Color</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span>: <span class="kt">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>上面示例是 Enum 结构编译前后的对比。</p>
+<p>由于 TypeScript 的定位是 JavaScript 语言的类型增强，所以官方建议谨慎使用 Enum 结构，因为它不仅仅是类型，还会为编译后的代码加入一个对象。</p>
+<p>Enum 结构比较适合的场景是，成员的值不重要，名字更重要，从而增加代码的可读性和可维护性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Operator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ADD</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">DIV</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MUL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">SUB</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">compute</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">op</span>:<span class="kt">Operator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">a</span>:<span class="kt">number</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">b</span>:<span class="kt">number</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">switch</span> <span class="p">(</span><span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">Operator.ADD</span>:
+</span></span><span class="line"><span class="cl">      <span class="kt">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">Operator.DIV</span>:
+</span></span><span class="line"><span class="cl">      <span class="kt">return</span> <span class="nx">a</span> <span class="o">/</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">Operator.MUL</span>:
+</span></span><span class="line"><span class="cl">      <span class="kt">return</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">Operator.SUB</span>:
+</span></span><span class="line"><span class="cl">      <span class="kt">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;wrong operator&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">compute</span><span class="p">(</span><span class="nx">Operator</span><span class="p">.</span><span class="nx">ADD</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">// 4
+</span></span></span></code></pre></div><p>上面示例中，Enum 结构<code>Operator</code>的四个成员表示四则运算“加减乘除”。代码根本不需要用到这四个成员的值，只用成员名就够了。</p>
+<p><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#enum-overhaul" target="_blank" rel="noopener noreffer ">TypeScript 5.0</a> 之前，Enum 有一个 Bug，就是 Enum 类型的变量可以赋值为任何数值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">No</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Yes</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">noYes</span>:<span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">foo</span><span class="p">(</span><span class="mi">33</span><span class="p">);</span>  <span class="c1">// TypeScript 5.0 之前不报错
+</span></span></span></code></pre></div><p>上面示例中，函数<code>foo</code>的参数<code>noYes</code>是 Enum 类型，只有两个可用的值。但是，TypeScript 5.0 之前，任何数值作为函数<code>foo</code>的参数，编译都不会报错，TypeScript 5.0 纠正了这个问题。</p>
+<p>另外，由于 Enum 结构编译后是一个对象，所以不能有与它同名的变量（包括对象、函数、类等）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span> <span class="c1">// 报错
+</span></span></span></code></pre></div><p>上面示例，Enum 结构与变量同名，导致报错。</p>
+<p>很大程度上，Enum 结构可以被对象的<code>as const</code>断言替代。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">C</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Bar</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">C</span>: <span class="kt">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">as</span> <span class="kr">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">Foo</span><span class="p">.</span><span class="nx">A</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">Bar</span><span class="p">.</span><span class="nx">A</span><span class="p">)</span> <span class="p">{}</span>
+</span></span></code></pre></div><p>上面示例中，对象<code>Bar</code>使用了<code>as const</code>断言，作用就是使得它的属性无法修改。这样的话，<code>Foo</code>和<code>Bar</code>的行为就很类似了，前者完全可以用后者替代，而且后者还是 JavaScript 的原生数据结构。</p>
+<h2 id="enum-成员的值">Enum 成员的值</h2>
+<p>Enum 成员默认不必赋值，系统会从零开始逐一递增，按照顺序为每个成员赋值，比如0、1、2……</p>
+<p>但是，也可以为 Enum 成员显式赋值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，Enum 每个成员的值都是显式赋值。</p>
+<p>成员的值可以是任意数值，但不能是大整数（Bigint）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span> <span class="o">=</span> <span class="mi">7</span><span class="nx">n</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，Enum 成员的值可以是小数，但不能是 Bigint。</p>
+<p>成员的值甚至可以相同。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>如果只设定第一个成员的值，后面成员的值就会从这个值开始递增。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span><span class="p">,</span>  <span class="c1">// 8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Blue</span>   <span class="c1">// 9
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 或者
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span> <span class="c1">// 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Green</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span> <span class="c1">// 8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>Enum 成员的值也可以使用计算式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Permission</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">UserRead</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">UserWrite</span>    <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">UserExecute</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">GroupRead</span>    <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">GroupWrite</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">GroupExecute</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">AllRead</span>      <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">AllWrite</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">AllExecute</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">No</span> <span class="o">=</span> <span class="mi">123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Yes</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，Enum 成员的值等于一个计算式，或者等于函数的返回值，都是正确的。</p>
+<p>Enum 成员值都是只读的，不能重新赋值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Color</span><span class="p">.</span><span class="nx">Red</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// 报错
+</span></span></span></code></pre></div><p>上面示例中，重新为 Enum 成员赋值就会报错。</p>
+<p>为了让这一点更醒目，通常会在 enum 关键字前面加上<code>const</code>修饰，表示这是常量，不能再次赋值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>加上<code>const</code>还有一个好处，就是编译为 JavaScript 代码后，代码中 Enum 成员会被替换成对应的值，这样能提高性能表现。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Red</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Green</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Blue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Red</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Green</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">z</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Blue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 编译后
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="cm">/* Color.Red */</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="cm">/* Color.Green */</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">z</span> <span class="o">=</span> <span class="mi">2</span> <span class="cm">/* Color.Blue */</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，由于 Enum 结构前面加了<code>const</code>关键字，所以编译产物里面就没有生成对应的对象，而是把所有 Enum 成员出现的场合，都替换成对应的常量。</p>
+<p>如果希望加上<code>const</code>关键词后，运行时还能访问 Enum 结构（即编译后依然将 Enum 转成对象），需要在编译时打开<code>preserveConstEnums</code>编译选项。</p>
+<h2 id="同名-enum-的合并">同名 Enum 的合并</h2>
+<p>多个同名的 Enum 结构会自动合并。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">C</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="err">，</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">C</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>Foo</code>分成三段定义，系统会自动把它们合并。</p>
+<p>Enum 结构合并时，只允许其中一个的首成员省略初始值，否则报错。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span><span class="p">,</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>Foo</code>的两段定义的第一个成员，都没有设置初始值，导致报错。</p>
+<p>同名 Enum 合并时，不能有同名成员，否则报错。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">C</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>Foo</code>的两段定义有一个同名成员<code>B</code>，导致报错。</p>
+<p>同名 Enum 合并的另一个限制是，所有定义必须同为 const 枚举或者非 const 枚举，不允许混合使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="kr">enum</span> <span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="kr">enum</span> <span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="kr">enum</span> <span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>同名 Enum 的合并，最大用处就是补充外部定义的 Enum 结构。</p>
+<h2 id="字符串-enum">字符串 Enum</h2>
+<p>Enum 成员的值除了设为数值，还可以设为字符串。也就是说，Enum 也可以用作一组相关字符串的集合。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Direction</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Up</span> <span class="o">=</span> <span class="s1">&#39;UP&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Down</span> <span class="o">=</span> <span class="s1">&#39;DOWN&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Left</span> <span class="o">=</span> <span class="s1">&#39;LEFT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Right</span> <span class="o">=</span> <span class="s1">&#39;RIGHT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>Direction</code>就是字符串枚举，每个成员的值都是字符串。</p>
+<p>注意，字符串枚举的所有成员值，都必须显式设置。如果没有设置，成员值默认为数值，且位置必须在字符串成员之前。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span><span class="p">,</span> <span class="c1">// 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">B</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">C</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，<code>A</code>之前没有其他成员，所以可以不设置初始值，默认等于<code>0</code>；<code>C</code>之前有一个字符串成员，所以<code>C</code>必须有初始值，不赋值就报错了。</p>
+<p>Enum 成员可以是字符串和数值混合赋值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">One</span> <span class="o">=</span> <span class="s1">&#39;One&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Two</span> <span class="o">=</span> <span class="s1">&#39;Two&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Three</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Four</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>除了数值和字符串，Enum 成员不允许使用其他值（比如 Symbol 值）。</p>
+<p>变量类型如果是字符串 Enum，就不能再赋值为字符串，这跟数值 Enum 不一样。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">MyEnum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">One</span> <span class="o">=</span> <span class="s1">&#39;One&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Two</span> <span class="o">=</span> <span class="s1">&#39;Two&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">MyEnum</span><span class="p">.</span><span class="nx">One</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">s</span> <span class="o">=</span> <span class="s1">&#39;One&#39;</span><span class="p">;</span> <span class="c1">// 报错
+</span></span></span></code></pre></div><p>上面示例中，变量<code>s</code>的类型是<code>MyEnum</code>，再赋值为字符串就报错。</p>
+<p>由于这个原因，如果函数的参数类型是字符串 Enum，传参时就不能直接传入字符串，而要传入 Enum 成员。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">MyEnum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">One</span> <span class="o">=</span> <span class="s1">&#39;One&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Two</span> <span class="o">=</span> <span class="s1">&#39;Two&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">arg</span>:<span class="kt">MyEnum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="s1">&#39;arg is &#39;</span> <span class="o">+</span> <span class="nx">arg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">f</span><span class="p">(</span><span class="s1">&#39;One&#39;</span><span class="p">)</span> <span class="c1">// 报错
+</span></span></span></code></pre></div><p>上面示例中，参数类型是<code>MyEnum</code>，直接传入字符串会报错。</p>
+<p>所以，字符串 Enum 作为一种类型，有限定函数参数的作用。</p>
+<p>前面说过，数值 Enum 的成员值往往不重要。但是有些场合，开发者可能希望 Enum 成员值可以保存一些有用的信息，所以 TypeScript 才设计了字符串 Enum。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="kr">enum</span> <span class="nx">MediaTypes</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">JSON</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">XML</span> <span class="o">=</span> <span class="s1">&#39;application/xml&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Accept</span>: <span class="kt">MediaTypes.JSON</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div><p>上面示例中，函数<code>fetch()</code>的参数对象的属性<code>Accept</code>，只能接受一些指定的字符串。这时就很适合把字符串放进一个 Enum 结构，通过成员值来引用这些字符串。</p>
+<p>字符串 Enum 可以使用联合类型（union）代替。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">move</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">where</span><span class="o">:</span><span class="s1">&#39;Up&#39;</span><span class="o">|</span><span class="s1">&#39;Down&#39;</span><span class="o">|</span><span class="s1">&#39;Left&#39;</span><span class="o">|</span><span class="s1">&#39;Right&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，函数参数<code>where</code>属于联合类型，效果跟指定为字符串 Enum 是一样的。</p>
+<p>注意，字符串 Enum 的成员值，不能使用表达式赋值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">MyEnum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span> <span class="o">=</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1">// 报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>上面示例中，成员<code>B</code>的值是一个字符串表达式，导致报错。</p>
+<h2 id="keyof-运算符">keyof 运算符</h2>
+<p>keyof 运算符可以取出 Enum 结构的所有成员名，作为联合类型返回。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">MyEnum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// &#39;A&#39;|&#39;B&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">Foo</span> <span class="o">=</span> <span class="k">keyof</span> <span class="k">typeof</span> <span class="nx">MyEnum</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，<code>keyof typeof MyEnum</code>可以取出<code>MyEnum</code>的所有成员名，所以类型<code>Foo</code>等同于联合类型<code>'A'|'B'</code>。</p>
+<p>注意，这里的<code>typeof</code>是必需的，否则<code>keyof MyEnum</code>相当于<code>keyof number</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Foo</span> <span class="o">=</span> <span class="k">keyof</span> <span class="nx">MyEnum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;toString&#34; | &#34;toFixed&#34; | &#34;toExponential&#34; |
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;toPrecision&#34; | &#34;valueOf&#34; | &#34;toLocaleString&#34;
+</span></span></span></code></pre></div><p>上面示例中，类型<code>Foo</code>等于类型<code>number</code>的所有原生属性名组成的联合类型。</p>
+<p>这是因为 Enum 作为类型，本质上属于<code>number</code>或<code>string</code>的一种变体，而<code>typeof MyEnum</code>会将<code>MyEnum</code>当作一个值处理，从而先其转为对象类型，就可以再用<code>keyof</code>运算符返回该对象的所有属性名。</p>
+<p>如果要返回 Enum 所有的成员值，可以使用<code>in</code>运算符。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">MyEnum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// { a: any, b: any }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">Foo</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">MyEnum</span><span class="p">]</span><span class="o">:</span> <span class="kt">any</span> <span class="p">};</span>
+</span></span></code></pre></div><p>上面示例中，采用属性索引可以取出<code>MyEnum</code>的所有成员值。</p>
+<h2 id="反向映射">反向映射</h2>
+<p>数值 Enum 存在反向映射，即可以通过成员值获得成员名。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">Weekdays</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Monday</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Tuesday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Wednesday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Thursday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Friday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Saturday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Sunday</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Weekdays</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// Wednesday
+</span></span></span></code></pre></div><p>上面示例中，Enum 成员<code>Wednesday</code>的值等于3，从而可以从成员值<code>3</code>取到对应的成员名<code>Wednesday</code>，这就叫反向映射。</p>
+<p>这是因为 TypeScript 会将上面的 Enum 结构，编译成下面的 JavaScript 代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">Weekdays</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">Weekdays</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Monday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Monday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Tuesday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Tuesday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Wednesday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Wednesday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Thursday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Thursday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Friday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Friday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Saturday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Saturday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Weekdays</span><span class="p">[</span><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Sunday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Sunday&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})(</span><span class="nx">Weekdays</span> <span class="o">||</span> <span class="p">(</span><span class="nx">Weekdays</span> <span class="o">=</span> <span class="p">{}));</span>
+</span></span></code></pre></div><p>上面代码中，实际进行了两组赋值，以第一个成员为例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">Weekdays</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Monday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Monday&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面代码有两个赋值运算符（<code>=</code>），实际上等同于下面的代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">Weekdays</span><span class="p">[</span><span class="s2">&#34;Monday&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Weekdays</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Monday&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>注意，这种情况只发生在数值 Enum，对于字符串 Enum，不存在反向映射。这是因为字符串 Enum 编译后只有一组赋值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">MyEnum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">A</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">B</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 编译后
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">MyEnum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">MyEnum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">MyEnum</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;a&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">MyEnum</span><span class="p">[</span><span class="s2">&#34;B&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;b&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})(</span><span class="nx">MyEnum</span> <span class="o">||</span> <span class="p">(</span><span class="nx">MyEnum</span> <span class="o">=</span> <span class="p">{}));</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/typescript-tutorial/enum/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/typescript-tutorial/enum/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/typescript-tutorial/enum/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/typescript-tutorial/enum/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/typescript-tutorial/enum/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/typescript-tutorial/es6/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/typescript-tutorial/decorator/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

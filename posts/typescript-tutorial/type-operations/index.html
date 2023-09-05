@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="类型运算 运算律 改变成员类型的顺序不影响联合类型的结果类型。 type T0 = string | number; type T1 = number | string; 对部分类型成员使用分组运算符不影响联合类型的结果类型。 type T0" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/typescript-tutorial/type-operations/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="类型运算 运算律 改变成员类型的顺序不影响联合类型的结果类型。 type T0 = string | number; type T1 = number | string; 对部分类型成员使用分组运算符不影响联合类型的结果类型。 type T0"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/typescript-tutorial/type-operations/" /><link rel="prev" href="http://localhost:1313/posts/typescript-tutorial/types/" /><link rel="next" href="http://localhost:1313/posts/typescript-tutorial/tuple/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/type-operations\/"
+        },"genre": "posts","wordcount":  2051 ,
+        "url": "http:\/\/localhost:1313\/posts\/typescript-tutorial\/type-operations\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2051 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#运算律">运算律</a>
+      <ul>
+        <li><a href="#优先级">优先级</a></li>
+      </ul>
+    </li>
+    <li><a href="#never-类型">never 类型</a></li>
+    <li><a href="#unknown-类型">unknown 类型</a></li>
+    <li><a href="#联合类型">联合类型</a></li>
+    <li><a href="#交叉类型">交叉类型</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="类型运算">类型运算</h1>
+<h2 id="运算律">运算律</h2>
+<p>改变成员类型的顺序不影响联合类型的结果类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T0</span> <span class="o">=</span> <span class="kt">string</span> <span class="o">|</span> <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T1</span> <span class="o">=</span> <span class="kt">number</span> <span class="o">|</span> <span class="kt">string</span><span class="p">;</span>
+</span></span></code></pre></div><p>对部分类型成员使用分组运算符不影响联合类型的结果类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T0</span> <span class="o">=</span> <span class="p">(</span><span class="kr">boolean</span> <span class="o">|</span> <span class="kt">string</span><span class="p">)</span> <span class="o">|</span> <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T1</span> <span class="o">=</span> <span class="kr">boolean</span> <span class="o">|</span> <span class="p">(</span><span class="kt">string</span> <span class="o">|</span> <span class="kt">number</span><span class="p">);</span>
+</span></span></code></pre></div><p>联合类型的成员类型可以进行化简。假设有联合类型“U = T0 | T1”，如果T1是T0的子类型，那么可以将类型成员T1从联合类型U中消去。最后，联合类型U的结果类型为“U = T0”。例如，有联合类型“boolean | true | false”。其中，true类型和false类型是boolean类型的子类型，因此可以将true类型和false类型从联合类型中消去。最终，联合类型“boolean | true | false”的结果类型为boolean类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T0</span> <span class="o">=</span> <span class="kr">boolean</span> <span class="o">|</span> <span class="kc">true</span> <span class="o">|</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 所以T0等同于 T1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T1</span> <span class="o">=</span> <span class="kr">boolean</span><span class="p">;</span>
+</span></span></code></pre></div><h3 id="优先级">优先级</h3>
+<p><code>&amp;</code>的优先级高于<code>|</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">A</span> <span class="o">&amp;</span> <span class="nx">B</span> <span class="o">|</span> <span class="nx">C</span> <span class="o">&amp;</span> <span class="nx">D</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 该类型等同于如下类型：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="nx">A</span> <span class="o">&amp;</span> <span class="nx">B</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="nx">C</span> <span class="o">&amp;</span> <span class="nx">D</span><span class="p">)</span>
+</span></span></code></pre></div><p>分配律</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">A</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">B</span> <span class="o">|</span> <span class="nx">C</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="nx">A</span> <span class="o">&amp;</span> <span class="nx">B</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="nx">A</span> <span class="o">&amp;</span> <span class="nx">C</span><span class="p">)</span>
+</span></span></code></pre></div><p>一个稍微复杂的类型等式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="p">(</span><span class="nx">A</span> <span class="o">|</span> <span class="nx">B</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">C</span> <span class="o">|</span> <span class="nx">D</span><span class="p">)</span> <span class="err">≡</span> <span class="nx">A</span> <span class="o">&amp;</span> <span class="nx">C</span> <span class="o">|</span> <span class="nx">A</span> <span class="o">&amp;</span> <span class="nx">D</span> <span class="o">|</span> <span class="nx">B</span> <span class="o">&amp;</span> <span class="nx">C</span> <span class="o">|</span> <span class="nx">B</span> <span class="o">&amp;</span> <span class="nx">D</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">T</span> <span class="o">=</span> <span class="p">(</span><span class="kt">string</span> <span class="o">|</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="kt">number</span> <span class="o">|</span> <span class="s1">&#39;a&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">T</span> <span class="o">=</span> <span class="p">(</span><span class="kt">string</span> <span class="o">&amp;</span> <span class="kt">number</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="kt">string</span> <span class="o">&amp;</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&amp;</span> <span class="kt">number</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&amp;</span> <span class="s1">&#39;a&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">T</span> <span class="o">=</span> <span class="kt">never</span> <span class="o">|</span> <span class="s1">&#39;a&#39;</span> <span class="o">|</span> <span class="mi">0</span> <span class="o">|</span> <span class="kt">never</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">T</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">extend</span><span class="p">&lt;</span><span class="nt">T</span> <span class="na">extends</span> <span class="na">object</span><span class="err">,</span> <span class="na">U</span> <span class="na">extends</span> <span class="na">object</span><span class="p">&gt;(</span><span class="nx">first</span>: <span class="kt">T</span><span class="p">,</span> <span class="nx">second</span>: <span class="kt">U</span><span class="p">)</span><span class="o">:</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">U</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">T</span> <span class="err">&amp;</span> <span class="na">U</span><span class="p">&gt;{};</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">first</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(&lt;</span><span class="nt">T</span><span class="p">&gt;</span><span class="nx">result</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">first</span><span class="p">[</span><span class="nx">id</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">second</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(&lt;</span><span class="nt">U</span><span class="p">&gt;</span><span class="nx">result</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">second</span><span class="p">[</span><span class="nx">id</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">({</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">&#39;hello&#39;</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">b</span>: <span class="kt">42</span> <span class="p">});</span>
+</span></span></code></pre></div><h2 id="never-类型">never 类型</h2>
+<p>never 可以视为空集。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">NeverIntersection</span> <span class="o">=</span> <span class="kt">never</span> <span class="o">&amp;</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// Type: never
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">NeverUnion</span> <span class="o">=</span> <span class="kt">never</span> <span class="o">|</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// Type: string
+</span></span></span></code></pre></div><p>很适合在交叉类型中用作过滤。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">OnlyStrings</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="kt">string</span> <span class="o">?</span> <span class="nx">T</span> : <span class="kt">never</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">RedOrBlue</span> <span class="o">=</span> <span class="nx">OnlyStrings</span><span class="o">&lt;</span><span class="s2">&#34;red&#34;</span> <span class="o">|</span> <span class="s2">&#34;blue&#34;</span> <span class="o">|</span> <span class="mi">0</span> <span class="o">|</span> <span class="kc">false</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Equivalent to: &#34;red&#34; | &#34;blue&#34;
+</span></span></span></code></pre></div><p>范例：https://www.typescriptlang.org/play#example/conditional-types</p>
+<h2 id="unknown-类型">unknown 类型</h2>
+<p>在联合类型中，unknown吸收所有类型。这意味着如果任何组成类型是unknown，则联合类型的计算结果为unknown。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// In an intersection everything absorbs unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T00</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T01</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// undefined
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T02</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kc">null</span> <span class="o">&amp;</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// null &amp; undefined (which becomes never)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T03</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T04</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">string</span><span class="p">[];</span> <span class="c1">// string[]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T05</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">unknown</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T06</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">any</span><span class="p">;</span> <span class="c1">// any
+</span></span></span><span class="line"><span class="cl"><span class="c1">// In a union an unknown absorbs everything
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T10</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T11</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T12</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T13</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T14</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">string</span><span class="p">[];</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T15</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">unknown</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T16</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">any</span><span class="p">;</span> <span class="c1">// any
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Type variable and unknown in union and intersection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T20</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{};</span> <span class="c1">// T &amp; {}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T21</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">|</span> <span class="p">{};</span> <span class="c1">// T | {}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T22</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="kt">unknown</span><span class="p">;</span> <span class="c1">// T
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T23</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">|</span> <span class="kt">unknown</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1">// unknown in conditional types
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T30</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="kr">extends</span> <span class="nx">T</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Deferred
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T31</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="kt">unknown</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Deferred (so it distributes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T32</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="kt">never</span> <span class="kr">extends</span> <span class="nx">T</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">T33</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="kt">never</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Deferred
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">UnionType1</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">UnionType2</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">UnionType3</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// unknown
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">UnionType4</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">number</span><span class="p">[];</span> <span class="c1">// unknown
+</span></span></span></code></pre></div><p>该规则的一个例外是any。如果至少有一种构成类型是any，则联合类型的计算结果为any：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">UnionType5</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">|</span> <span class="kt">any</span><span class="p">;</span> <span class="c1">// any
+</span></span></span></code></pre></div><p>在交叉类型中，每种类型都吸收unknown. 这意味着与任何类型相交unknown不会改变结果类型：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">IntersectionType1</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">IntersectionType2</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// undefined
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">IntersectionType3</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">string</span><span class="p">;</span> <span class="c1">// string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">IntersectionType4</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">number</span><span class="p">[];</span> <span class="c1">// number[]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">IntersectionType5</span> <span class="o">=</span> <span class="kt">unknown</span> <span class="o">&amp;</span> <span class="kt">any</span><span class="p">;</span> <span class="c1">// any
+</span></span></span></code></pre></div><p>除非使用<code>as</code>断言，首先缩小类型<code>unknown</code>类型的范围，然后才可以用于其他类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">value</span>: <span class="kt">unknown</span> <span class="o">=</span> <span class="s2">&#34;Hello World&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">someString</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">value</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">otherString</span> <span class="o">=</span> <span class="nx">someString</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span> <span class="c1">// &#34;HELLO WORLD&#34;
+</span></span></span></code></pre></div><h2 id="联合类型">联合类型</h2>
+<p>如果类型是多个值的联合，甚至可以产生插值的效果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">EmailLocaleIDs</span> <span class="o">=</span> <span class="s2">&#34;welcome_email&#34;</span> <span class="o">|</span> <span class="s2">&#34;email_heading&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">FooterLocaleIDs</span> <span class="o">=</span> <span class="s2">&#34;footer_title&#34;</span> <span class="o">|</span> <span class="s2">&#34;footer_sendoff&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 等同于 type AllLocaleIDs = &#34;welcome_email_id&#34; | &#34;email_heading_id&#34; | &#34;footer_title_id&#34; | &#34;footer_sendoff_id&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">AllLocaleIDs</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">EmailLocaleIDs</span> <span class="o">|</span> <span class="nx">FooterLocaleIDs</span><span class="si">}</span><span class="sb">_id`</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="交叉类型">交叉类型</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Brightness</span> <span class="o">=</span> <span class="s2">&#34;dark&#34;</span> <span class="o">|</span> <span class="s2">&#34;light&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Color</span> <span class="o">=</span> <span class="s2">&#34;blue&#34;</span> <span class="o">|</span> <span class="s2">&#34;red&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">BrightnessAndColor</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">Brightness</span><span class="si">}</span><span class="sb">-</span><span class="si">${</span><span class="nx">Color</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Equivalent to: &#34;dark-red&#34; | &#34;light-red&#34; | &#34;dark-blue&#34; | &#34;light-blue&#34;
+</span></span></span></code></pre></div><p>如果交叉类型中存在多个相同的成员类型，那么相同的成员类型将被合并为单一成员类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T0</span> <span class="o">=</span> <span class="kr">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T1</span> <span class="o">=</span> <span class="kr">boolean</span> <span class="o">&amp;</span> <span class="kr">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T2</span> <span class="o">=</span> <span class="kr">boolean</span> <span class="o">&amp;</span> <span class="kr">boolean</span> <span class="o">&amp;</span> <span class="kr">boolean</span><span class="p">;</span>
+</span></span></code></pre></div><p>上面示例中，T0、T1和T2都表示同一种类型boolean。</p>
+<p>改变成员类型的顺序不影响交叉类型的结果类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Clickable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">click</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Focusable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">focus</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T0</span> <span class="o">=</span> <span class="nx">Clickable</span> <span class="o">&amp;</span> <span class="nx">Focusable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T1</span> <span class="o">=</span> <span class="nx">Focusable</span> <span class="o">&amp;</span> <span class="nx">Clickable</span><span class="p">;</span>
+</span></span></code></pre></div><p>注意，当交叉类型涉及调用签名重载或构造签名重载时便失去了“加法交换律”的性质。因为交叉类型中成员类型的顺序将决定重载签名的顺序，进而将影响重载签名的解析顺序。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Clickable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">register</span><span class="p">(</span><span class="nx">x</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Focusable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">register</span><span class="p">(</span><span class="nx">x</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">ClickableAndFocusable</span> <span class="o">=</span> <span class="nx">Clickable</span> <span class="o">&amp;</span> <span class="nx">Focusable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">FocusableAndFocusable</span> <span class="o">=</span> <span class="nx">Focusable</span> <span class="o">&amp;</span> <span class="nx">Clickable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">clickFocus</span>: <span class="kt">ClickableAndFocusable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">focusClick</span>: <span class="kt">FocusableAndFocusable</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">a</span>: <span class="kt">void</span> <span class="o">=</span> <span class="nx">clickFocus</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">b</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="nx">focusClick</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>此例第8行和第9行使用不同的成员类型顺序定义了两个交叉类型。第15行，调用“register()”方法的返回值类型为void，说明在ClickableAndFocusable类型中，Clickable接口中定义的“register()”方法具有更高的优先级。第16行，调用“register()”方法的返回值类型为boolean，说明FocusableAndFocusable类型中Focusable接口中定义的“register()”方法具有更高的优先级。此例也说明了调用签名重载的顺序与交叉类型中成员类型的定义顺序是一致的。</p>
+<p>对部分类型成员使用分组运算符不影响交叉类型的结果类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Clickable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">click</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Focusable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">focus</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Scrollable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">scroll</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T0</span> <span class="o">=</span> <span class="p">(</span><span class="nx">Clickable</span> <span class="o">&amp;</span> <span class="nx">Focusable</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nx">Scrollable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">T1</span> <span class="o">=</span> <span class="nx">Clickable</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">Focusable</span> <span class="o">&amp;</span> <span class="nx">Scrollable</span><span class="p">);</span>
+</span></span></code></pre></div><p>上面示例的T0和T1类型是同一种类型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Combined</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span>: <span class="kt">number</span> <span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="nx">b</span>: <span class="kt">string</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Conflicting</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span>: <span class="kt">number</span> <span class="p">}</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="nx">a</span>: <span class="kt">string</span> <span class="p">};</span>
+</span></span></code></pre></div><p>只要交叉类型I中任意一个成员类型包含了属性签名M，那么交叉类型I也包含属性签名M。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">B</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">b</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 交叉类型如下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">b</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>若交叉类型的属性签名M在所有成员类型中都是可选属性，那么该属性签名在交叉类型中也是可选属性。否则，属性签名M是一个必选属性。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">x</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">y?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">B</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">x?</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">y?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 交叉类型如下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">x</span>: <span class="kt">boolean</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">y?</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/typescript-tutorial/type-operations/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/typescript-tutorial/type-operations/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/typescript-tutorial/type-operations/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/typescript-tutorial/type-operations/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/typescript-tutorial/type-operations/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/typescript-tutorial/types/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/typescript-tutorial/tuple/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

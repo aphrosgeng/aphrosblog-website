@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="第 9 章 绘图和可视化 信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/pyda-2e-zh/9/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="第 9 章 绘图和可视化 信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/pyda-2e-zh/9/" /><link rel="prev" href="http://localhost:1313/posts/pyda-2e-zh/a/" /><link rel="next" href="http://localhost:1313/posts/pyda-2e-zh/8/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/pyda-2e-zh\/9\/"
+        },"genre": "posts","wordcount":  8547 ,
+        "url": "http:\/\/localhost:1313\/posts\/pyda-2e-zh\/9\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8547 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;18 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#图形和子图">图形和子图</a></li>
+    <li><a href="#调整子图周围的间距">调整子图周围的间距</a></li>
+    <li><a href="#颜色标记和线型">颜色、标记和线型</a></li>
+    <li><a href="#刻度标签和图例">刻度、标签和图例</a></li>
+    <li><a href="#设置标题轴标签刻度以及刻度标签">设置标题、轴标签、刻度以及刻度标签</a></li>
+    <li><a href="#添加图例">添加图例</a></li>
+    <li><a href="#注解以及在子图上绘图">注解以及在子图上绘图</a></li>
+    <li><a href="#将图表保存到文件">将图表保存到文件</a></li>
+    <li><a href="#matplotlib-配置">matplotlib 配置</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#线型图">线型图</a></li>
+    <li><a href="#柱状图">柱状图</a></li>
+    <li><a href="#直方图和密度图">直方图和密度图</a></li>
+    <li><a href="#散点图或点图">散点图或点图</a></li>
+    <li><a href="#分面网格facet-grid和类型数据">分面网格（facet grid）和类型数据</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="第-9-章-绘图和可视化">第 9 章 绘图和可视化</h1>
+<p>信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的想法等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python 有许多库进行静态或动态的数据可视化，但我这里重要关注于 <a href="http://matplotlib.org/" target="_blank" rel="noopener noreffer ">matplotlib</a> 和基于它的库。</p>
+<p>matplotlib 是一个用于创建出版质量图表的桌面绘图包（主要是 2D 方面）。该项目是由 John Hunter 于 2002 年启动的，其目的是为 Python 构建一个 MATLAB 式的绘图接口。matplotlib 和 IPython 社区进行合作，简化了从 IPython shell（包括现在的 Jupyter 笔记本）进行交互式绘图。matplotlib 支持各种操作系统上许多不同的 GUI 后端，而且还能将图片导出为各种常见的向量（vector）和光栅（raster）图：PDF、SVG、JPG、PNG、BMP、GIF 等。除了几张，本书中的大部分图都是用它生成的。</p>
+<p>随着时间的发展，matplotlib 衍生出了多个数据可视化的工具集，它们使用 matplotlib 作为底层。其中之一是 <a href="http://seaborn.pydata.org/" target="_blank" rel="noopener noreffer ">seaborn</a>，本章后面会学习它。</p>
+<p>学习本章代码案例的最简单方法是在 Jupyter 笔记本进行交互式绘图。在 Jupyter 笔记本中执行下面的语句：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">%</span><span class="n">matplotlib</span> <span class="n">notebook</span>
+</span></span></code></pre></div><h1 id="91-matplotlib-api-入门">9.1 matplotlib API 入门</h1>
+<p>matplotlib 的通常引入约定是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span></code></pre></div><p>在 Jupyter 笔记本中运行<code>%matplotlib</code>（或在 IPython 中运行<code>%matplotlib</code>），就可以创建一个简单的图形。如果一切设置正确，会看到图 9-1：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-7032e333a6ecdd37.png"
+        data-srcset="img/7178691-7032e333a6ecdd37.png, img/7178691-7032e333a6ecdd37.png 1.5x, img/7178691-7032e333a6ecdd37.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-7032e333a6ecdd37.png"
+        title="图 9-1 简单的线图" /></p>
+<p>虽然 seaborn 这样的库和 pandas 的内置绘图函数能够处理许多普通的绘图任务，但如果需要自定义一些高级功能的话就必须学习 matplotlib API。</p>
+<blockquote>
+<p>笔记：虽然本书没有详细地讨论 matplotlib 的各种功能，但足以将你引入门。matplotlib 的示例库和文档是学习高级特性的最好资源。</p>
+</blockquote>
+<h2 id="图形和子图">图形和子图</h2>
+<p>matplotlib 的图像都位于图形对象中。你可以用<code>plt.figure</code>创建一个新的图形：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span></code></pre></div><p>如果用的是 IPython，这时会弹出一个空窗口，但在 Jupyter 中，必须再输入更多命令才能看到。<code>plt.figure</code>有一些选项，特别是<code>figsize</code>，它用于确保当图片保存到磁盘时具有一定的大小和纵横比。</p>
+<p>不能通过空图形绘图。必须用<code>add_subplot</code>创建一个或多个子图才行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div><p>这条代码的意思是：图像应该是<code>2×2</code>的（即最多 4 张图），且当前选中的是 4 个子图中的第一个（编号从 1 开始）。如果再把后面两个子图也创建出来，最终得到的图像如图 9-2 所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-b8cff158e64eae74.png"
+        data-srcset="img/7178691-b8cff158e64eae74.png, img/7178691-b8cff158e64eae74.png 1.5x, img/7178691-b8cff158e64eae74.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-b8cff158e64eae74.png"
+        title="图 9-2 带有三个子图的图形" /></p>
+<blockquote>
+<p>提示：使用 Jupyter 笔记本有一点不同，即每个小窗重新执行后，图形会被重置。因此，对于复杂的图形，，你必须将所有的绘图命令存在一个小窗里。</p>
+</blockquote>
+<p>这里，我们运行同一个小窗里的所有命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span></code></pre></div><p>如果这时执行一条绘图命令（如<code>plt.plot([1.5, 3.5, -2, 1.6])</code>），matplotlib 就会在最后一个用过的子图（如果没有则创建一个）上进行绘制，隐藏创建图形和子图的过程。因此，如果我们执行下列命令，你就会得到如图 9-3 所示的结果：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-7bcbd5e56fdbbd92.png"
+        data-srcset="img/7178691-7bcbd5e56fdbbd92.png, img/7178691-7bcbd5e56fdbbd92.png 1.5x, img/7178691-7bcbd5e56fdbbd92.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-7bcbd5e56fdbbd92.png"
+        title="图 9-3 绘制一次之后的图像" /></p>
+<p><code>&quot;k--&quot;</code>是一个线型选项，用于告诉 matplotlib 绘制黑色虚线图。上面那些由<code>fig.add_subplot</code>所返回的对象是<code>AxesSubplot</code>对象，直接调用它们的实例方法就可以在其它空着的格子里面画图了，如图 9-4 所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-2297bcaf355db24c.png"
+        data-srcset="img/7178691-2297bcaf355db24c.png, img/7178691-2297bcaf355db24c.png 1.5x, img/7178691-2297bcaf355db24c.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-2297bcaf355db24c.png"
+        title="图 9-4 继续绘制两次之后的图像" /></p>
+<p>你可以在 matplotlib 的文档中找到各种图表类型。</p>
+<p>创建包含子图网格的图形是一个非常常见的任务，matplotlib 有一个更为方便的方法<code>plt.subplots</code>，它可以创建一个新的图形，并返回一个含有已创建的子图对象的 NumPy 数组：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">axes</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">array</span><span class="p">([[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb626374048</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb62625db00</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb6262f6c88</span><span class="o">&gt;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">       <span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb6261a36a0</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb626181860</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb6260fd4e0</span><span class="o">&gt;</span><span class="p">]],</span> <span class="n">dtype</span>
+</span></span><span class="line"><span class="cl"><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+</span></span></code></pre></div><p>这是非常实用的，因为可以轻松地对<code>axes</code>数组进行索引，就好像是一个二维数组一样，例如<code>axes[0,1]</code>。你还可以通过<code>sharex</code>和<code>sharey</code>指定子图应该具有相同的 X 轴或 Y 轴。在比较相同范围的数据时，这也是非常实用的，否则，matplotlib 会自动缩放各图表的界限。有关该方法的更多信息，请参见表 9-1。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-88bb55faca7d01ba.png"
+        data-srcset="img/7178691-88bb55faca7d01ba.png, img/7178691-88bb55faca7d01ba.png 1.5x, img/7178691-88bb55faca7d01ba.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-88bb55faca7d01ba.png"
+        title="表 9-1 &lt;code&gt;pyplot.subplots&lt;/code&gt;的选项" /></p>
+<h2 id="调整子图周围的间距">调整子图周围的间距</h2>
+<p>默认情况下，matplotlib 会在子图外围留下一定的边距，并在子图之间留下一定的间距。间距跟图像的高度和宽度有关，因此，如果你调整了图像大小（不管是编程还是手工），间距也会自动调整。利用图形的<code>subplots_adjust</code>方法可以轻而易举地修改间距，此外，它也是个顶级函数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">wspace</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>wspace</code>和<code>hspace</code>用于控制宽度和高度的百分比，可以用作子图之间的间距。下面是一个简单的例子，其中我将间距收缩到了 0（如图 9-5 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-80be7ffc3dec88a5.png"
+        data-srcset="img/7178691-80be7ffc3dec88a5.png, img/7178691-80be7ffc3dec88a5.png 1.5x, img/7178691-80be7ffc3dec88a5.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-80be7ffc3dec88a5.png"
+        title="图 9-5 各子图之间没有间距" /></p>
+<p>不难看出，其中的轴标签重叠了。matplotlib 不会检查标签是否重叠，所以对于这种情况，你只能自己设定刻度位置和刻度标签。后面几节将会详细介绍该内容。</p>
+<h2 id="颜色标记和线型">颜色、标记和线型</h2>
+<p>matplotlib 的<code>plot</code>函数接受一组 X 和 Y 坐标，还可以接受一个表示颜色和线型的字符串缩写。例如，要根据<code>x</code>和<code>y</code>绘制绿色虚线，你可以执行如下代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>这种在一个字符串中指定颜色和线型的方式非常方便。在实际中，如果你是用代码绘图，你可能不想通过处理字符串来获得想要的格式。通过下面这种更为明确的方式也能得到同样的效果：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>常用的颜色可以使用颜色缩写，你也可以指定颜色码（例如，<code>'#CECECE'</code>）。你可以通过查看<code>plot</code>的文档字符串查看所有线型的合集（在 IPython 和 Jupyter 中使用<code>plot?</code>）。</p>
+<p>线图可以使用标记强调数据点。因为 matplotlib 可以创建连续线图，在点之间进行插值，因此有时可能不太容易看出真实数据点的位置。标记也可以放到格式字符串中，但标记类型和线型必须放在颜色后面（见图 9-6）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;ko--&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-404d816f3e1d6621.png"
+        data-srcset="img/7178691-404d816f3e1d6621.png, img/7178691-404d816f3e1d6621.png 1.5x, img/7178691-404d816f3e1d6621.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-404d816f3e1d6621.png"
+        title="图 9-6 带有标记的线型图示例" /></p>
+<p>还可以将其写成更为明确的形式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>在线型图中，非实际数据点默认是按线性方式插值的。可以通过<code>drawstyle</code>选项修改（见图 9-7）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Default&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7fb624d86160</span><span class="o">&gt;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;steps-post&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7fb624d869e8</span><span class="o">&gt;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-3ec7642e1a592f08.png"
+        data-srcset="img/7178691-3ec7642e1a592f08.png, img/7178691-3ec7642e1a592f08.png 1.5x, img/7178691-3ec7642e1a592f08.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-3ec7642e1a592f08.png"
+        title="图 9-7 不同&lt;code&gt;drawstyle&lt;/code&gt;选项的线型图" /></p>
+<p>你可能注意到运行上面代码时有输出<code>&lt;matplotlib.lines.Line2D at ...&gt;</code>。matplotlib 会返回引用了新添加的子组件的对象。大多数时候，你可以放心地忽略这些输出。这里，因为我们传递了<code>label</code>参数到<code>plot</code>，我们可以创建一个<code>plot</code>图例，指明每条使用<code>plt.legend</code>的线。</p>
+<blockquote>
+<p>笔记：你必须调用<code>plt.legend</code>（或使用<code>ax.legend</code>，如果引用了轴的话）来创建图例，无论你绘图时是否传递<code>label</code>标签选项。</p>
+</blockquote>
+<h2 id="刻度标签和图例">刻度、标签和图例</h2>
+<p>对于大多数的图表装饰项，其主要实现方式有二：使用过程型的<code>pyplot</code>接口（例如，<code>matplotlib.pyplot</code>）以及更为面向对象的原生 matplotlib API。</p>
+<p><code>pyplot</code>接口的设计目的就是交互式使用，含有诸如<code>xlim</code>、<code>xticks</code>和<code>xticklabels</code>之类的方法。它们分别控制图表的范围、刻度位置、刻度标签等。其使用方式有以下两种：</p>
+<ul>
+<li>调用时不带参数，则返回当前的参数值（例如，<code>plt.xlim()</code>返回当前的 X 轴绘图范围）。</li>
+<li>调用时带参数，则设置参数值（例如，<code>plt.xlim([0,10])</code>会将 X 轴的范围设置为 0 到 10）。</li>
+</ul>
+<p>所有这些方法都是对当前或最近创建的<code>AxesSubplot</code>起作用的。它们各自对应子图对象上的两个方法，以<code>xlim</code>为例，就是<code>ax.get_xlim</code>和<code>ax.set_xlim</code>。我更喜欢使用子图的实例方法（因为我喜欢明确的事情，而且在处理多个子图时这样也更清楚一些）。当然你完全可以选择自己觉得方便的那个。</p>
+<h2 id="设置标题轴标签刻度以及刻度标签">设置标题、轴标签、刻度以及刻度标签</h2>
+<p>为了说明自定义轴，我将创建一个简单的图像并绘制一段随机漫步（如图 9-8 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">38</span><span class="p">]:</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">39</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-caf9300dacb61fa4.png"
+        data-srcset="img/7178691-caf9300dacb61fa4.png, img/7178691-caf9300dacb61fa4.png 1.5x, img/7178691-caf9300dacb61fa4.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-caf9300dacb61fa4.png"
+        title="图 9-8 用于演示&lt;code&gt;xticks&lt;/code&gt;的简单线型图（带有标签）" /></p>
+<p>要改变 x 轴刻度，最简单的办法是使用<code>set_xticks</code>和<code>set_xticklabels</code>。前者告诉 matplotlib 要将刻度放在数据范围中的哪些位置，默认情况下，这些位置也就是刻度标签。但我们可以通过<code>set_xticklabels</code>将任何其他的值用作标签：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">40</span><span class="p">]:</span> <span class="n">ticks</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">41</span><span class="p">]:</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">,</span> <span class="s1">&#39;five&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>                             <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>rotation</code>选项设定 x 刻度标签倾斜 30 度。最后，再用<code>set_xlabel</code>为 X 轴设置一个名称，并用<code>set_title</code>设置一个标题（见图 9-9 的结果）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">42</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;My first matplotlib plot&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">42</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7fb624d055f8</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">43</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Stages&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-741f968323bd818f.png"
+        data-srcset="img/7178691-741f968323bd818f.png, img/7178691-741f968323bd818f.png 1.5x, img/7178691-741f968323bd818f.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-741f968323bd818f.png"
+        title="图 9-9 用于演示 xticks 的简单线型图" /></p>
+<p>Y 轴的修改方式与此类似，只需将上述代码中的<code>x</code>替换为<code>y</code>即可。轴的类有集合方法，可以批量设定绘图选项。前面的例子，也可以写为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">props</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;My first matplotlib plot&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;xlabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Stages&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">**</span><span class="n">props</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="添加图例">添加图例</h2>
+<p>图例（legend）是另一种用于标识图表元素的重要工具。添加图例的方式有多种。最简单的是在添加子图的时候传入<code>label</code>参数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">44</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">45</span><span class="p">]:</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">46</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;one&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7fb624bdf860</span><span class="o">&gt;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;two&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7fb624be90f0</span><span class="o">&gt;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;three&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7fb624be9160</span><span class="o">&gt;</span><span class="p">]</span>
+</span></span></code></pre></div><p>在此之后，你可以调用<code>ax.legend()</code>或<code>plt.legend()</code>来自动创建图例（结果见图 9-10）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-651ff89750c0a89b.png"
+        data-srcset="img/7178691-651ff89750c0a89b.png, img/7178691-651ff89750c0a89b.png 1.5x, img/7178691-651ff89750c0a89b.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-651ff89750c0a89b.png"
+        title="图 9-10 带有三条线以及图例的简单线型图" /></p>
+<p><code>legend</code>方法有几个其它的<code>loc</code>位置参数选项。请查看文档字符串（使用<code>ax.legend?</code>）。</p>
+<p><code>loc</code>告诉 matplotlib 要将图例放在哪。如果你不是吹毛求疵的话，<code>&quot;best&quot;</code>是不错的选择，因为它会选择最不碍事的位置。要从图例中去除一个或多个元素，不传入<code>label</code>或传入<code>label='nolegend'</code>即可。（中文第一版这里把<code>best</code>错写成了<code>beat</code>）</p>
+<h2 id="注解以及在子图上绘图">注解以及在子图上绘图</h2>
+<p>除标准的绘图类型，你可能还希望绘制一些子集的注解，可能是文本、箭头或其他图形等。注解和文字可以通过<code>text</code>、<code>arrow</code>和<code>annotate</code>函数进行添加。<code>text</code>可以将文本绘制在图表的指定坐标<code>(x,y)</code>，还可以加上一些自定义格式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">family</span><span class="o">=</span><span class="s1">&#39;monospace&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>注解中可以既含有文本也含有箭头。例如，我们根据最近的标准普尔 500 指数价格（来自 Yahoo!Finance）绘制一张曲线图，并标出 2008 年到 2009 年金融危机期间的一些重要日期。你可以在 Jupyter 笔记本的一个小窗中试验这段代码（图 9-11 是结果）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/spx.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">spx</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;SPX&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">spx</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">crisis_data</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;Peak of bull market&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;Bear Stearns Fails&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="s1">&#39;Lehman Bankruptcy&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">crisis_data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">spx</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">+</span> <span class="mi">75</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">spx</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">+</span> <span class="mi">225</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">headwidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">headlength</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Zoom in on 2007-2010</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="s1">&#39;1/1/2007&#39;</span><span class="p">,</span> <span class="s1">&#39;1/1/2011&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">600</span><span class="p">,</span> <span class="mi">1800</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Important dates in the 2008-2009 financial crisis&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-3127eaa51f5e4c2c.png"
+        data-srcset="img/7178691-3127eaa51f5e4c2c.png, img/7178691-3127eaa51f5e4c2c.png 1.5x, img/7178691-3127eaa51f5e4c2c.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-3127eaa51f5e4c2c.png"
+        title="图 9-11 2008-2009 年金融危机期间的重要日期" /></p>
+<p>这张图中有几个重要的点要强调：<code>ax.annotate</code>方法可以在指定的 x 和 y 坐标轴绘制标签。我们使用<code>set_xlim</code>和<code>set_ylim</code>人工设定起始和结束边界，而不使用 matplotlib 的默认方法。最后，用<code>ax.set_title</code>添加图标标题。</p>
+<p>更多有关注解的示例，请访问 matplotlib 的在线示例库。</p>
+<p>图形的绘制要麻烦一些。matplotlib 有一些表示常见图形的对象。这些对象被称为块（patch）。其中有些（如<code>Rectangle</code>和<code>Circle</code>），可以在<code>matplotlib.pyplot</code>中找到，但完整集合位于<code>matplotlib.patches</code>。</p>
+<p>要在图表中添加一个图形，你需要创建一个块对象<code>shp</code>，然后通过<code>ax.add_patch(shp)</code>将其添加到子图中（如图 9-12 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rect</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">),</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">circ</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pgon</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">([[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">pgon</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-1f8a3d7a3a02d7d8.png"
+        data-srcset="img/7178691-1f8a3d7a3a02d7d8.png, img/7178691-1f8a3d7a3a02d7d8.png 1.5x, img/7178691-1f8a3d7a3a02d7d8.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-1f8a3d7a3a02d7d8.png"
+        title="图 9-12 由三个块图形组成的图" /></p>
+<p>如果查看许多常见图表对象的具体实现代码，你就会发现它们其实就是由块组装而成的。</p>
+<h2 id="将图表保存到文件">将图表保存到文件</h2>
+<p>利用<code>plt.savefig</code>可以将当前图表保存到文件。该方法相当于图形对象的实例方法<code>savefig</code>。例如，要将图表保存为 SVG 文件，你只需输入：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figpath.svg&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>文件类型是通过文件扩展名推断出来的。因此，如果你使用的是<code>.pdf</code>，就会得到一个 PDF 文件。我在发布图片时最常用到两个重要的选项是<code>dpi</code>（控制“每英寸点数”分辨率）和<code>bbox_inches</code>（可以剪除当前图表周围的空白部分）。要得到一张带有最小白边且分辨率为 400DPI 的 PNG 图片，你可以：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figpath.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>savefig</code>并非一定要写入磁盘，也可以写入任何文件型的对象，比如<code>BytesIO</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+</span></span><span class="line"><span class="cl"><span class="n">buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</span></span></code></pre></div><p>表 9-2 列出了<code>savefig</code>的其它选项。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-4bee796bf7262423.png"
+        data-srcset="img/7178691-4bee796bf7262423.png, img/7178691-4bee796bf7262423.png 1.5x, img/7178691-4bee796bf7262423.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-4bee796bf7262423.png"
+        title="表 9-2 &lt;code&gt;Figure.savefig&lt;/code&gt;的选项" /></p>
+<h2 id="matplotlib-配置">matplotlib 配置</h2>
+<p>matplotlib 自带一些配色方案，以及为生成出版质量的图片而设定的默认配置信息。幸运的是，几乎所有默认行为都能通过一组全局参数进行自定义，它们可以管理图像大小、子图边距、配色方案、字体大小、网格类型等。一种 Python 编程方式配置系统的方法是使用<code>rc</code>方法。例如，要将全局的图像默认大小设置为<code>10×10</code>，你可以执行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span></span></code></pre></div><p><code>rc</code>的第一个参数是希望自定义的对象，如<code>'figure'</code>、<code>'axes'</code>、<code>'xtick'</code>、<code>'ytick'</code>、<code>'grid'</code>、<code>'legend'</code>等。其后可以跟上一系列的关键字参数。一个简单的办法是将这些选项写成一个字典：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">font_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span> <span class="p">:</span> <span class="s1">&#39;monospace&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;weight&#39;</span> <span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;size&#39;</span>   <span class="p">:</span> <span class="s1">&#39;small&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">font_options</span><span class="p">)</span>
+</span></span></code></pre></div><p>要了解全部的自定义选项，请查阅 matplotlib 的配置文件<code>matplotlibrc</code>（位于<code>matplotlib/mpl-data</code>目录中）。如果对该文件进行了自定义，并将其放在你自己的<code>.matplotlibrc</code>目录中，则每次使用 matplotlib 时就会加载该文件。</p>
+<p>下一节，我们会看到，seaborn 包有若干内置的绘图主题或类型，它们使用了 matplotlib 的内部配置。</p>
+<h1 id="92-使用-pandas-和-seaborn-绘图">9.2 使用 pandas 和 seaborn 绘图</h1>
+<p>matplotlib 实际上是一种比较低级的工具。要绘制一张图表，你组装一些基本组件就行：数据展示（即图表类型：线型图、柱状图、盒形图、散点图、等值线图等）、图例、标题、刻度标签以及其他注解型信息。</p>
+<p>在 pandas 中，我们有多列数据，还有行和列标签。pandas 自身就有内置的方法，用于简化从<code>DataFrame</code>和<code>Series</code>绘制图形。另一个库 <a href="https://seaborn.pydata.org/" target="_blank" rel="noopener noreffer ">seaborn</a>，由 Michael Waskom 创建的静态图形库。Seaborn 简化了许多常见可视类型的创建。</p>
+<blockquote>
+<p>提示：引入 seaborn 会修改 matplotlib 默认的颜色方案和绘图类型，以提高可读性和美观度。即使你不使用 seaborn API，你可能也会引入 seaborn，作为提高美观度和绘制常见 matplotlib 图形的简化方法。</p>
+</blockquote>
+<h2 id="线型图">线型图</h2>
+<p><code>Series</code>和<code>DataFrame</code>都有一个用于生成各类图表的<code>plot</code>方法。默认情况下，它们所生成的是线型图（如图 9-13 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">60</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">61</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-f28e5ab2ac94c7a2.png"
+        data-srcset="img/7178691-f28e5ab2ac94c7a2.png, img/7178691-f28e5ab2ac94c7a2.png 1.5x, img/7178691-f28e5ab2ac94c7a2.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-f28e5ab2ac94c7a2.png"
+        title="图 9-13 简单的&lt;code&gt;Series&lt;/code&gt;图表示例" /></p>
+<p>该<code>Series</code>对象的索引会被传给 matplotlib，并用以绘制 X 轴。可以通过<code>use_index=False</code>禁用该功能。X 轴的刻度和界限可以通过<code>xticks</code>和<code>xlim</code>选项进行调节，Y 轴就用<code>yticks</code>和<code>ylim</code>。<code>plot</code>参数的完整列表请参见表 9-3。我只会讲解其中几个，剩下的就留给读者自己去研究了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-6d9fbf863c09370a.png"
+        data-srcset="img/7178691-6d9fbf863c09370a.png, img/7178691-6d9fbf863c09370a.png 1.5x, img/7178691-6d9fbf863c09370a.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-6d9fbf863c09370a.png"
+        title="img/7178691-6d9fbf863c09370a.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-44e50562aeb5eb49.png"
+        data-srcset="img/7178691-44e50562aeb5eb49.png, img/7178691-44e50562aeb5eb49.png 1.5x, img/7178691-44e50562aeb5eb49.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-44e50562aeb5eb49.png"
+        title="表 9-3 &lt;code&gt;Series.plot&lt;/code&gt;方法的参数" /></p>
+<p>pandas 的大部分绘图方法都有一个可选的<code>ax</code>参数，它可以是一个 matplotlib 的子图对象。这使你能够在网格布局中更为灵活地处理子图的位置。</p>
+<p><code>DataFrame</code>的<code>plot</code>方法会在一个子图中为各列绘制一条线，并自动创建图例（如图 9-14 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">62</span><span class="p">]:</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>                   <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>                   <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">63</span><span class="p">]:</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-a1234d5e5ee41a40.png"
+        data-srcset="img/7178691-a1234d5e5ee41a40.png, img/7178691-a1234d5e5ee41a40.png 1.5x, img/7178691-a1234d5e5ee41a40.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-a1234d5e5ee41a40.png"
+        title="图 9-14 简单的&lt;code&gt;DataFrame&lt;/code&gt;绘图" /></p>
+<p><code>plot</code>属性包含一批不同绘图类型的方法。例如，<code>df.plot()</code>等价于<code>df.plot.line()</code>。后面会学习这些方法。</p>
+<blockquote>
+<p>笔记：<code>plot</code>的其他关键字参数会被传给相应的 matplotlib 绘图函数，所以要更深入地自定义图表，就必须学习更多有关 matplotlib API 的知识。</p>
+</blockquote>
+<p><code>DataFrame</code>还有一些用于对列进行灵活处理的选项，例如，是要将所有列都绘制到一个子图中还是创建各自的子图。详细信息请参见表 9-4。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-96651ecaa90f1c68.png"
+        data-srcset="img/7178691-96651ecaa90f1c68.png, img/7178691-96651ecaa90f1c68.png 1.5x, img/7178691-96651ecaa90f1c68.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-96651ecaa90f1c68.png"
+        title="表 9-4 专用于&lt;code&gt;DataFrame&lt;/code&gt;的&lt;code&gt;plot&lt;/code&gt;参数" /></p>
+<blockquote>
+<p>注意： 有关时间序列的绘图，请见第 11 章。</p>
+</blockquote>
+<h2 id="柱状图">柱状图</h2>
+<p><code>plot.bar()</code>和<code>plot.barh()</code>分别绘制水平和垂直的柱状图。这时，<code>Series</code>和<code>DataFrame</code>的索引将会被用作 X（<code>bar</code>）或 Y（<code>barh</code>）刻度（如图 9-15 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcdefghijklmnop&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="n">at</span> <span class="mh">0x7fb62493d470</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-cd54c7ccfa3f0687.png"
+        data-srcset="img/7178691-cd54c7ccfa3f0687.png, img/7178691-cd54c7ccfa3f0687.png 1.5x, img/7178691-cd54c7ccfa3f0687.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-cd54c7ccfa3f0687.png"
+        title="图 9-15 水平和垂直的柱状图" /></p>
+<p><code>color='k'</code>和<code>alpha=0.7</code>设定了图形的颜色为黑色，并使用部分的填充透明度。对于<code>DataFrame</code>，柱状图会将每一行的值分为一组，并排显示，如图 9-16 所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>                   <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">,</span> <span class="s1">&#39;five&#39;</span><span class="p">,</span> <span class="s1">&#39;six&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">   <span class="o">....</span><span class="p">:</span>                   <span class="n">columns</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Genus&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="n">df</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">70</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">Genus</span>         <span class="n">A</span>         <span class="n">B</span>         <span class="n">C</span>         <span class="n">D</span>
+</span></span><span class="line"><span class="cl"><span class="n">one</span>    <span class="mf">0.370670</span>  <span class="mf">0.602792</span>  <span class="mf">0.229159</span>  <span class="mf">0.486744</span>
+</span></span><span class="line"><span class="cl"><span class="n">two</span>    <span class="mf">0.420082</span>  <span class="mf">0.571653</span>  <span class="mf">0.049024</span>  <span class="mf">0.880592</span>
+</span></span><span class="line"><span class="cl"><span class="n">three</span>  <span class="mf">0.814568</span>  <span class="mf">0.277160</span>  <span class="mf">0.880316</span>  <span class="mf">0.431326</span>
+</span></span><span class="line"><span class="cl"><span class="n">four</span>   <span class="mf">0.374020</span>  <span class="mf">0.899420</span>  <span class="mf">0.460304</span>  <span class="mf">0.100843</span>
+</span></span><span class="line"><span class="cl"><span class="n">five</span>   <span class="mf">0.433270</span>  <span class="mf">0.125107</span>  <span class="mf">0.494675</span>  <span class="mf">0.961825</span>
+</span></span><span class="line"><span class="cl"><span class="n">six</span>    <span class="mf">0.601648</span>  <span class="mf">0.478576</span>  <span class="mf">0.205690</span>  <span class="mf">0.560547</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-bfc141acb37d99b5.png"
+        data-srcset="img/7178691-bfc141acb37d99b5.png, img/7178691-bfc141acb37d99b5.png 1.5x, img/7178691-bfc141acb37d99b5.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-bfc141acb37d99b5.png"
+        title="图 9-16&lt;code&gt;DataFrame&lt;/code&gt;的柱状图" /></p>
+<p>注意，<code>DataFrame</code>各列的名称&quot;Genus&quot;被用作了图例的标题。</p>
+<p>设置<code>stacked=True</code>即可为<code>DataFrame</code>生成堆积柱状图，这样每行的值就会被堆积在一起（如图 9-17 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-c19e4246eb897978.png"
+        data-srcset="img/7178691-c19e4246eb897978.png, img/7178691-c19e4246eb897978.png 1.5x, img/7178691-c19e4246eb897978.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-c19e4246eb897978.png"
+        title="图 9-17&lt;code&gt;DataFrame&lt;/code&gt;的堆积柱状图" /></p>
+<blockquote>
+<p>笔记：柱状图有一个非常不错的用法：利用<code>value_counts</code>图形化显示<code>Series</code>中各值的出现频率，比如<code>s.value_counts().plot.bar()</code>。</p>
+</blockquote>
+<p>再以本书前面用过的那个有关小费的数据集为例，假设我们想要做一张堆积柱状图以展示每天各种聚会规模的数据点的百分比。我用<code>read_csv</code>将数据加载进来，然后根据日期和聚会规模创建一张交叉表：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">75</span><span class="p">]:</span> <span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/tips.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">76</span><span class="p">]:</span> <span class="n">party_counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">],</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">77</span><span class="p">]:</span> <span class="n">party_counts</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">77</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">size</span>  <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>  <span class="mi">5</span>  <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">day</span>                      
+</span></span><span class="line"><span class="cl"><span class="n">Fri</span>   <span class="mi">1</span>  <span class="mi">16</span>   <span class="mi">1</span>   <span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sat</span>   <span class="mi">2</span>  <span class="mi">53</span>  <span class="mi">18</span>  <span class="mi">13</span>  <span class="mi">1</span>  <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sun</span>   <span class="mi">0</span>  <span class="mi">39</span>  <span class="mi">15</span>  <span class="mi">18</span>  <span class="mi">3</span>  <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thur</span>  <span class="mi">1</span>  <span class="mi">48</span>   <span class="mi">4</span>   <span class="mi">5</span>  <span class="mi">1</span>  <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Not many 1- and 6-person parties</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">78</span><span class="p">]:</span> <span class="n">party_counts</span> <span class="o">=</span> <span class="n">party_counts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</span></span></code></pre></div><p>然后进行规格化，使得各行的和为 1，并生成图表（如图 9-18 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Normalize to sum to 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">79</span><span class="p">]:</span> <span class="n">party_pcts</span> <span class="o">=</span> <span class="n">party_counts</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">party_counts</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">80</span><span class="p">]:</span> <span class="n">party_pcts</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">80</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">size</span>         <span class="mi">2</span>         <span class="mi">3</span>         <span class="mi">4</span>         <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">day</span>                                         
+</span></span><span class="line"><span class="cl"><span class="n">Fri</span>   <span class="mf">0.888889</span>  <span class="mf">0.055556</span>  <span class="mf">0.055556</span>  <span class="mf">0.000000</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sat</span>   <span class="mf">0.623529</span>  <span class="mf">0.211765</span>  <span class="mf">0.152941</span>  <span class="mf">0.011765</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sun</span>   <span class="mf">0.520000</span>  <span class="mf">0.200000</span>  <span class="mf">0.240000</span>  <span class="mf">0.040000</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thur</span>  <span class="mf">0.827586</span>  <span class="mf">0.068966</span>  <span class="mf">0.086207</span>  <span class="mf">0.017241</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">81</span><span class="p">]:</span> <span class="n">party_pcts</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-2918f67936823834.png"
+        data-srcset="img/7178691-2918f67936823834.png, img/7178691-2918f67936823834.png 1.5x, img/7178691-2918f67936823834.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-2918f67936823834.png"
+        title="图 9-18 每天各种聚会规模的比例" /></p>
+<p>于是，通过该数据集就可以看出，聚会规模在周末会变大。</p>
+<p>对于在绘制一个图形之前，需要进行合计的数据，使用 seaborn 可以减少工作量。用 seaborn 来看每天的小费比例（图 9-19 是结果）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">83</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">84</span><span class="p">]:</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">85</span><span class="p">]:</span> <span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">85</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">total_bill</span>   <span class="n">tip</span> <span class="n">smoker</span>  <span class="n">day</span>    <span class="n">time</span>  <span class="n">size</span>   <span class="n">tip_pct</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>       <span class="mf">16.99</span>  <span class="mf">1.01</span>     <span class="n">No</span>  <span class="n">Sun</span>  <span class="n">Dinner</span>     <span class="mi">2</span>  <span class="mf">0.063204</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>       <span class="mf">10.34</span>  <span class="mf">1.66</span>     <span class="n">No</span>  <span class="n">Sun</span>  <span class="n">Dinner</span>     <span class="mi">3</span>  <span class="mf">0.191244</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>       <span class="mf">21.01</span>  <span class="mf">3.50</span>     <span class="n">No</span>  <span class="n">Sun</span>  <span class="n">Dinner</span>     <span class="mi">3</span>  <span class="mf">0.199886</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>       <span class="mf">23.68</span>  <span class="mf">3.31</span>     <span class="n">No</span>  <span class="n">Sun</span>  <span class="n">Dinner</span>     <span class="mi">2</span>  <span class="mf">0.162494</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>       <span class="mf">24.59</span>  <span class="mf">3.61</span>     <span class="n">No</span>  <span class="n">Sun</span>  <span class="n">Dinner</span>     <span class="mi">4</span>  <span class="mf">0.172069</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">86</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-c33e8b3add99904b.png"
+        data-srcset="img/7178691-c33e8b3add99904b.png, img/7178691-c33e8b3add99904b.png 1.5x, img/7178691-c33e8b3add99904b.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-c33e8b3add99904b.png"
+        title="图 9-19 小费的每日比例，带有误差条" /></p>
+<p>seaborn 的绘制函数使用<code>data</code>参数，它可能是 pandas 的<code>DataFrame</code>。其它的参数是关于列的名字。因为一天的每个值有多次观察，柱状图的值是<code>tip_pct</code>的平均值。绘制在柱状图上的黑线代表 95%置信区间（可以通过可选参数配置）。</p>
+<p><code>seaborn.barplot</code>有颜色选项，使我们能够通过一个额外的值设置（见图 9-20）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">88</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-06abe2f070222115.png"
+        data-srcset="img/7178691-06abe2f070222115.png, img/7178691-06abe2f070222115.png 1.5x, img/7178691-06abe2f070222115.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-06abe2f070222115.png"
+        title="图 9-20 根据天和时间的小费比例" /></p>
+<p>注意，seaborn 已经自动修改了图形的美观度：默认调色板，图形背景和网格线的颜色。你可以用<code>seaborn.set</code>在不同的图形外观之间切换：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">90</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&#34;whitegrid&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="直方图和密度图">直方图和密度图</h2>
+<p>直方图（histogram）是一种可以对值频率进行离散化显示的柱状图。数据点被拆分到离散的、间隔均匀的面元中，绘制的是各面元中数据点的数量。再以前面那个小费数据为例，通过在<code>Series</code>使用<code>plot.hist</code>方法，我们可以生成一张“小费占消费总额百分比”的直方图（如图 9-21 所示）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">92</span><span class="p">]:</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-255279376f7649a3.png"
+        data-srcset="img/7178691-255279376f7649a3.png, img/7178691-255279376f7649a3.png 1.5x, img/7178691-255279376f7649a3.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-255279376f7649a3.png"
+        title="图 9-21 小费百分比的直方图" /></p>
+<p>与此相关的一种图表类型是密度图，它是通过计算“可能会产生观测数据的连续概率分布的估计”而产生的。一般的过程是将该分布近似为一组核（即诸如正态分布之类的较为简单的分布）。因此，密度图也被称作 KDE（Kernel Density Estimate，核密度估计）图。使用<code>plot.kde</code>和标准混合正态分布估计即可生成一张密度图（见图 9-22）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">density</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-ee929d033159516a.png"
+        data-srcset="img/7178691-ee929d033159516a.png, img/7178691-ee929d033159516a.png 1.5x, img/7178691-ee929d033159516a.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-ee929d033159516a.png"
+        title="图 9-22  小费百分比的密度图" /></p>
+<p>seaborn 的<code>distplot</code>方法绘制直方图和密度图更加简单，还可以同时画出直方图和连续密度估计图。作为例子，考虑一个双峰分布，由两个不同的标准正态分布组成（见图 9-23）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">96</span><span class="p">]:</span> <span class="n">comp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">97</span><span class="p">]:</span> <span class="n">comp2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">98</span><span class="p">]:</span> <span class="n">values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">99</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-975f04d750c4efe2.png"
+        data-srcset="img/7178691-975f04d750c4efe2.png, img/7178691-975f04d750c4efe2.png 1.5x, img/7178691-975f04d750c4efe2.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-975f04d750c4efe2.png"
+        title="图 9-23 标准混合密度估计的标准直方图" /></p>
+<h2 id="散点图或点图">散点图或点图</h2>
+<p>点图或散点图是观察两个一维数据序列之间的关系的有效手段。在下面这个例子中，我加载了来自 statsmodels 项目的 macrodata 数据集，选择了几个变量，然后计算对数差：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">100</span><span class="p">]:</span> <span class="n">macro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;examples/macrodata.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">101</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">macro</span><span class="p">[[</span><span class="s1">&#39;cpi&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">,</span> <span class="s1">&#39;tbilrate&#39;</span><span class="p">,</span> <span class="s1">&#39;unemp&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">102</span><span class="p">]:</span> <span class="n">trans_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">103</span><span class="p">]:</span> <span class="n">trans_data</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">103</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">          <span class="n">cpi</span>        <span class="n">m1</span>  <span class="n">tbilrate</span>     <span class="n">unemp</span>
+</span></span><span class="line"><span class="cl"><span class="mi">198</span> <span class="o">-</span><span class="mf">0.007904</span>  <span class="mf">0.045361</span> <span class="o">-</span><span class="mf">0.396881</span>  <span class="mf">0.105361</span>
+</span></span><span class="line"><span class="cl"><span class="mi">199</span> <span class="o">-</span><span class="mf">0.021979</span>  <span class="mf">0.066753</span> <span class="o">-</span><span class="mf">2.277267</span>  <span class="mf">0.139762</span>
+</span></span><span class="line"><span class="cl"><span class="mi">200</span>  <span class="mf">0.002340</span>  <span class="mf">0.010286</span>  <span class="mf">0.606136</span>  <span class="mf">0.160343</span>
+</span></span><span class="line"><span class="cl"><span class="mi">201</span>  <span class="mf">0.008419</span>  <span class="mf">0.037461</span> <span class="o">-</span><span class="mf">0.200671</span>  <span class="mf">0.127339</span>
+</span></span><span class="line"><span class="cl"><span class="mi">202</span>  <span class="mf">0.008894</span>  <span class="mf">0.012202</span> <span class="o">-</span><span class="mf">0.405465</span>  <span class="mf">0.042560</span>
+</span></span></code></pre></div><p>然后可以使用 seaborn 的<code>regplot</code>方法，它可以做一个散点图，并加上一条线性回归的线（见图 9-24）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">105</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="s1">&#39;m1&#39;</span><span class="p">,</span> <span class="s1">&#39;unemp&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">trans_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">105</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">_subplots</span><span class="o">.</span><span class="n">AxesSubplot</span> <span class="n">at</span> <span class="mh">0x7fb613720be0</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">106</span><span class="p">]:</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Changes in log </span><span class="si">%s</span><span class="s1"> versus log </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;m1&#39;</span><span class="p">,</span> <span class="s1">&#39;unemp&#39;</span><span class="p">))</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-2133d20739478a80.png"
+        data-srcset="img/7178691-2133d20739478a80.png, img/7178691-2133d20739478a80.png 1.5x, img/7178691-2133d20739478a80.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-2133d20739478a80.png"
+        title="图 9-24 seaborn 的回归/散点图" /></p>
+<p>在探索式数据分析工作中，同时观察一组变量的散点图是很有意义的，这也被称为散点图矩阵（scatter plot matrix）。纯手工创建这样的图表很费工夫，所以 seaborn 提供了一个便捷的<code>pairplot</code>函数，它支持在对角线上放置每个变量的直方图或密度估计（见图 9-25）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">107</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">trans_data</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">,</span> <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">})</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-20aa530a44e06f61.png"
+        data-srcset="img/7178691-20aa530a44e06f61.png, img/7178691-20aa530a44e06f61.png 1.5x, img/7178691-20aa530a44e06f61.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-20aa530a44e06f61.png"
+        title="图 9-25 statsmodels macro data 的散点图矩阵" /></p>
+<p>你可能注意到了<code>plot_kws</code>参数。它可以让我们传递配置选项到非对角线元素上的图形使用。对于更详细的配置选项，可以查阅<code>seaborn.pairplot</code>文档字符串。</p>
+<h2 id="分面网格facet-grid和类型数据">分面网格（facet grid）和类型数据</h2>
+<p>要是数据集有额外的分组维度呢？有多个分类变量的数据可视化的一种方法是使用小面网格。seaborn 有一个有用的内置函数<code>factorplot</code>，可以简化制作多种分面图（见图 9-26）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"> <span class="n">In</span> <span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;smoker&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>                <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="o">.</span><span class="n">tip_pct</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">])</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-737ba19a0cbdd46f.png"
+        data-srcset="img/7178691-737ba19a0cbdd46f.png, img/7178691-737ba19a0cbdd46f.png 1.5x, img/7178691-737ba19a0cbdd46f.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-737ba19a0cbdd46f.png"
+        title="图 9-26 按照天/时间/吸烟者的小费百分比" /></p>
+<p>除了在分面中用不同的颜色按时间分组，我们还可以通过给每个时间值添加一行来扩展分面网格：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>                <span class="n">col</span><span class="o">=</span><span class="s1">&#39;smoker&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>                <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="o">.</span><span class="n">tip_pct</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">])</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-4e52192441c609f7.png"
+        data-srcset="img/7178691-4e52192441c609f7.png, img/7178691-4e52192441c609f7.png 1.5x, img/7178691-4e52192441c609f7.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-4e52192441c609f7.png"
+        title="图 9-27 按天的&lt;code&gt;tip_pct&lt;/code&gt;，通过&lt;code&gt;time&lt;/code&gt;/&lt;code&gt;smoker&lt;/code&gt;分面" /></p>
+<p><code>factorplot</code>支持其它的绘图类型，你可能会用到。例如，盒图（它可以显示中位数，四分位数，和异常值）就是一个有用的可视化类型（见图 9-28）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tip_pct&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="o">.....</span><span class="p">:</span>                <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="o">.</span><span class="n">tip_pct</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">])</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="img/7178691-356fb27a7c658920.png"
+        data-srcset="img/7178691-356fb27a7c658920.png, img/7178691-356fb27a7c658920.png 1.5x, img/7178691-356fb27a7c658920.png 2x"
+        data-sizes="auto"
+        alt="img/7178691-356fb27a7c658920.png"
+        title="图 9-28 按天的&lt;code&gt;tip_pct&lt;/code&gt;的盒图" /></p>
+<p>使用更通用的<code>seaborn.FacetGrid</code>类，你可以创建自己的分面网格。请查阅 <a href="https://seaborn.pydata.org/" target="_blank" rel="noopener noreffer ">seaborn 的文档</a>。</p>
+<h1 id="93-其它的-python-可视化工具">9.3 其它的 Python 可视化工具</h1>
+<p>与其它开源库类似，Python 创建图形的方式非常多（根本罗列不完）。自从 2010 年，许多开发工作都集中在创建交互式图形以便在 Web 上发布。利用工具如 <a href="https://bokeh.pydata.org/en/latest/" target="_blank" rel="noopener noreffer ">Boken</a> 和 <a href="https://github.com/plotly/plotly.py" target="_blank" rel="noopener noreffer ">Plotly</a>，现在可以创建动态交互图形，用于网页浏览器。</p>
+<p>对于创建用于打印或网页的静态图形，我建议默认使用 matplotlib 和附加的库，比如 pandas 和 seaborn。对于其它数据可视化要求，学习其它的可用工具可能是有用的。我鼓励你探索绘图的生态系统，因为它将持续发展。</p>
+<h1 id="94-总结">9.4 总结</h1>
+<p>本章的目的是熟悉一些基本的数据可视化操作，使用 pandas，matplotlib，和 seaborn。如果视觉显示数据分析的结果对你的工作很重要，我鼓励你寻求更多的资源来了解更高效的数据可视化。这是一个活跃的研究领域，你可以通过在线和纸质的形式学习许多优秀的资源。</p>
+<p>下一章，我们将重点放在 pandas 的数据聚合和分组操作上。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/pyda-2e-zh/9/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/pyda-2e-zh/9/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/pyda-2e-zh/9/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/pyda-2e-zh/9/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/pyda-2e-zh/9/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/pyda-2e-zh/a/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/pyda-2e-zh/8/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

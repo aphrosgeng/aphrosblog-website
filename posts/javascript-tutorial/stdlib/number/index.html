@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Aphros的个人博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="Number 对象 概述 Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。 作为构造函数时，它用于生成值为数值的对象。 var n" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/javascript-tutorial/stdlib/number/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Aphros的博客" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Number 对象 概述 Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。 作为构造函数时，它用于生成值为数值的对象。 var n"/>
+<meta name="application-name" content="Aphros的博客">
+<meta name="apple-mobile-web-app-title" content="Aphros的博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/javascript-tutorial/stdlib/number/" /><link rel="prev" href="http://localhost:1313/posts/javascript-tutorial/stdlib/object/" /><link rel="next" href="http://localhost:1313/posts/javascript-tutorial/stdlib/math/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/stdlib\/number\/"
+        },"genre": "posts","wordcount":  2419 ,
+        "url": "http:\/\/localhost:1313\/posts\/javascript-tutorial\/stdlib\/number\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Aphros"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Aphros的个人博客">Aphros的博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Aphros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2419 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#静态属性">静态属性</a></li>
+    <li><a href="#实例方法">实例方法</a>
+      <ul>
+        <li><a href="#numberprototypetostring">Number.prototype.toString()</a></li>
+        <li><a href="#numberprototypetofixed">Number.prototype.toFixed()</a></li>
+        <li><a href="#numberprototypetoexponential">Number.prototype.toExponential()</a></li>
+        <li><a href="#numberprototypetoprecision">Number.prototype.toPrecision()</a></li>
+        <li><a href="#numberprototypetolocalestring">Number.prototype.toLocaleString()</a></li>
+      </ul>
+    </li>
+    <li><a href="#自定义方法">自定义方法</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="number-对象">Number 对象</h1>
+<h2 id="概述">概述</h2>
+<p><code>Number</code>对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。</p>
+<p>作为构造函数时，它用于生成值为数值的对象。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">typeof</span> <span class="nx">n</span> <span class="c1">// &#34;object&#34;
+</span></span></span></code></pre></div><p>上面代码中，<code>Number</code>对象作为构造函数使用，返回一个值为<code>1</code>的对象。</p>
+<p>作为工具函数时，它可以将任何类型的值转为数值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="c1">// 1
+</span></span></span></code></pre></div><p>上面代码将布尔值<code>true</code>转为数值<code>1</code>。<code>Number</code>作为工具函数的用法，详见《数据类型转换》一章。</p>
+<h2 id="静态属性">静态属性</h2>
+<p><code>Number</code>对象拥有以下一些静态属性（即直接定义在<code>Number</code>对象上的属性，而不是定义在实例上的属性）。</p>
+<ul>
+<li><code>Number.POSITIVE_INFINITY</code>：正的无限，指向<code>Infinity</code>。</li>
+<li><code>Number.NEGATIVE_INFINITY</code>：负的无限，指向<code>-Infinity</code>。</li>
+<li><code>Number.NaN</code>：表示非数值，指向<code>NaN</code>。</li>
+<li><code>Number.MIN_VALUE</code>：表示最小的正数（即最接近0的正数，在64位浮点数体系中为<code>5e-324</code>），相应的，最接近0的负数为<code>-Number.MIN_VALUE</code>。</li>
+<li><code>Number.MAX_SAFE_INTEGER</code>：表示能够精确表示的最大整数，即<code>9007199254740991</code>。</li>
+<li><code>Number.MIN_SAFE_INTEGER</code>：表示能够精确表示的最小整数，即<code>-9007199254740991</code>。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">POSITIVE_INFINITY</span> <span class="c1">// Infinity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Number</span><span class="p">.</span><span class="nx">NEGATIVE_INFINITY</span> <span class="c1">// -Infinity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Number</span><span class="p">.</span><span class="kc">NaN</span> <span class="c1">// NaN
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_VALUE</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1.7976931348623157e+308
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_VALUE</span> <span class="o">&lt;</span> <span class="kc">Infinity</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_VALUE</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 5e-324
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_VALUE</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_SAFE_INTEGER</span> <span class="c1">// 9007199254740991
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_SAFE_INTEGER</span> <span class="c1">// -9007199254740991
+</span></span></span></code></pre></div><h2 id="实例方法">实例方法</h2>
+<p><code>Number</code>对象有4个实例方法，都跟将数值转换成指定格式有关。</p>
+<h3 id="numberprototypetostring">Number.prototype.toString()</h3>
+<p><code>Number</code>对象部署了自己的<code>toString</code>方法，用来将一个数值转为字符串形式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">()</span> <span class="c1">// &#34;10&#34;
+</span></span></span></code></pre></div><p><code>toString</code>方法可以接受一个参数，表示输出的进制。如果省略这个参数，默认将数值先转为十进制，再输出字符串；否则，就根据参数指定的进制，将一个数字转化成某个进制的字符串。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1010&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="c1">// &#34;12&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="c1">// &#34;a&#34;
+</span></span></span></code></pre></div><p>上面代码中，<code>10</code>一定要放在括号里，这样表明后面的点表示调用对象属性。如果不加括号，这个点会被 JavaScript 引擎解释成小数点，从而报错。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">10.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// SyntaxError: Unexpected token ILLEGAL
+</span></span></span></code></pre></div><p>只要能够让 JavaScript 引擎不混淆小数点和对象的点运算符，各种写法都能用。除了为<code>10</code>加上括号，还可以在<code>10</code>后面加两个点，JavaScript 会把第一个点理解成小数点（即<code>10.0</code>），把第二个点理解成调用对象属性，从而得到正确结果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">10.</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;1010&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 其他方法还包括
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mi">10</span> <span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1010&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">10.0</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1010&#34;
+</span></span></span></code></pre></div><p>这实际上意味着，可以直接对一个小数使用<code>toString</code>方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mf">10.5</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="c1">// &#34;10.5&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">10.5</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1010.1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">10.5</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="c1">// &#34;12.4&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">10.5</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="c1">// &#34;a.8&#34;
+</span></span></span></code></pre></div><p>通过方括号运算符也可以调用<code>toString</code>方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="mi">10</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">](</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1010&#34;
+</span></span></span></code></pre></div><p><code>toString</code>方法只能将十进制的数，转为其他进制的字符串。如果要将其他进制的数，转回十进制，需要使用<code>parseInt</code>方法。</p>
+<h3 id="numberprototypetofixed">Number.prototype.toFixed()</h3>
+<p><code>toFixed()</code>方法先将一个数转为指定位数的小数，然后返回这个小数对应的字符串。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;10.00&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">10.005</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;10.01&#34;
+</span></span></span></code></pre></div><p>上面代码中，<code>10</code>和<code>10.005</code>先转成2位小数，然后转成字符串。其中<code>10</code>必须放在括号里，否则后面的点会被处理成小数点。</p>
+<p><code>toFixed()</code>方法的参数为小数位数，有效范围为0到100，超出这个范围将抛出 RangeError 错误。</p>
+<p>由于浮点数的原因，小数<code>5</code>的四舍五入是不确定的，使用的时候必须小心。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mf">10.055</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 10.05
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">10.005</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 10.01
+</span></span></span></code></pre></div><h3 id="numberprototypetoexponential">Number.prototype.toExponential()</h3>
+<p><code>toExponential</code>方法用于将一个数转为科学计数法形式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">()</span>  <span class="c1">// &#34;1e+1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// &#34;1.0e+1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1.00e+1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">1234</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">()</span>  <span class="c1">// &#34;1.234e+3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mi">1234</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// &#34;1.2e+3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mi">1234</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;1.23e+3&#34;
+</span></span></span></code></pre></div><p><code>toExponential</code>方法的参数是小数点后有效数字的位数，范围为0到100，超出这个范围，会抛出一个 RangeError 错误。</p>
+<h3 id="numberprototypetoprecision">Number.prototype.toPrecision()</h3>
+<p><code>Number.prototype.toPrecision()</code>方法用于将一个数转为指定位数的有效数字。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mf">12.34</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// &#34;1e+1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.34</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// &#34;12&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.34</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// &#34;12.3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.34</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">// &#34;12.34&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.34</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">// &#34;12.340&#34;
+</span></span></span></code></pre></div><p>该方法的参数为有效数字的位数，范围是1到100，超出这个范围会抛出 RangeError 错误。</p>
+<p>该方法用于四舍五入时不太可靠，跟浮点数不是精确储存有关。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mf">12.35</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// &#34;12.3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.25</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// &#34;12.3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.15</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// &#34;12.2&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="mf">12.45</span><span class="p">).</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// &#34;12.4&#34;
+</span></span></span></code></pre></div><h3 id="numberprototypetolocalestring">Number.prototype.toLocaleString()</h3>
+<p><code>Number.prototype.toLocaleString()</code>方法接受一个地区码作为参数，返回一个字符串，表示当前数字在该地区的当地书写形式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="s1">&#39;zh-Hans-CN-u-nu-hanidec&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;一二三&#34;
+</span></span></span></code></pre></div><p>该方法还可以接受第二个参数配置对象，用来定制指定用途的返回字符串。该对象的<code>style</code>属性指定输出样式，默认值是<code>decimal</code>，表示输出十进制形式。如果值为<code>percent</code>，表示输出百分数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="s1">&#39;zh-Hans-CN&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;percent&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;12,300%&#34;
+</span></span></span></code></pre></div><p>如果<code>style</code>属性的值为<code>currency</code>，则可以搭配<code>currency</code>属性，输出指定格式的货币字符串形式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="s1">&#39;zh-Hans-CN&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;currency&#39;</span><span class="p">,</span> <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;CNY&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;￥123.00&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="s1">&#39;de-DE&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;currency&#39;</span><span class="p">,</span> <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;EUR&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;123,00 €&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="s1">&#39;en-US&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;currency&#39;</span><span class="p">,</span> <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;USD&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;$123.00&#34;
+</span></span></span></code></pre></div><p>如果<code>Number.prototype.toLocaleString()</code>省略了参数，则由浏览器自行决定如何处理，通常会使用操作系统的地区设定。注意，该方法如果使用浏览器不认识的地区码，会抛出一个错误。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">)</span> <span class="c1">// 出错
+</span></span></span></code></pre></div><h2 id="自定义方法">自定义方法</h2>
+<p>与其他对象一样，<code>Number.prototype</code>对象上面可以自定义方法，被<code>Number</code>的实例继承。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">this</span> <span class="o">+</span> <span class="nx">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">8</span><span class="p">[</span><span class="s1">&#39;add&#39;</span><span class="p">](</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 10
+</span></span></span></code></pre></div><p>上面代码为<code>Number</code>对象实例定义了一个<code>add</code>方法。在数值上调用某个方法，数值会自动转为<code>Number</code>的实例对象，所以就可以调用<code>add</code>方法了。由于<code>add</code>方法返回的还是数值，所以可以链式运算。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">subtract</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">this</span> <span class="o">-</span> <span class="nx">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">subtract</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 6
+</span></span></span></code></pre></div><p>上面代码在<code>Number</code>对象的实例上部署了<code>subtract</code>方法，它可以与<code>add</code>方法链式调用。</p>
+<p>我们还可以部署更复杂的方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">iterate</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="nx">iterate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// [0, 1, 2, 3, 4, 5, 6, 7, 8]
+</span></span></span></code></pre></div><p>上面代码在<code>Number</code>对象的原型上部署了<code>iterate</code>方法，将一个数值自动遍历为一个数组。</p>
+<p>注意，数值的自定义方法，只能定义在它的原型对象<code>Number.prototype</code>上面，数值本身是无法自定义属性的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">n</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">n</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// undefined
+</span></span></span></code></pre></div><p>上面代码中，<code>n</code>是一个原始类型的数值。直接在它上面新增一个属性<code>x</code>，不会报错，但毫无作用，总是返回<code>undefined</code>。这是因为一旦被调用属性，<code>n</code>就自动转为<code>Number</code>的实例对象，调用结束后，该对象自动销毁。所以，下一次调用<code>n</code>的属性时，实际取到的是另一个对象，属性<code>x</code>当然就读不出来。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/javascript-tutorial/stdlib/number/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/javascript-tutorial/stdlib/number/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/javascript-tutorial/stdlib/number/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/javascript-tutorial/stdlib/number/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/javascript-tutorial/stdlib/number/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript-tutorial/stdlib/object/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/javascript-tutorial/stdlib/math/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Aphros</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
